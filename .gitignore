@@ -6,3 +6,5 @@ node_modules
 
 #webstorm
 .idea
+
+dist
