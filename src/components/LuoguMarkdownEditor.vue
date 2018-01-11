@@ -1,22 +1,27 @@
 <template>
-    <div id="luogu-mardown-editor">
-        <div id="editor-input-area" class="editor-area">
+    <div id="luogu-markdown-editor">
+        <div id="editor-input-area" class="editor-area input-area">
             <input-area v-model="code" @input="updateCode"></input-area>
         </div>
-        <div id="editor-preview-area" class="editor-area">
-
+        <div id="editor-preview-area" class="editor-area preview-area">
+            <preview-area v-model="code"></preview-area>
         </div>
     </div>
 </template>
 
 <style>
-    .editor-area{
-        width: 50%;
+    .editor-area {
+        width: 49%;
+        float: left;
+    }
+    .input-area {
+        border-right: solid black;
     }
 </style>
 
 <script>
     import InputArea from "./InputArea.vue"
+    import PreviewArea from "./PreviewArea.vue"
 
     export default {
         name: "luogu-markdown-editor",
@@ -42,7 +47,8 @@
             this.code = this.value
         },
         components: {
-            InputArea
+            InputArea,
+            PreviewArea
         },
         methods: {
             updateCode(code) {
