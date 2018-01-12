@@ -1,9 +1,9 @@
 <template>
     <div id="luogu-markdown-editor">
         <div id="editor-input-area" class="editor-area input-area">
-            <input-area v-model="code" @input="updateCode"></input-area>
+            <input-area v-model="code" @input="updateCode" :height="this.config.height"></input-area>
         </div>
-        <div id="editor-preview-area" class="editor-area preview-area">
+        <div id="editor-preview-area" class="editor-area preview-area" :height="this.config.height">
             <preview-area v-model="code"></preview-area>
         </div>
     </div>
@@ -33,7 +33,7 @@
            config: {
                default: function() {
                     return {
-
+                        height: '500px'
                     }
                }
            }

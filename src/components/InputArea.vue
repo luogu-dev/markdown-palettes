@@ -9,10 +9,6 @@
     </div>
 </template>
 
-<style>
-
-</style>
-
 <script>
     import { codemirror } from 'vue-codemirror-lite'
     import 'codemirror/mode/markdown/markdown.js'
@@ -28,9 +24,14 @@
                 default: function () {
                     return {
                         mode: 'markdown',
-                        lineNumbers: true
+                        lineNumbers: true,
+                        lineWrapping: true
                     }
                 }
+            },
+            height: {
+                type: String,
+                default: '400px'
             }
         },
         computed: {
@@ -48,6 +49,7 @@
         },
         mounted: function() {
             this.code = this.value
+            this.editor.setSize("100%", this.height);
             this.editor.focus()
         },
         methods: {

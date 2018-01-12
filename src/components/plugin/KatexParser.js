@@ -5,7 +5,17 @@ export default {
     reg: RegExp(/(\$+[^$]*\$+)/, 'g'),
     parser: function (segment) {
         let matchReg = new RegExp(/^\$+(.*)\$+$/)
-        segment = segment.match(matchReg)[1]
-        return katex.renderToString(segment)
+        let matched = segment.match(matchReg)
+
+        if(matched) {
+            segment = matched[1]
+            try {
+                return katex.renderToString(segment)
+            } catch (exception) {
+                return '$' + segment + '$'
+            }
+        } else {
+            return ''
+        }
     }
 }
