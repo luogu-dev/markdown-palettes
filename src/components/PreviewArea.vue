@@ -1,6 +1,6 @@
 <template>
-    <div id="preview-area">
-        <div id="preview-content" v-html="content" :stype="{ 'max-height': height }"></div>
+    <div id="preview-area" :style="{ 'height': height }">
+        <div id="preview-content" v-html="content"></div>
     </div>
 </template>
 
@@ -9,11 +9,11 @@
         padding: 10px;
         padding-left: 20px;
         padding-right: 20px;
+        overflow-y: auto;
+        word-wrap:break-word;
     }
 
     #preview-area {
-        overflow-y: auto;
-        word-wrap:break-word;
     }
 </style>
 
