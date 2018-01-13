@@ -13,6 +13,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "clean-webpack-plugin": "^0.1.17",
+    "font-awesome": "^4.7.0",
     "highlight.js": "^9.12.0",
     "katex": "^0.9.0-alpha2",
     "lodash": "^4.17.4",

@@ -1,6 +1,8 @@
 <template>
     <div id="luogu-markdown-editor" class="editor-container">
-        <div id="editor-toolbar" class="editor-toolbar"></div>
+        <div id="editor-toolbar" class="editor-toolbar">
+            <toolbar></toolbar>
+        </div>
         <div id="editor-area">
             <div id="editor-input-area" class="editor-area input-area">
                 <input-area v-model="code" @input="updateCode" :height="this.config.height"></input-area>
@@ -8,6 +10,9 @@
             <div id="editor-preview-area" class="editor-area preview-area" >
                 <preview-area v-model="code" :height="this.config.height"></preview-area>
             </div>
+        </div>
+        <div id="editor-dialog">
+            <editor-dialog></editor-dialog>
         </div>
     </div>
 </template>
@@ -40,6 +45,8 @@
 <script>
     import InputArea from "./InputArea.vue"
     import PreviewArea from "./PreviewArea.vue"
+    import Toolbar from "./Toolbar.vue"
+    import EditorDialog from "./Dialog.vue"
 
     export default {
         name: "luogu-markdown-editor",
@@ -66,7 +73,9 @@
         },
         components: {
             InputArea,
-            PreviewArea
+            PreviewArea,
+            Toolbar,
+            EditorDialog
         },
         methods: {
             updateCode(code) {

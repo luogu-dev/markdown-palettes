@@ -45,7 +45,7 @@
             }
         },
         mounted: function() {
-            this.updateContent($this.value)
+            this.updateContent(this.value)
         },
         methods: {
             updateContent(newContent) {
