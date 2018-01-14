@@ -60,6 +60,7 @@
     import "font-awesome/css/font-awesome.css"
     import BtnBold from "./toolbar-button/btn-bold"
     import Divider from "./toolbar-button/divider"
+    import BtnImg from "./toolbar-button/btn-img"
 
     /**
      * configItem = {
@@ -84,7 +85,7 @@
             toolbarConfig: {
                 type: Array,
                 default: function () {
-                    return [ BtnBold, BtnBold, Divider, BtnBold ]
+                    return [ BtnBold, Divider, BtnImg ]
                 }
             }
         },
@@ -97,7 +98,7 @@
             },
             handleAction(action) {
                 if(action.insert) {
-                    this.insertCode(action)
+                    this.insertCode(action.insert)
                 }
                 else if(action.request) {
                     this.requestData(action.request)

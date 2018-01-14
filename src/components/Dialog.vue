@@ -163,6 +163,13 @@
                 responseData: {}
             }
         },
+        computed: {
+            response() {
+                let res = this.request
+                res.data = this.responseData
+                return res
+            }
+        },
         mounted: function() {
             let initialData = {}
 
@@ -177,7 +184,7 @@
                 this.$emit('close')
             },
             finish() {
-                this.$emit('finish', this.requestData())
+                this.$emit('finish', this.response)
             }
         }
     }

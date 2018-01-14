@@ -32,11 +32,32 @@
             height: {
                 type: String,
                 default: '400px'
+            },
+            insertCode: {
+                default: null
             }
         },
         computed: {
             editor() {
                 return this.$refs.editor.editor
+            }
+        },
+        watch: {
+            insertCode: function (insert) {
+                if(insert === null)
+                    return
+
+                if(!Array.isArray(insert))
+                    insert = [insert, '']
+
+                let cursor    = this.editor.getCursor();
+                let selection = this.editor.getSelection();
+
+                this.editor.replaceSelection(insert[0] + selection + insert[1]);
+
+                if(selection === "") {
+                    this.editor.setCursor(cursor.line, cursor.ch + 2);
+                }
             }
         },
         data: function () {

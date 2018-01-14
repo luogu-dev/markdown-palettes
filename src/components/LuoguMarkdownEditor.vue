@@ -1,18 +1,18 @@
 <template>
     <div id="luogu-markdown-editor" class="editor-container">
         <div id="editor-toolbar" class="editor-toolbar">
-            <toolbar></toolbar>
+            <toolbar @change="insert" @click="clickToolbar"></toolbar>
         </div>
         <div id="editor-area">
             <div id="editor-input-area" class="editor-area input-area">
-                <input-area v-model="code" @input="updateCode" :height="this.config.height"></input-area>
+                <input-area v-model="code" @input="updateCode" :height="this.config.height" :insertCode="insertCode"></input-area>
             </div>
             <div id="editor-preview-area" class="editor-area preview-area" >
                 <preview-area v-model="code" :height="this.config.height"></preview-area>
             </div>
         </div>
         <div id="editor-dialog">
-            <editor-dialog></editor-dialog>
+            <editor-dialog v-if="showDialog" :request="dialogRequest" @finish="dialogFinish" @close="closeDialog"></editor-dialog>
         </div>
     </div>
 </template>
@@ -65,7 +65,10 @@
         },
         data: function () {
             return {
-                code: ''
+                code: '',
+                showDialog: false,
+                dialogRequest: {},
+                insertCode: null
             }
         },
         mounted: function() {
@@ -80,6 +83,23 @@
         methods: {
             updateCode(code) {
                 this.$emit('input', code);
+            },
+            insert(code) {
+                if(code !== null)
+                    this.insertCode = code
+            },
+            closeDialog() {
+                this.showDialog = false
+            },
+            dialogFinish(request) {
+                this.insert(request.callback(request.data))
+                this.closeDialog()
+            },
+            clickToolbar(request) {
+                if(this.showDialog)
+                    return
+                this.dialogRequest = request
+                this.showDialog = true
             }
         }
     }
