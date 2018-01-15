@@ -1,4 +1,4 @@
-# luogu-mardown-editor
+# Markdown*Palettes
 
 > Markdown*Palettes: Markdown editor for the modern web.
 
