@@ -1,14 +1,14 @@
 <template>
     <div id="luogu-markdown-editor" class="editor-container">
         <div id="editor-toolbar" class="editor-toolbar">
-            <toolbar @change="insert" @click="clickToolbar"></toolbar>
+            <toolbar @change="insert" @click="clickToolbar"  :toolbarConfig="this.config.toolbarConfig"></toolbar>
         </div>
         <div id="editor-area">
             <div id="editor-input-area" class="editor-area input-area">
-                <input-area v-model="code" @input="updateCode" :height="this.config.height" :insertCode="insertCode"></input-area>
+                <input-area v-model="code" @input="updateCode" :height="this.config.height" :insertCode="insertCode" :editorOption="this.config.editorOption"></input-area>
             </div>
             <div id="editor-preview-area" class="editor-area preview-area" >
-                <preview-area v-model="code" :height="this.config.height"></preview-area>
+                <preview-area v-model="code" :height="this.config.height" :parsers="this.config.parsers"></preview-area>
             </div>
         </div>
         <div id="editor-dialog">
@@ -48,17 +48,36 @@
     import Toolbar from "./Toolbar.vue"
     import EditorDialog from "./Dialog.vue"
 
+    import KatexParser from './plugin/KatexParser'
+    import BtnBold from "./toolbar-button/btn-bold"
+    import Divider from "./toolbar-button/divider"
+    import BtnImg from "./toolbar-button/btn-img"
+
+
     export default {
         name: "luogu-markdown-editor",
         props: {
            value: {
-               type: String,
-               default: ''
+               type: String
            },
            config: {
+               type: Object,
                default: function() {
                     return {
-                        height: '500px'
+                        height: '500px',
+                        parsers:[
+                            KatexParser
+                        ],
+                        toolbarConfig: [
+                            BtnBold,
+                            Divider,
+                            BtnImg
+                        ],
+                        editorOption: {
+                            mode: 'markdown',
+                            lineNumbers: true,
+                            lineWrapping: true
+                        }
                     }
                }
            }

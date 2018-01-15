@@ -17,17 +17,10 @@
         name: 'input-area',
         props: {
             value: {
-                type: String,
-                default: ''
+                type: String
             },
             editorOption: {
-                default: function () {
-                    return {
-                        mode: 'markdown',
-                        lineNumbers: true,
-                        lineWrapping: true
-                    }
-                }
+                type: Object
             },
             height: {
                 type: String,

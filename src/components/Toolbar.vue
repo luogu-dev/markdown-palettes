@@ -58,9 +58,6 @@
 
 <script>
     import "font-awesome/css/font-awesome.css"
-    import BtnBold from "./toolbar-button/btn-bold"
-    import Divider from "./toolbar-button/divider"
-    import BtnImg from "./toolbar-button/btn-img"
 
     /**
      * configItem = {
@@ -83,10 +80,7 @@
         name:"toolbar",
         props: {
             toolbarConfig: {
-                type: Array,
-                default: function () {
-                    return [ BtnBold, Divider, BtnImg ]
-                }
+                type: Array
             }
         },
         methods: {

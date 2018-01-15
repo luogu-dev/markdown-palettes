@@ -137,28 +137,10 @@
         name: 'editor-dialog',
         props: {
             request: {
-                type: Object,
-                default: function() {
-                    return {
-                        title: "Test",
-                        body: [
-                            {
-                                name: "test",
-                                title: "2333",
-                                default: "666"
-                            },
-                            {
-                                name: "test",
-                                title: "2333",
-                                default: "666"
-                            }
-                        ]
-                    }
-                }
+                type: Object
             }
         },
         data: function () {
-            console.log("init")
             return {
                 responseData: {}
             }

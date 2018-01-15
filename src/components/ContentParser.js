@@ -1,12 +1,12 @@
 import { MarkdownParser } from "./plugin/MarkdownParser"
 
-export function ContentParser(content, config) {
+export function ContentParser(content, parsers) {
     let md5 = require('md5');
 
     let newContent = content
     let stringMap = []
 
-    config.parsers.forEach(function (parserConfig) {
+    parsers.forEach(function (parserConfig) {
         let segments = newContent.match(parserConfig.reg)
 
         if(segments) {

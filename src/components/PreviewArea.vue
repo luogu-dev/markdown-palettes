@@ -19,8 +19,6 @@
 
 <script>
     import { ContentParser } from './ContentParser'
-    import { MarkdownParser } from './plugin/MarkdownParser'
-    import KatexParser from './plugin/KatexParser'
 
     export default {
         name: 'preview-area',
@@ -32,16 +30,14 @@
             height: {
                 type: String,
                 default: '400px'
+            },
+            parsers: {
+                type: Array
             }
         },
         data: function () {
             return {
-                content: '',
-                parserConfig: {
-                    parsers:[
-                        KatexParser
-                    ]
-                }
+                content: ''
             }
         },
         mounted: function() {
@@ -49,7 +45,7 @@
         },
         methods: {
             updateContent(newContent) {
-                this.content = ContentParser(newContent, this.parserConfig)
+                this.content = ContentParser(newContent, this.parsers)
             }
         },
         watch: {
