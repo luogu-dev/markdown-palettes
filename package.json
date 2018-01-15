@@ -1,6 +1,6 @@
 {
-  "name": "luogu-mardown-editor",
-  "description": "A markdown editor for luogu",
+  "name": "markdown-palettes",
+  "description": "Markdown*Palettes: Markdown editor for the modern web.",
   "version": "1.0.0",
   "author": "dark-flames <dark_flames@outlook.com>",
   "license": "MIT",

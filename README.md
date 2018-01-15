@@ -1,6 +1,6 @@
 # luogu-mardown-editor
 
-> A markdown editor for luogu
+> Markdown*Palettes: Markdown editor for the modern web.
 
 ## Build Setup
 
