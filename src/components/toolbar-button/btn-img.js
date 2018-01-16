@@ -18,7 +18,7 @@ export default {
         }
       ],
       callback (data) {
-        return '![' + data.description + '](' + data.address + ' "'+ data.description + '")'
+        return '![' + data.description + '](' + data.address + ' "' + data.description + '")'
       }
     }
   }
