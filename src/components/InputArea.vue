@@ -51,6 +51,8 @@
                 if(selection === "") {
                     this.editor.setCursor(cursor.line, cursor.ch + 2);
                 }
+
+                this.$emit("finish")
             }
         },
         data: function () {

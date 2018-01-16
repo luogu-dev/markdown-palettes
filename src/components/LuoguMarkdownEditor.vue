@@ -5,7 +5,12 @@
         </div>
         <div id="editor-area">
             <div id="editor-input-area" class="editor-area input-area">
-                <input-area v-model="code" @input="updateCode" :height="this.config.height" :insertCode="insertCode" :editorOption="this.config.editorOption"></input-area>
+                <input-area v-model="code"
+                            @input="updateCode"
+                            @finish="insertCode = null"
+                            :height="this.config.height"
+                            :insertCode="insertCode"
+                            :editorOption="this.config.editorOption"></input-area>
             </div>
             <div id="editor-preview-area" class="editor-area preview-area" >
                 <preview-area v-model="code" :height="this.config.height" :parsers="this.config.parsers"></preview-area>
