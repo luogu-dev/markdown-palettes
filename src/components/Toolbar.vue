@@ -57,9 +57,9 @@
 </style>
 
 <script>
-    import "font-awesome/css/font-awesome.css"
+import 'font-awesome/css/font-awesome.css'
 
-    /**
+/**
      * configItem = {
      *     name: "",
      *     icon: "", // icon name from font-awesome
@@ -76,28 +76,27 @@
      *     }
      * }
      */
-    export default {
-        name:"toolbar",
-        props: {
-            toolbarConfig: {
-                type: Array
-            }
-        },
-        methods: {
-            insertCode(code) {
-                this.$emit('change', code)
-            },
-            requestData(request) {
-                this.$emit('click', request)
-            },
-            handleAction(action) {
-                if(action.insert) {
-                    this.insertCode(action.insert)
-                }
-                else if(action.request) {
-                    this.requestData(action.request)
-                }
-            }
-        }
+export default {
+  name: 'toolbar',
+  props: {
+    toolbarConfig: {
+      type: Array
     }
+  },
+  methods: {
+    insertCode (code) {
+      this.$emit('change', code)
+    },
+    requestData (request) {
+      this.$emit('click', request)
+    },
+    handleAction (action) {
+      if (action.insert) {
+        this.insertCode(action.insert)
+      } else if (action.request) {
+        this.requestData(action.request)
+      }
+    }
+  }
+}
 </script>

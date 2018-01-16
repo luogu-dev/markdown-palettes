@@ -43,83 +43,80 @@
 </style>
 
 <script>
-    import InputArea from "./InputArea.vue"
-    import PreviewArea from "./PreviewArea.vue"
-    import Toolbar from "./Toolbar.vue"
-    import EditorDialog from "./Dialog.vue"
+import InputArea from './InputArea.vue'
+import PreviewArea from './PreviewArea.vue'
+import Toolbar from './Toolbar.vue'
+import EditorDialog from './Dialog.vue'
 
-    import KatexParser from './plugin/KatexParser'
-    import BtnBold from "./toolbar-button/btn-bold"
-    import Divider from "./toolbar-button/divider"
-    import BtnImg from "./toolbar-button/btn-img"
+import KatexParser from './plugin/KatexParser'
+import BtnBold from './toolbar-button/btn-bold'
+import Divider from './toolbar-button/divider'
+import BtnImg from './toolbar-button/btn-img'
 
-
-    export default {
-        name: "luogu-markdown-editor",
-        props: {
-           value: {
-               type: String
-           },
-           config: {
-               type: Object,
-               default: function() {
-                    return {
-                        height: '500px',
-                        parsers:[
-                            KatexParser
-                        ],
-                        toolbarConfig: [
-                            BtnBold,
-                            Divider,
-                            BtnImg
-                        ],
-                        editorOption: {
-                            mode: 'markdown',
-                            lineNumbers: true,
-                            lineWrapping: true
-                        }
-                    }
-               }
-           }
-        },
-        data: function () {
-            return {
-                code: '',
-                showDialog: false,
-                dialogRequest: {},
-                insertCode: null
-            }
-        },
-        mounted: function() {
-            this.code = this.value
-        },
-        components: {
-            InputArea,
-            PreviewArea,
-            Toolbar,
-            EditorDialog
-        },
-        methods: {
-            updateCode(code) {
-                this.$emit('input', code);
-            },
-            insert(code) {
-                if(code !== null)
-                    this.insertCode = code
-            },
-            closeDialog() {
-                this.showDialog = false
-            },
-            dialogFinish(request) {
-                this.insert(request.callback(request.data))
-                this.closeDialog()
-            },
-            clickToolbar(request) {
-                if(this.showDialog)
-                    return
-                this.dialogRequest = request
-                this.showDialog = true
-            }
+export default {
+  name: 'luogu-markdown-editor',
+  props: {
+    value: {
+      type: String
+    },
+    config: {
+      type: Object,
+      default () {
+        return {
+          height: '500px',
+          parsers: [
+            KatexParser
+          ],
+          toolbarConfig: [
+            BtnBold,
+            Divider,
+            BtnImg
+          ],
+          editorOption: {
+            mode: 'markdown',
+            lineNumbers: true,
+            lineWrapping: true
+          }
         }
+      }
     }
+  },
+  data () {
+    return {
+      code: '',
+      showDialog: false,
+      dialogRequest: {},
+      insertCode: null
+    }
+  },
+  mounted () {
+    this.code = this.value
+  },
+  components: {
+    InputArea,
+    PreviewArea,
+    Toolbar,
+    EditorDialog
+  },
+  methods: {
+    updateCode (code) {
+      this.$emit('input', code)
+    },
+    insert (code) {
+      if (code !== null) { this.insertCode = code }
+    },
+    closeDialog () {
+      this.showDialog = false
+    },
+    dialogFinish (request) {
+      this.insert(request.callback(request.data))
+      this.closeDialog()
+    },
+    clickToolbar (request) {
+      if (this.showDialog) { return }
+      this.dialogRequest = request
+      this.showDialog = true
+    }
+  }
+}
 </script>

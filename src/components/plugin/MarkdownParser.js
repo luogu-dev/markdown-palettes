@@ -1,46 +1,45 @@
-import "highlight.js/styles/atom-one-light.css"
+import 'highlight.js/styles/atom-one-light.css'
 
-export function MarkdownParser(code, stringMap) {
-    let marked = require('marked');
+export function MarkdownParser (code, stringMap) {
+  let marked = require('marked')
 
-    let renderer = new marked.Renderer();
+  let renderer = new marked.Renderer()
 
-    renderer.heading = function (text, level) {
-        return '<h' + level + '>' + text + '</h' + level + '>';
-    };
+  renderer.heading = function (text, level) {
+    return '<h' + level + '>' + text + '</h' + level + '>'
+  }
 
-    let highlight =  function (code) {
-        return require('highlight.js').highlightAuto(code).value;
+  let highlight = function (code) {
+    return require('highlight.js').highlightAuto(code).value
+  }
+
+  renderer.code = function (code, lang, escaped) {
+    stringMap.forEach(function (mapItem) {
+      code = code.replace(mapItem.hash, mapItem.segment)
+    })
+
+    let out = highlight(code, lang)
+    if (out != null && out !== code) {
+      escaped = true
+      code = out
     }
 
-    renderer.code = function(code, lang, escaped) {
-        stringMap.forEach(function (mapItem) {
-            code = code.replace(mapItem.hash, mapItem.segment)
-        })
+    if (!lang) {
+      return '<pre><code>' +
+                (escaped ? code : escape(code, true)) +
+                '\n</code></pre>'
+    }
 
-        let out = highlight(code, lang);
-        if (out != null && out !== code) {
-            escaped = true;
-            code = out;
-        }
+    return '<pre><code class="' +
+            'lang-' +
+            escape(lang, true) +
+            '">' +
+            (escaped ? code : escape(code, true)) +
+            '\n</code></pre>\n'
+  }
 
-        if (!lang) {
-            return '<pre><code>'
-                + (escaped ? code : escape(code, true))
-                + '\n</code></pre>';
-        }
-
-        return '<pre><code class="'
-            + 'lang-'
-            + escape(lang, true)
-            + '">'
-            + (escaped ? code : escape(code, true))
-            + '\n</code></pre>\n';
-    };
-
-    marked.setOptions({
-        renderer: renderer
-    });
-    return marked(code);
+  marked.setOptions({
+    renderer: renderer
+  })
+  return marked(code)
 }
-
