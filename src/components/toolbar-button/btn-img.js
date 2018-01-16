@@ -15,15 +15,10 @@ export default {
           name: 'description',
           title: '图片描述',
           default: ''
-        },
-        {
-          name: 'url',
-          title: '图片链接',
-          default: 'http://'
         }
       ],
       callback (data) {
-        return '[![' + data.description + '](' + data.address + ' "' + data.description + '")](' + data.url + ' "' + data.description + '")'
+        return '![' + data.description + '](' + data.address + ' "'+ data.description + '")'
       }
     }
   }

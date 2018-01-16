@@ -54,9 +54,7 @@ import Toolbar from './Toolbar.vue'
 import EditorDialog from './Dialog.vue'
 
 import KatexParser from './plugin/KatexParser'
-import BtnBold from './toolbar-button/btn-bold'
-import Divider from './toolbar-button/divider'
-import BtnImg from './toolbar-button/btn-img'
+import {toolbarBtn} from './toolbar-button/toolbarBtn'
 
 export default {
   name: 'luogu-markdown-editor',
@@ -72,11 +70,7 @@ export default {
           parsers: [
             KatexParser
           ],
-          toolbarConfig: [
-            BtnBold,
-            Divider,
-            BtnImg
-          ],
+          toolbarConfig: toolbarBtn,
           editorOption: {
             mode: 'markdown',
             lineNumbers: true,
