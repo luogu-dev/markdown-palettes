@@ -15,6 +15,21 @@
 
     #preview-area {
     }
+
+    #preview-content table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: block;
+        width: 100%;
+        overflow: auto;
+        word-break: keep-all;
+        margin: 10px;
+    }
+
+    #preview-content table th, td {
+        border: 1px solid #ddd;
+        padding: 6px 13px;
+    }
 </style>
 
 <script>
