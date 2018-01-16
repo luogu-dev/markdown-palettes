@@ -50,7 +50,7 @@
 
     .dialog-container {
         width: 380px;
-        margin: 0px auto;
+        margin: 0 auto;
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
@@ -102,10 +102,6 @@
         background: #fff;
         padding: 7px 10px;
         border: 1px solid #ddd;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -ms-border-radius: 3px;
-        -o-border-radius: 3px;
         border-radius: 3px;
     }
 
@@ -131,43 +127,43 @@
 </style>
 
 <script>
-    import "font-awesome/css/font-awesome.css"
+import 'font-awesome/css/font-awesome.css'
 
-    export default {
-        name: 'editor-dialog',
-        props: {
-            request: {
-                type: Object
-            }
-        },
-        data: function () {
-            return {
-                responseData: {}
-            }
-        },
-        computed: {
-            response() {
-                let res = this.request
-                res.data = this.responseData
-                return res
-            }
-        },
-        mounted: function() {
-            let initialData = {}
-
-            this.request.body.forEach(function (field) {
-                initialData[field.name] = field.default ? field.default : ''
-            })
-
-            this.responseData = initialData
-        },
-        methods: {
-            close() {
-                this.$emit('close')
-            },
-            finish() {
-                this.$emit('finish', this.response)
-            }
-        }
+export default {
+  name: 'editor-dialog',
+  props: {
+    request: {
+      type: Object
     }
+  },
+  data () {
+    return {
+      responseData: {}
+    }
+  },
+  computed: {
+    response () {
+      let res = this.request
+      res.data = this.responseData
+      return res
+    }
+  },
+  mounted () {
+    let initialData = {}
+
+    this.request.body.forEach(function (field) {
+      initialData[field.name] = field.default ? field.default : ''
+    })
+
+    this.responseData = initialData
+  },
+  methods: {
+    close () {
+      this.$emit('close')
+    },
+    finish () {
+      this.$emit('finish', this.response)
+    }
+  }
+}
 </script>
