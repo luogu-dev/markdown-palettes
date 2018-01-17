@@ -4,7 +4,7 @@
             <li v-for="item in toolbarConfig" :class="{'divider':item.name === '|'}" >
                 <span v-if="item.name === '|'">|</span>
                 <a v-else :title="item.title" @click="handleAction(item.action)" unselectable="on">
-                    <i :class="['fa', item.icon]" :name="item.name" unselectable="on"></i>
+                    <i :class="['fa', item.icon]" :name="item.name" unselectable="on">{{ item.content }}</i>
                 </a>
             </li>
         </ul>
@@ -54,6 +54,12 @@
         height: 65%;
         border-right: 1px solid #ddd;
     }
+
+    .icon-blold {
+        padding: 5px 2px;
+        display: inline-block;
+        font-weight: 700;
+    }
 </style>
 
 <script>
@@ -63,6 +69,7 @@ import 'font-awesome/css/font-awesome.css'
      * configItem = {
      *     name: "",
      *     icon: "", // icon name from font-awesome
+     *     content: "",
      *     title: "",
      *     action: {
      *         insert: "code",  //or ["before", "after"]
