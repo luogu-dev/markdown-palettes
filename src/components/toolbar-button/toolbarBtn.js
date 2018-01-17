@@ -8,11 +8,11 @@ import BtnLink from './btn-link'
 import BtnTable from './btn-table'
 
 export let toolbarBtn = [
-    BtnBold,
-    BtnItalic,
-    BtnStrikeThrough,
-    Divider,
-    BtnImg,
-    BtnLink,
-    BtnTable
+  BtnBold,
+  BtnItalic,
+  BtnStrikeThrough,
+  Divider,
+  BtnImg,
+  BtnLink,
+  BtnTable
 ]
