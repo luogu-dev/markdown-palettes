@@ -63,9 +63,9 @@ export default {
     },
     config: {
       type: Object,
-        default: function () {
-            return defaultConfig
-        }
+      default: function () {
+        return defaultConfig
+      }
     }
   },
   data () {
