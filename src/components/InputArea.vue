@@ -41,8 +41,7 @@ export default {
         return
       }
 
-      if(typeof insert === 'function')
-          insert = insert()
+      if (typeof insert === 'function') { insert = insert() }
 
       if (!Array.isArray(insert)) {
         insert = [insert, '']
