@@ -10,7 +10,7 @@ import BtnUl from './btn-ul'
 import BtnOl from './btn-ol'
 import BtnHr from './btn-hr'
 
-export let toolbarBtn = [
+export let defaultBtns = [
   BtnBold,
   BtnStrikeThrough,
   BtnItalic,
@@ -30,3 +30,20 @@ export let toolbarBtn = [
   BtnLink,
   BtnTable
 ]
+
+function getDefaultBtnsMap () {
+  let btnsMap = {}
+  defaultBtns.forEach(function (btn) {
+    btnsMap[btn.name] = btn
+  })
+  return btnsMap
+}
+
+export function getBtns (toolbarConfig) {
+  let btnsMap = getDefaultBtnsMap()
+  let btns = []
+  toolbarConfig.forEach(function (btn) {
+    if (typeof btn === 'object') { btns.push(btn) } else { btns.push(btnsMap[btn]) }
+  })
+  return btns
+}

@@ -1,5 +1,5 @@
 import KatexParser from './plugin/KatexParser'
-import {toolbarBtn} from './toolbar-button/toolbarBtn'
+import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
 function set (obj, config) {
@@ -17,7 +17,7 @@ export let defaultConfig = {
   parsers: [
     KatexParser
   ],
-  toolbarConfig: toolbarBtn,
+  toolbarConfig: defaultBtns,
   editorOption: {
     mode: 'markdown',
     lineNumbers: true,
@@ -26,5 +26,6 @@ export let defaultConfig = {
 }
 
 export function getConfig (config) {
+  if (config.toolbarConfig !== undefined) { config.toolbarConfig = getBtns(config.toolbarConfig) }
   return set(_.cloneDeep(defaultConfig), config)
 }
