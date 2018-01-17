@@ -1,19 +1,19 @@
 <template>
     <div id="luogu-markdown-editor" class="editor-container">
         <div id="editor-toolbar" class="editor-toolbar">
-            <toolbar @change="insert" @click="clickToolbar"  :toolbarConfig="this.config.toolbarConfig"></toolbar>
+            <toolbar @change="insert" @click="clickToolbar"  :toolbarConfig="editorConfig.toolbarConfig"></toolbar>
         </div>
         <div id="editor-area">
             <div id="editor-input-area" class="editor-area input-area">
                 <input-area v-model="code"
                             @input="updateCode"
                             @finish="insertCode = null"
-                            :height="this.config.height"
+                            :height="editorConfig.height"
                             :insertCode="insertCode"
-                            :editorOption="this.config.editorOption"></input-area>
+                            :editorOption="editorConfig.editorOption"></input-area>
             </div>
             <div id="editor-preview-area" class="editor-area preview-area" >
-                <preview-area v-model="code" :height="this.config.height" :parsers="this.config.parsers"></preview-area>
+                <preview-area v-model="code" :height="editorConfig.height" :parsers="editorConfig.parsers"></preview-area>
             </div>
         </div>
         <div id="editor-dialog">
@@ -53,8 +53,7 @@ import PreviewArea from './PreviewArea.vue'
 import Toolbar from './Toolbar.vue'
 import EditorDialog from './Dialog.vue'
 
-import KatexParser from './plugin/KatexParser'
-import {toolbarBtn} from './toolbar-button/toolbarBtn'
+import { defaultConfig, getConfig } from './DefaultConfig'
 
 export default {
   name: 'luogu-markdown-editor',
@@ -64,20 +63,9 @@ export default {
     },
     config: {
       type: Object,
-      default () {
-        return {
-          height: '500px',
-          parsers: [
-            KatexParser
-          ],
-          toolbarConfig: toolbarBtn,
-          editorOption: {
-            mode: 'markdown',
-            lineNumbers: true,
-            lineWrapping: true
-          }
+        default: function () {
+            return defaultConfig
         }
-      }
     }
   },
   data () {
@@ -85,7 +73,8 @@ export default {
       code: '',
       showDialog: false,
       dialogRequest: {},
-      insertCode: null
+      insertCode: null,
+      editorConfig: getConfig(this.config)
     }
   },
   mounted () {

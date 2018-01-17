@@ -1,4 +1,3 @@
-
 import BtnBold from './btn-bold'
 import BtnItalic from './btn-italic'
 import BtnStrikeThrough from './btn-strikethrough'
