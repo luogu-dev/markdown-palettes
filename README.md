@@ -11,6 +11,7 @@
 - [lodash](https://github.com/lodash/lodash)
 
 #### 体验
-> npm install
-
-> npm run dev
+> git clone https://github.com/luogu-dev/markdown-palettes.git
+  cd ./markdown-palettes
+  npm install
+  npm run dev
