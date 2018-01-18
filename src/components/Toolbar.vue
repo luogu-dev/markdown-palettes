@@ -109,13 +109,11 @@ export default {
       this.$emit('click', request)
     },
     handleAction (action) {
-    if(action.event) {
+      if (action.event) {
         this.$emit('input', action.event)
-    }
-      else if (action.insert) {
+      } else if (action.insert) {
         this.insertCode(action.insert)
-      }
-      else if (action.request) {
+      } else if (action.request) {
         this.requestData(action.request)
       }
     }

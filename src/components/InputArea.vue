@@ -58,9 +58,9 @@ export default {
 
       this.$emit('finish')
     },
-      height: function (newHeight) {
-          this.editor.setSize('100%', newHeight)
-      }
+    height: function (newHeight) {
+      this.editor.setSize('100%', newHeight)
+    }
   },
   data: function () {
     return {

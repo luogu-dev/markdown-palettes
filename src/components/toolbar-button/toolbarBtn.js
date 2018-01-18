@@ -35,7 +35,7 @@ export let defaultBtns = [
   BtnTable,
   Divider,
   BtnHide,
-    BtnFullscreen
+  BtnFullscreen
 ]
 
 function getDefaultBtnsMap () {
