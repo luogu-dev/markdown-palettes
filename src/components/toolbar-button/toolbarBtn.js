@@ -9,6 +9,7 @@ import BtnsHeader from './btn-header'
 import BtnUl from './btn-ul'
 import BtnOl from './btn-ol'
 import BtnHr from './btn-hr'
+import BtnCode from './btn-code'
 
 export let defaultBtns = [
   BtnBold,
@@ -28,6 +29,7 @@ export let defaultBtns = [
   Divider,
   BtnImg,
   BtnLink,
+  BtnCode,
   BtnTable
 ]
 
