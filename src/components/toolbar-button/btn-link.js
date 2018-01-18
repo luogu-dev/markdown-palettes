@@ -9,11 +9,13 @@ export default {
         {
           name: 'url',
           title: '链接地址',
+          type: 'input',
           default: ''
         },
         {
           name: 'description',
           title: '链接标题',
+          type: 'input',
           default: ''
         }
       ],

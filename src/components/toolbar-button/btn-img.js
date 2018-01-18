@@ -9,11 +9,13 @@ export default {
         {
           name: 'address',
           title: '图片地址',
+          type: 'input',
           default: ''
         },
         {
           name: 'description',
           title: '图片描述',
+          type: 'input',
           default: ''
         }
       ],
