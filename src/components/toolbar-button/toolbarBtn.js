@@ -10,6 +10,8 @@ import BtnUl from './btn-ul'
 import BtnOl from './btn-ol'
 import BtnHr from './btn-hr'
 import BtnCode from './btn-code'
+import BtnHide from './btn-hide'
+import BtnFullscreen from './btn-fullscreen'
 
 export let defaultBtns = [
   BtnBold,
@@ -30,7 +32,10 @@ export let defaultBtns = [
   BtnImg,
   BtnLink,
   BtnCode,
-  BtnTable
+  BtnTable,
+  Divider,
+  BtnHide,
+    BtnFullscreen
 ]
 
 function getDefaultBtnsMap () {

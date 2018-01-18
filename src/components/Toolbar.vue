@@ -12,6 +12,17 @@
 </template>
 
 <style>
+
+    #toolbar {
+        box-sizing: border-box;
+        width: 100%;
+        padding-right: 1px;
+        min-height: 35px;
+        border-right: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+    }
+
     #editor-menu>li>a {
         outline: 0;
         color: #666;
@@ -98,9 +109,13 @@ export default {
       this.$emit('click', request)
     },
     handleAction (action) {
-      if (action.insert) {
+    if(action.event) {
+        this.$emit('input', action.event)
+    }
+      else if (action.insert) {
         this.insertCode(action.insert)
-      } else if (action.request) {
+      }
+      else if (action.request) {
         this.requestData(action.request)
       }
     }
