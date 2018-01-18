@@ -2,17 +2,15 @@
 
 > Markdown*Palettes: Markdown editor for the modern web.
 
-## Build Setup
+**Markdown*Palettes** ??????Markdown?????????????
 
-``` bash
-# install dependencies
-npm install
+- [Vue.js](https://github.com/vuejs/vue)
+- [marked](https://github.com/chjj/marked)
+- [katex](https://github.com/Khan/KaTeX)
+- [font-awesome](https://github.com/FortAwesome/Font-Awesome)
+- [lodash](https://github.com/lodash/lodash)
 
-# serve with hot reload at localhost:8080
-npm run dev
+#### ??
+> npm install
 
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+> npm run dev
