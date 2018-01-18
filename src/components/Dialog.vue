@@ -10,9 +10,10 @@
                     </div>
                     <div class="dialog-body">
                         <div class="dialog-form">
-                            <div class="dialog-field"v-for="field in request.body">
+                            <div class="dialog-field" v-for="field in request.body">
                                 <label>{{ field.title }}</label>
-                                <input class="dialog-input" v-model="responseData[field.name]">
+                                <input class="dialog-input" v-if="field.type === 'input'" v-model="responseData[field.name]">
+                                <textarea class="dialog-input" v-if="field.type === 'textarea'" v-model="responseData[field.name]"></textarea>
                                 <br>
                             </div>
                         </div>
@@ -76,10 +77,18 @@
         overflow:auto;
     }
     .dialog-field label  {
+        padding-top: 5px;
         display: inline-block;
+        vertical-align: top;
         width: 75px;
         font-size: 14px;
         color: #666;
+    }
+
+    .dialog-field textarea {
+        resize: none;
+        height: 250px;
+        overflow: auto;
     }
 
     .dialog-input {
