@@ -1,4 +1,5 @@
 import 'highlight.js/styles/atom-one-light.css'
+import Highlight from './Highlight'
 
 export function MarkdownParser (code, stringMap) {
   let marked = require('marked')
@@ -10,7 +11,7 @@ export function MarkdownParser (code, stringMap) {
   }
 
   let highlight = function (code) {
-    return require('highlight.js').highlightAuto(code).value
+    return Highlight.highlightAuto(code).value
   }
 
   renderer.code = function (code, lang, escaped) {

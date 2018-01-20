@@ -1,7 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
     entry: ["babel-polyfill",'./src/main.js'],
@@ -12,6 +13,7 @@ module.exports = {
     },
     plugins: [
         new LodashModuleReplacementPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new CleanWebpackPlugin(['dist'])
     ],
     module: {
@@ -49,7 +51,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.runtime.esm.js'
         },
         extensions: ['*', '.js', '.vue', '.json']
     },
@@ -62,6 +64,12 @@ module.exports = {
         hints: false
     },
     devtool: '#eval-source-map'
+}
+
+if (process.env.BUNDLE_ANALYZE === 'true') {
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new BundleAnalyzerPlugin()
+    ])
 }
 
 if (process.env.NODE_ENV === 'production') {
