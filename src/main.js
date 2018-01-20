@@ -1,22 +1,40 @@
 import Vue from 'vue'
-import LuoguMarkdownEditor from './components/LuoguMarkdownEditor.vue'
+import Editor from './components/MarkdownPalettes.vue'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#editor',
-  data: function () {
-    return {
-      code: ''
+class MarkdownPalettes {
+    constructor (el) {
+        this.editor = new Vue({
+            el: el,
+            data () {
+                return {
+                    code: ''
+                }
+            },
+            render (createElement) {
+                const vm = this
+                return createElement(Editor, {
+                    props: {
+                        value: vm.code
+                    },
+                    on: {
+                        input (event) {
+                            vm.code = event
+                        }
+                    }
+                })
+            },
+            methods: {
+                setCode (code) {
+                    this.code = code
+                },
+                getCode () {
+                    return this.code
+                }
+            }
+        })
     }
-  },
-  components: {
-    LuoguMarkdownEditor
-  },
-  methods: {
-    updateCode (newCode) {
-      this.code = newCode
-    }
-  }
-})
+}
+
+window.MarkdownPalettes = MarkdownPalettes

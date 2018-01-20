@@ -6,9 +6,10 @@
     <title>luogu-markdown-editor</title>
   </head>
   <body>
-    <div id="editor">
-      <luogu-markdown-editor v-model="code"></luogu-markdown-editor>
-    </div>
+    <div id="editor"></div>
     <script src="/dist/luogu-markdown-editor.js"></script>
+    <script>
+      var editor = new MarkdownPalettes("#editor")
+    </script>
   </body>
 </html>

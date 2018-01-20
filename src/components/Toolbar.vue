@@ -95,28 +95,28 @@ import 'font-awesome/css/font-awesome.css'
      * }
      */
 export default {
-  name: 'toolbar',
-  props: {
-    toolbarConfig: {
-      type: Array
-    }
-  },
-  methods: {
-    insertCode (code) {
-      this.$emit('change', code)
+    name: 'toolbar',
+    props: {
+        toolbarConfig: {
+            type: Array
+        }
     },
-    requestData (request) {
-      this.$emit('click', request)
-    },
-    handleAction (action) {
-      if (action.event) {
-        this.$emit('input', action.event)
-      } else if (action.insert) {
-        this.insertCode(action.insert)
-      } else if (action.request) {
-        this.requestData(action.request)
-      }
+    methods: {
+        insertCode (code) {
+            this.$emit('change', code)
+        },
+        requestData (request) {
+            this.$emit('click', request)
+        },
+        handleAction (action) {
+            if (action.event) {
+                this.$emit('input', action.event)
+            } else if (action.insert) {
+                this.insertCode(action.insert)
+            } else if (action.request) {
+                this.requestData(action.request)
+            }
+        }
     }
-  }
 }
 </script>

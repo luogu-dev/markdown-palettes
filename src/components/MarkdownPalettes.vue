@@ -79,76 +79,82 @@ import EditorDialog from './Dialog.vue'
 import {defaultConfig, getConfig} from './DefaultConfig'
 
 export default {
-  name: 'luogu-markdown-editor',
-  props: {
-    value: {
-      type: String
-    },
-    config: {
-      type: Object,
-      default: function () {
-        return defaultConfig
-      }
-    }
-  },
-  data () {
-    let config = getConfig(this.config)
-    return {
-      code: '',
-      showDialog: false,
-      dialogRequest: {},
-      insertCode: null,
-      editorConfig: config,
-      editorHeight: config.height
-    }
-  },
-  mounted () {
-    this.code = this.value
-  },
-  components: {
-    InputArea,
-    PreviewArea,
-    Toolbar,
-    EditorDialog
-  },
-  methods: {
-    updateCode (code) {
-      this.$emit('input', code)
-    },
-    insert (code) {
-      if (code !== null) {
-        this.insertCode = code
-      }
-    },
-    closeDialog () {
-      this.showDialog = false
-    },
-    dialogFinish (request) {
-      this.insert(request.callback(request.data))
-      this.closeDialog()
-    },
-    clickToolbar (request) {
-      if (this.showDialog) {
-        return
-      }
-      this.dialogRequest = request
-      this.showDialog = true
-    },
-    handleToolbarOperation (operation) {
-      if (operation === 'hide') {
-        if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
-      }
-      if (operation === 'fullscreen') {
-        if (!this.config.fullscreen) {
-          this.config.fullscreen = true
-          this.editorHeight = (screen.height - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
-          console.log(this.editorHeight)
-        } else {
-          this.config.fullscreen = false
-          this.editorHeight = this.editorConfig.height
+    name: 'markdown-palettes',
+    props: {
+        value: {
+            type: String
+        },
+        config: {
+            type: Object,
+            default: function () {
+                return defaultConfig
+            }
         }
-      }
+    },
+    data () {
+        let config = getConfig(this.config)
+        return {
+            code: '',
+            showDialog: false,
+            dialogRequest: {},
+            insertCode: null,
+            editorConfig: config,
+            editorHeight: config.height
+        }
+    },
+    mounted () {
+        this.code = this.value
+    },
+    components: {
+        InputArea,
+        PreviewArea,
+        Toolbar,
+        EditorDialog
+    },
+    methods: {
+        updateCode (code) {
+            this.$emit('input', code)
+        },
+        insert (code) {
+            if (code !== null) {
+                this.insertCode = code
+            }
+        },
+        closeDialog () {
+            this.showDialog = false
+        },
+        dialogFinish (request) {
+            this.insert(request.callback(request.data))
+            this.closeDialog()
+        },
+        clickToolbar (request) {
+            if (this.showDialog) {
+                return
+            }
+            this.dialogRequest = request
+            this.showDialog = true
+        },
+        handleToolbarOperation (operation) {
+            if (operation === 'hide') {
+                if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
+            }
+            if (operation === 'fullscreen') {
+                if (!this.config.fullscreen) {
+                    this.config.fullscreen = true
+                    this.editorHeight = (screen.height - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
+                    console.log(this.editorHeight)
+                } else {
+                    this.config.fullscreen = false
+                    this.editorHeight = this.editorConfig.height
+                }
+            }
+        }
+    },
+    watch: {
+        value (newValue) {
+            this.code = newValue
+            this.updateCode(newValue)
+        }
     }
-  }
 }
 </script>

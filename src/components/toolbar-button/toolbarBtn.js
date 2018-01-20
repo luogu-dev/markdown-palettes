@@ -14,43 +14,43 @@ import BtnHide from './btn-hide'
 import BtnFullscreen from './btn-fullscreen'
 
 export let defaultBtns = [
-  BtnBold,
-  BtnStrikeThrough,
-  BtnItalic,
-  BtnHr,
-  Divider,
-  BtnsHeader(1),
-  BtnsHeader(2),
-  BtnsHeader(3),
-  BtnsHeader(4),
-  BtnsHeader(5),
-  BtnsHeader(6),
-  Divider,
-  BtnUl,
-  BtnOl,
-  Divider,
-  BtnImg,
-  BtnLink,
-  BtnCode,
-  BtnTable,
-  Divider,
-  BtnHide,
-  BtnFullscreen
+    BtnBold,
+    BtnStrikeThrough,
+    BtnItalic,
+    BtnHr,
+    Divider,
+    BtnsHeader(1),
+    BtnsHeader(2),
+    BtnsHeader(3),
+    BtnsHeader(4),
+    BtnsHeader(5),
+    BtnsHeader(6),
+    Divider,
+    BtnUl,
+    BtnOl,
+    Divider,
+    BtnImg,
+    BtnLink,
+    BtnCode,
+    BtnTable,
+    Divider,
+    BtnHide,
+    BtnFullscreen
 ]
 
 function getDefaultBtnsMap () {
-  let btnsMap = {}
-  defaultBtns.forEach(function (btn) {
-    btnsMap[btn.name] = btn
-  })
-  return btnsMap
+    let btnsMap = {}
+    defaultBtns.forEach(function (btn) {
+        btnsMap[btn.name] = btn
+    })
+    return btnsMap
 }
 
 export function getBtns (toolbarConfig) {
-  let btnsMap = getDefaultBtnsMap()
-  let btns = []
-  toolbarConfig.forEach(function (btn) {
-    if (typeof btn === 'object') { btns.push(btn) } else { btns.push(btnsMap[btn]) }
-  })
-  return btns
+    let btnsMap = getDefaultBtnsMap()
+    let btns = []
+    toolbarConfig.forEach(function (btn) {
+        if (typeof btn === 'object') { btns.push(btn) } else { btns.push(btnsMap[btn]) }
+    })
+    return btns
 }

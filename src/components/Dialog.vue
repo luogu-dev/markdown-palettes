@@ -139,40 +139,40 @@
 import 'font-awesome/css/font-awesome.css'
 
 export default {
-  name: 'editor-dialog',
-  props: {
-    request: {
-      type: Object
-    }
-  },
-  data () {
-    return {
-      responseData: {}
-    }
-  },
-  computed: {
-    response () {
-      let res = this.request
-      res.data = this.responseData
-      return res
-    }
-  },
-  mounted () {
-    let initialData = {}
-
-    this.request.body.forEach(function (field) {
-      initialData[field.name] = field.default ? field.default : ''
-    })
-
-    this.responseData = initialData
-  },
-  methods: {
-    close () {
-      this.$emit('close')
+    name: 'editor-dialog',
+    props: {
+        request: {
+            type: Object
+        }
     },
-    finish () {
-      this.$emit('finish', this.response)
+    data () {
+        return {
+            responseData: {}
+        }
+    },
+    computed: {
+        response () {
+            let res = this.request
+            res.data = this.responseData
+            return res
+        }
+    },
+    mounted () {
+        let initialData = {}
+
+        this.request.body.forEach(function (field) {
+            initialData[field.name] = field.default ? field.default : ''
+        })
+
+        this.responseData = initialData
+    },
+    methods: {
+        close () {
+            this.$emit('close')
+        },
+        finish () {
+            this.$emit('finish', this.response)
+        }
     }
-  }
 }
 </script>

@@ -5,6 +5,9 @@
     "html/indent": "0",
     "html/report-bad-indent": "error"
   },
+  "rules": {
+    "indent": ["error", 4]
+  },
   "env": {
     "browser": true
   },

@@ -3,31 +3,31 @@ import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
 function set (obj, config) {
-  for (let key in config) {
-    if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-      set(obj[key], config)
+    for (let key in config) {
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+            set(obj[key], config)
+        }
+        obj[key] = config[key]
     }
-    obj[key] = config[key]
-  }
-  return obj
+    return obj
 }
 
 export let defaultConfig = {
-  height: '500px',
-  previewDisplay: 'normal',
-  fullscreen: false,
-  parsers: [
-    KatexParser
-  ],
-  toolbarConfig: defaultBtns,
-  editorOption: {
-    mode: 'markdown',
-    lineNumbers: true,
-    lineWrapping: true
-  }
+    height: '500px',
+    previewDisplay: 'normal',
+    fullscreen: false,
+    parsers: [
+        KatexParser
+    ],
+    toolbarConfig: defaultBtns,
+    editorOption: {
+        mode: 'markdown',
+        lineNumbers: true,
+        lineWrapping: true
+    }
 }
 
 export function getConfig (config) {
-  if (config.toolbarConfig !== undefined) { config.toolbarConfig = getBtns(config.toolbarConfig) }
-  return set(_.cloneDeep(defaultConfig), config)
+    if (config.toolbarConfig !== undefined) { config.toolbarConfig = getBtns(config.toolbarConfig) }
+    return set(_.cloneDeep(defaultConfig), config)
 }

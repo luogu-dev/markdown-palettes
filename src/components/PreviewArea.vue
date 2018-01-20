@@ -36,37 +36,37 @@
 import { ContentParser } from './ContentParser'
 
 export default {
-  name: 'preview-area',
-  props: {
-    value: {
-      type: String,
-      default: ''
+    name: 'preview-area',
+    props: {
+        value: {
+            type: String,
+            default: ''
+        },
+        height: {
+            type: String,
+            default: '400px'
+        },
+        parsers: {
+            type: Array
+        }
     },
-    height: {
-      type: String,
-      default: '400px'
+    data () {
+        return {
+            content: ''
+        }
     },
-    parsers: {
-      type: Array
+    mounted () {
+        this.updateContent(this.value)
+    },
+    methods: {
+        updateContent (newContent) {
+            this.content = ContentParser(newContent, this.parsers)
+        }
+    },
+    watch: {
+        value (newContent) {
+            this.updateContent(newContent)
+        }
     }
-  },
-  data () {
-    return {
-      content: ''
-    }
-  },
-  mounted () {
-    this.updateContent(this.value)
-  },
-  methods: {
-    updateContent (newContent) {
-      this.content = ContentParser(newContent, this.parsers)
-    }
-  },
-  watch: {
-    value (newContent) {
-      this.updateContent(newContent)
-    }
-  }
 }
 </script>
