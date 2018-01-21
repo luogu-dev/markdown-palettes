@@ -14,6 +14,7 @@
     }
 
     #preview-area {
+        background-color: white;
     }
 
     #preview-content table {

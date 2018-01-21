@@ -15,6 +15,7 @@
 
     #toolbar {
         box-sizing: border-box;
+        background-color: white;
         width: 100%;
         padding-right: 1px;
         min-height: 35px;
