@@ -32,6 +32,11 @@
         border: 1px solid #ddd;
         padding: 6px 13px;
     }
+
+    code.mp-code {
+        font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+        font-size: 15px;
+    }
 </style>
 
 <script>

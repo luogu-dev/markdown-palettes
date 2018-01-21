@@ -1,5 +1,6 @@
-import 'highlight.js/styles/atom-one-light.css'
+import 'highlight.js/styles/tomorrow.css'
 import Highlight from './Highlight'
+import escapeHtml from 'escape-html'
 
 export function MarkdownParser (code, stringMap) {
     let marked = require('marked')
@@ -14,28 +15,27 @@ export function MarkdownParser (code, stringMap) {
         return Highlight.highlightAuto(code).value
     }
 
-    renderer.code = function (code, lang, escaped) {
+    renderer.code = function (code, lang) {
         stringMap.forEach(function (mapItem) {
             code = code.replace(mapItem.hash, mapItem.segment)
         })
 
         let out = highlight(code, lang)
-        if (out != null && out !== code) {
-            escaped = true
+        if (out !== null) {
             code = out
         }
 
         if (!lang) {
-            return '<pre><code>' +
-                (escaped ? code : escape(code, true)) +
+            return '<pre><code class="mp-code ">' +
+                code +
                 '\n</code></pre>'
         }
 
-        return '<pre><code class="' +
+        return '<pre><code class="mp-code ' +
             'lang-' +
-            escape(lang, true) +
+            escapeHtml(lang) +
             '">' +
-            (escaped ? code : escape(code, true)) +
+            code +
             '\n</code></pre>\n'
     }
 
