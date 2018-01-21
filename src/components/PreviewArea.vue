@@ -1,23 +1,24 @@
 <template>
-    <div id="preview-area" :style="{ 'height': height }">
-        <div id="preview-content" v-html="content"></div>
+    <div id="mp-preview-area" :style="{ 'height': height }">
+        <div id="mp-preview-content" v-html="content"></div>
     </div>
 </template>
 
 <style>
-    #preview-content {
+    #mp-preview-content {
         padding: 10px;
         padding-left: 20px;
         padding-right: 20px;
-        overflow-y: auto;
+        overflow: scroll;
         word-wrap:break-word;
     }
 
-    #preview-area {
+    #mp-preview-area {
+        overflow: scroll;
         background-color: white;
     }
 
-    #preview-content table {
+    #mp-preview-content table {
         border-collapse: collapse;
         border-spacing: 0;
         display: block;
@@ -27,7 +28,7 @@
         margin: 10px;
     }
 
-    #preview-content table th, td {
+    #mp-preview-content table th, td {
         border: 1px solid #ddd;
         padding: 6px 13px;
     }

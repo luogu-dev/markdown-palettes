@@ -1,27 +1,27 @@
 <template>
-    <div id="editor-dialog">
-        <div class="dialog-mask">
-            <div class="dialog-wrapper">
-                <div class="dialog-container">
+    <div id="mp-editor-dialog">
+        <div class="mp-dialog-mask">
+            <div class="mp-dialog-wrapper">
+                <div class="mp-dialog-container">
 
-                    <div class="dialog-header">
+                    <div class="mp-dialog-header">
                         <strong>{{ request.title }}</strong>
-                        <a class="fa fa-close dialog-close" @click="close()"></a>
+                        <a class="fa fa-close mp-dialog-close" @click="close()"></a>
                     </div>
-                    <div class="dialog-body">
-                        <div class="dialog-form">
-                            <div class="dialog-field" v-for="field in request.body">
+                    <div class="mp-dialog-body">
+                        <div class="mp-dialog-form">
+                            <div class="mp-dialog-field" v-for="field in request.body">
                                 <label>{{ field.title }}</label>
-                                <input class="dialog-input" v-if="field.type === 'input'" v-model="responseData[field.name]">
-                                <textarea class="dialog-input" v-if="field.type === 'textarea'" v-model="responseData[field.name]"></textarea>
+                                <input class="mp-dialog-input" v-if="field.type === 'input'" v-model="responseData[field.name]">
+                                <textarea class="mp-dialog-input" v-if="field.type === 'textarea'" v-model="responseData[field.name]"></textarea>
                                 <br>
                             </div>
                         </div>
 
-                        <div class="dialog-footer">
+                        <div class="mp-dialog-footer">
                             <div>
-                                <button class="dialog-button" @click="close()">取消</button>
-                                <button class="dialog-button" @click="finish()"  style="margin-right: 7px">确定</button>
+                                <button class="mp-dialog-button" @click="close()">取消</button>
+                                <button class="mp-dialog-button" @click="finish()"  style="margin-right: 7px">确定</button>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
 </template>
 
 <style>
-    .dialog-mask {
+    .mp-dialog-mask {
         position: fixed;
         z-index: 9998;
         top: 0;
@@ -44,12 +44,12 @@
         transition: opacity .3s ease;
     }
 
-    .dialog-wrapper {
+    .mp-dialog-wrapper {
         display: table-cell;
         vertical-align: middle;
     }
 
-    .dialog-container {
+    .mp-dialog-container {
         width: 380px;
         margin: 0 auto;
         background-color: #fff;
@@ -58,7 +58,7 @@
         transition: all .3s ease;
         font-family: Helvetica, Arial, sans-serif;
     }
-    .dialog-header {
+    .mp-dialog-header {
         padding: 11px 20px;
         border-bottom: 1px solid #eee;
     }
@@ -67,12 +67,12 @@
         color: #666;
     }
 
-    .dialog-body {
+    .mp-dialog-body {
         padding: 20px 30px;
         padding-bottom: 10px;
     }
 
-    .dialog-field {
+    .mp-dialog-field {
         margin-bottom: 8px;
         overflow:auto;
     }
@@ -91,18 +91,18 @@
         overflow: auto;
     }
 
-    .dialog-input {
+    .mp-dialog-input {
         display: inline-block;
         width: 220px;
         color: #999;
         padding: 8px;
         border: 1px solid #ddd;
     }
-    .dialog-footer {
+    .mp-dialog-footer {
         overflow:auto;
     }
 
-    .dialog-button {
+    .mp-dialog-button {
         display: inline-block;
         float: right;
         color: #666;
@@ -114,21 +114,21 @@
         border-radius: 3px;
     }
 
-    .dialog-enter {
+    .mp-dialog-enter {
         opacity: 0;
     }
 
-    .dialog-leave-active {
+    .mp-dialog-leave-active {
         opacity: 0;
     }
 
-    .dialog-enter .dialog-container,
-    .dialog-leave-active .dialog-container {
+    .mp-dialog-enter .mp-dialog-container,
+    .mp-dialog-leave-active .mp-dialog-container {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
     }
 
-    .dialog-close {
+    .mp-dialog-close {
         font-size: 18px;
         color: #ccc;
         float: right;

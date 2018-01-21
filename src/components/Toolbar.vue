@@ -1,7 +1,7 @@
 <template>
-    <div id="toolbar">
-        <ul id="editor-menu" v-if="toolbarConfig.length > 0">
-            <li v-for="item in toolbarConfig" :class="{'divider':item.name === '|'}" >
+    <div id="mp-toolbar">
+        <ul id="mp-editor-menu" v-if="toolbarConfig.length > 0">
+            <li v-for="item in toolbarConfig" :class="{'mp-divider':item.name === '|'}" >
                 <span v-if="item.name === '|'">|</span>
                 <a v-else :title="item.title" @click="handleAction(item.action)" unselectable="on">
                     <i :class="['fa', item.icon]" :name="item.name" unselectable="on">{{ item.content }}</i>
@@ -13,7 +13,7 @@
 
 <style>
 
-    #toolbar {
+    #mp-toolbar {
         box-sizing: border-box;
         background-color: white;
         width: 100%;
@@ -24,7 +24,7 @@
         border-top: 1px solid #ddd;
     }
 
-    #editor-menu>li>a {
+    #mp-editor-menu>li>a {
         outline: 0;
         color: #666;
         display: inline-block;
@@ -35,42 +35,36 @@
         border: 1px solid #fff;
         transition: all 300ms ease-out;
     }
-    #editor-menu>li>a.active, #editor-menu>li>a:hover {
+    #mp-editor-menu>li>a.active, #editor-menu>li>a:hover {
         border: 1px solid #ddd;
         background-color: rgb(238, 238, 238);
     }
 
-    #editor-menu {
+    #mp-editor-menu {
         margin: 0;
         padding-left: 8px;
         list-style: none;
     }
 
-    #editor-menu>li>a>.fa {
+    #mp-editor-menu>li>a>.fa {
         text-align: center;
         display: block;
         padding: 5px;
     }
 
-    #editor-menu>li {
+    #mp-editor-menu>li {
         margin: 0;
         padding: 5px 1px;
         display: inline-block;
         position: relative;
     }
 
-    #editor-menu>li.divider {
+    #mp-editor-menu>li.divider {
         display: inline-block;
         text-indent: -9999px;
         margin: 0 5px;
         height: 65%;
         border-right: 1px solid #ddd;
-    }
-
-    .icon-blold {
-        padding: 5px 2px;
-        display: inline-block;
-        font-weight: 700;
     }
 </style>
 

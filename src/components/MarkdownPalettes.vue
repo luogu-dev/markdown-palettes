@@ -1,13 +1,13 @@
 <template>
-    <div id="luogu-markdown-editor" class="editor-container" :class="{'fullscreen': this.config.fullscreen}">
-        <div id="editor-toolbar" class="editor-toolbar">
+    <div id="mp-luogu-markdown-editor" class="mp-editor-container" :class="{'mp-fullscreen': this.config.fullscreen}">
+        <div id="mp-editor-toolbar" class="mp-editor-toolbar">
             <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
                      :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
         </div>
-        <div id="editor-area">
-            <div id="editor-input-area" class="input-area" :class="{
-                        'editor-area': this.config.previewDisplay === 'normal',
-                        'editor-area-full': this.config.previewDisplay === 'hide'
+        <div id="mp-editor-area">
+            <div id="mp-editor-input-area" class="mp-input-area" :class="{
+                        'mp-editor-area': this.config.previewDisplay === 'normal',
+                        'mp-editor-area-full': this.config.previewDisplay === 'hide'
                  }">
                 <input-area v-model="code"
                             ref="inputArea"
@@ -17,15 +17,15 @@
                             :insertCode="insertCode"
                             :editorOption="editorConfig.editorOption"></input-area>
             </div>
-            <div id="editor-preview-area" class="editor-area preview-area" :class="{
-                        'editor-area': this.config.previewDisplay === 'normal',
-                        'editor-area-hide': this.config.previewDisplay === 'hide'
+            <div id="mp-editor-preview-area" class="mp-editor-area mp-preview-area" :class="{
+                        'mp-editor-area': this.config.previewDisplay === 'normal',
+                        'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
                 <preview-area v-model="code" :height="editorHeight"
                               :parsers="editorConfig.parsers" ref="previewArea"></preview-area>
             </div>
         </div>
-        <div id="editor-dialog">
+        <div id="mp-editor-dialog">
             <editor-dialog v-if="showDialog" :request="dialogRequest" @finish="dialogFinish"
                            @close="closeDialog" ref="dialog"></editor-dialog>
         </div>
@@ -33,7 +33,7 @@
 </template>
 
 <style>
-    .editor-area {
+    .mp-editor-area {
         box-sizing: border-box;
         width: 50%;
         float: left;
@@ -41,26 +41,26 @@
         border-top: 1px solid #ddd;
     }
 
-    .editor-area-full {
+    .mp-editor-area-full {
         box-sizing: border-box;
         width: 100%;
         border: 1px solid #ddd;
     }
 
-    .editor-area-hide {
+    .mp-editor-area-hide {
         display: none;
     }
 
-    .input-area {
+    .mp-input-area {
         border-right: 1px solid #ddd;
         border-left: 1px solid #ddd;
     }
 
-    .preview-area {
+    .mp-preview-area {
         border-right: 1px solid #ddd;
     }
 
-    .fullscreen {
+    .mp-fullscreen {
         position: fixed;
         z-index: 9997;
         top: 0;
