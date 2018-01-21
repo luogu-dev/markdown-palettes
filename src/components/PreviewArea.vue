@@ -9,12 +9,12 @@
         padding: 10px;
         padding-left: 20px;
         padding-right: 20px;
-        overflow: scroll;
+        overflow: auto;
         word-wrap:break-word;
     }
 
     #mp-preview-area {
-        overflow: scroll;
+        overflow: auto;
         background-color: white;
     }
 
