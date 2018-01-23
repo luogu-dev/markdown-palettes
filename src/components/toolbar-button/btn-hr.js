@@ -3,6 +3,6 @@ export default {
     icon: 'fa-minus',
     title: '分割线',
     action: {
-        insert: '------------'
+        insert: '\n\n------------\n'
     }
 }
