@@ -2,20 +2,18 @@ import 'katex/dist/katex.css'
 import katex from 'katex/dist/katex'
 
 export default {
-    reg: RegExp(/(\$+[^$]*\$+)/, 'g'),
-    parser (segment) {
-        let matchReg = new RegExp(/^\$+(.*)\$+$/)
-        let matched = segment.match(matchReg)
-
-        if (matched) {
-            segment = matched[1]
-            try {
-                return katex.renderToString(segment)
-            } catch (exception) {
-                return '$' + segment + '$'
-            }
-        } else {
-            return ''
+    reg: /(\$\$?)(.+?)\$\$?/,
+    parser (matches) {
+        let isMathMode = false
+        if (matches[1] === '$$') {
+            isMathMode = true
+        }
+        try {
+            return katex.renderToString(matches[2], {
+                displayMode: isMathMode
+            })
+        } catch (exception) {
+            return matches[1] + matches[2] + matches[1]
         }
     }
 }

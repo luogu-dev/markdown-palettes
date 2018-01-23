@@ -7,18 +7,18 @@ export function ContentParser (content, parsers) {
     let stringMap = []
 
     parsers.forEach(function (parserConfig) {
-        let segments = newContent.match(parserConfig.reg)
+        let matches = newContent.match(parserConfig.reg)
 
-        if (segments) {
-            segments.forEach(function (segment) {
-                let mapItem = {
-                    hash: '$' + md5(segment) + '$',
-                    segment: segment,
-                    content: parserConfig.parser(segment)
-                }
-                newContent = newContent.replace(segment, mapItem.hash)
-                stringMap.push(mapItem)
-            })
+        while (matches !== null) {
+            let mapItem = {
+                hash: md5(matches[0]),
+                segment: matches[0],
+                content: parserConfig.parser(matches)
+            }
+            newContent = newContent.replace(mapItem.segment, mapItem.hash)
+            stringMap.push(mapItem)
+
+            matches = newContent.match(parserConfig.reg)
         }
     })
 
