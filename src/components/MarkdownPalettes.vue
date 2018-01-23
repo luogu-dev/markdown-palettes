@@ -141,8 +141,7 @@ export default {
             if (operation === 'fullscreen') {
                 if (!this.config.fullscreen) {
                     this.config.fullscreen = true
-                    this.editorHeight = (screen.height - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
-                    console.log(this.editorHeight)
+                    this.editorHeight = (window.innerHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
                 } else {
                     this.config.fullscreen = false
                     this.editorHeight = this.editorConfig.height
