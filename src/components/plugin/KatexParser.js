@@ -13,7 +13,7 @@ export default {
                 displayMode: isMathMode
             })
         } catch (exception) {
-            return matches[1] + matches[2] + matches[1]
+            return matches[0]
         }
     }
 }
