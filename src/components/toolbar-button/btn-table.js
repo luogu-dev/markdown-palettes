@@ -9,13 +9,13 @@ export default {
                 {
                     name: 'row',
                     title: '行数',
-                    type: 'input',
+                    type: 'dialog-input',
                     default: '3'
                 },
                 {
                     name: 'col',
                     title: '列数',
-                    type: 'input',
+                    type: 'dialog-input',
                     default: '2'
                 }
             ],

@@ -82,7 +82,7 @@ import 'font-awesome/css/font-awesome.css'
      *         reqeust: {
      *             title: "",
      *             body: [
-     *              {name,title,default}
+     *              {name, title, type, param, default}
      *             ],
      *             callback(){} //return the code that needed to be inserted
      *         }

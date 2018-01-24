@@ -11,10 +11,7 @@
                     <div class="mp-dialog-body">
                         <div class="mp-dialog-form">
                             <div class="mp-dialog-field" v-for="field in request.body">
-                                <label>{{ field.title }}</label>
-                                <input class="mp-dialog-input" v-if="field.type === 'input'" v-model="responseData[field.name]">
-                                <textarea class="mp-dialog-input" v-if="field.type === 'textarea'" v-model="responseData[field.name]"></textarea>
-                                <br>
+                                <component :is="field.type" :requestField="field" :param="field.param" @change="handleUpdate"></component>
                             </div>
                         </div>
 
@@ -73,31 +70,10 @@
     }
 
     .mp-dialog-field {
-        margin-bottom: 8px;
+        margin: 10px 8px;
         overflow:auto;
     }
-    .dialog-field label  {
-        padding-top: 5px;
-        display: inline-block;
-        vertical-align: top;
-        width: 75px;
-        font-size: 14px;
-        color: #666;
-    }
 
-    .dialog-field textarea {
-        resize: none;
-        height: 250px;
-        overflow: auto;
-    }
-
-    .mp-dialog-input {
-        display: inline-block;
-        width: 220px;
-        color: #999;
-        padding: 8px;
-        border: 1px solid #ddd;
-    }
     .mp-dialog-footer {
         overflow:auto;
     }
@@ -137,6 +113,7 @@
 
 <script>
 import 'font-awesome/css/font-awesome.css'
+import DialogComponents from './dialog-input-components/components'
 
 export default {
     name: 'editor-dialog',
@@ -172,7 +149,11 @@ export default {
         },
         finish () {
             this.$emit('finish', this.response)
+        },
+        handleUpdate(request) {
+            this.responseData[request.name] = request.value
         }
-    }
+    },
+    components: DialogComponents
 }
 </script>
