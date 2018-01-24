@@ -4,8 +4,8 @@
             <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
                      :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
         </div>
-        <div id="mp-editor-area">
-            <div id="mp-editor-input-area" class="mp-input-area" :class="{
+        <div id="mp-editor-area" :style="{ height: editorHeight }">
+            <div id="mp-editor-input-area" class="mp-editor-area mp-input-area" :class="{
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-full': this.config.previewDisplay === 'hide'
                  }">
@@ -13,16 +13,15 @@
                             ref="inputArea"
                             @input="updateCode"
                             @finish="insertCode = null"
-                            :height="editorHeight"
                             :insertCode="insertCode"
+                            :height="editorHeight"
                             :editorOption="editorConfig.editorOption"></input-area>
             </div>
             <div id="mp-editor-preview-area" class="mp-editor-area mp-preview-area" :class="{
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :height="editorHeight"
-                              :parsers="editorConfig.parsers" ref="previewArea"></preview-area>
+                <preview-area v-model="code" :parsers="editorConfig.parsers" ref="previewArea"></preview-area>
             </div>
         </div>
         <div id="mp-editor-dialog">
@@ -36,7 +35,9 @@
     .mp-editor-area {
         box-sizing: border-box;
         width: 50%;
+        height: 100%;
         float: left;
+        overflow: auto;
         border-bottom: 1px solid #ddd;
         border-top: 1px solid #ddd;
     }
@@ -58,6 +59,7 @@
 
     .mp-preview-area {
         border-right: 1px solid #ddd;
+        padding-bottom: 2px;
     }
 
     .mp-fullscreen {

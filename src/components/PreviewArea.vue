@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-preview-area" :style="{ 'height': height }">
+    <div id="mp-preview-area">
         <div id="mp-preview-content" v-html="content"></div>
     </div>
 </template>
@@ -16,6 +16,7 @@
     #mp-preview-area {
         overflow: auto;
         background-color: white;
+        height: 100%;
     }
 
     #mp-preview-content table {
@@ -48,10 +49,6 @@ export default {
         value: {
             type: String,
             default: ''
-        },
-        height: {
-            type: String,
-            default: '400px'
         },
         parsers: {
             type: Array

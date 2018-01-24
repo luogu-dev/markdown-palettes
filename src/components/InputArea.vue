@@ -1,5 +1,5 @@
 <template>
-    <div id="input-area">
+    <div id="mp-input-area">
         <codemirror
                 :value="code"
                 :options="editorOption"
@@ -8,6 +8,12 @@
         </codemirror>
     </div>
 </template>
+
+<style>
+    #mp-input-area {
+        overflow: auto;
+    }
+</style>
 
 <script>
 import {codemirror} from 'vue-codemirror-lite'
@@ -22,12 +28,11 @@ export default {
         editorOption: {
             type: Object
         },
-        height: {
-            type: String,
-            default: '400px'
-        },
         insertCode: {
             default: null
+        },
+        height: {
+            type: String
         }
     },
     computed: {
@@ -58,11 +63,11 @@ export default {
 
             this.$emit('finish')
         },
-        height (newHeight) {
-            this.editor.setSize('100%', newHeight)
-        },
         value (newValue) {
             this.code = newValue
+        },
+        height (newHeight) {
+            this.editor.setSize('100%', newHeight)
         }
     },
     data: function () {
