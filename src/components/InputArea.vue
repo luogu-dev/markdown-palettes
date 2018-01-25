@@ -10,9 +10,6 @@
 </template>
 
 <style>
-    #mp-input-area {
-        overflow: auto;
-    }
 </style>
 
 <script>
