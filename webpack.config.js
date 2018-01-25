@@ -2,36 +2,31 @@ const path = require('path')
 const webpack = require('webpack')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
     entry: ['./src/main.js'],
     output: {
         path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
-        filename: 'markdown-palettes.js'
+        filename: 'markdown-palettes.js',
+        publicPath: './'
     },
     plugins: [
         new LodashModuleReplacementPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
+        new ExtractTextPlugin('markdown-palettes.css'),
         new CleanWebpackPlugin(['dist'])
     ],
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader'
-                ],
-            },
-            {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                    }
-                    // other vue-loader options go here
+                    },
+                    extractCSS: true
                 }
             },
             {
@@ -40,10 +35,17 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    use: 'css-loader',
+                    fallback: 'vue-style-loader'
+                })
+            },
+            {
                 test: /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 5000,
+                    limit: 8192,
                     name: '[name].[ext]?[hash]'
                 }
             }
@@ -58,7 +60,8 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         noInfo: true,
-        overlay: true
+        overlay: true,
+        publicPath: '/dist/'
     },
     performance: {
         hints: false
