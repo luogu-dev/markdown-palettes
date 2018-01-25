@@ -25,15 +25,15 @@ export default {
                     param: {
                         options: [
                             {
-                                title: "左对齐",
+                                title: '左对齐',
                                 value: 1
                             },
                             {
-                                title: "居中",
+                                title: '居中',
                                 value: 2
                             },
                             {
-                                title: "右对齐",
+                                title: '右对齐',
                                 value: 3
                             }
                         ]
@@ -50,14 +50,7 @@ export default {
 
                 let divString = ''
                 for (let i = 0; i < data.col; i++) {
-                    if(data.align === 1)
-                        divString += '| :----------- '
-                    else if(data.align === 2)
-                        divString += '| :----------: '
-                    else if(data.align === 3)
-                        divString += '| -----------: '
-                    else
-                        divString += '| -----------: '
+                    if (data.align === 1) { divString += '| :----------- ' } else if (data.align === 2) { divString += '| :----------: ' } else if (data.align === 3) { divString += '| -----------: ' } else { divString += '| -----------: ' }
                 }
 
                 divString += '|'

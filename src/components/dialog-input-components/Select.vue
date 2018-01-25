@@ -33,10 +33,10 @@
 </style>
 
 <script>
-    import abstractInputComponent from './AbstractInputComponent.vue'
+import abstractInputComponent from './AbstractInputComponent.vue'
 
-    export default {
-        name: 'dialog-select',
-        extends: abstractInputComponent
-    }
+export default {
+    name: 'dialog-select',
+    extends: abstractInputComponent
+}
 </script>

@@ -32,43 +32,40 @@
 </style>
 
 <script>
-    import abstractInputComponent from './AbstractInputComponent.vue'
-    import { codemirror } from 'vue-codemirror-lite'
+import abstractInputComponent from './AbstractInputComponent.vue'
+import { codemirror } from 'vue-codemirror-lite'
 
-    export default {
-        name: 'dialog-codemirror',
-        extends: abstractInputComponent,
-        components: {
-            codemirror
-        },
-        mounted() {
-            let defaultSetting = {
-                lineNumbers: true,
-                lineWrapping: true,
-                height: '200px'
-            }
+export default {
+    name: 'dialog-codemirror',
+    extends: abstractInputComponent,
+    components: {
+        codemirror
+    },
+    mounted () {
+        let defaultSetting = {
+            lineNumbers: true,
+            lineWrapping: true,
+            height: '200px'
+        }
 
-            if(!this.param.editorSetting)
-                this.param.editorSetting = defaultSetting
-            else {
-                for(let setting in defaultSetting) {
-                    if(this.param.editorSetting[setting] === undefined)
-                        this.param.editorSetting[setting] = defaultSetting[setting]
-                }
-            }
-
-            this.editor.setSize('100%', this.param.editorSetting.height)
-            this.editor.focus()
-        },
-        computed: {
-            editor () {
-                return this.$refs.editor.editor
-            }
-        },
-        methods: {
-            updateContent(newContent) {
-                this.value = newContent
+        if (!this.param.editorSetting) { this.param.editorSetting = defaultSetting } else {
+            for (let setting in defaultSetting) {
+                if (this.param.editorSetting[setting] === undefined) { this.param.editorSetting[setting] = defaultSetting[setting] }
             }
         }
+
+        this.editor.setSize('100%', this.param.editorSetting.height)
+        this.editor.focus()
+    },
+    computed: {
+        editor () {
+            return this.$refs.editor.editor
+        }
+    },
+    methods: {
+        updateContent (newContent) {
+            this.value = newContent
+        }
     }
+}
 </script>

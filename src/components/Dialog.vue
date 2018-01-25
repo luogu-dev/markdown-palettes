@@ -150,7 +150,7 @@ export default {
         finish () {
             this.$emit('finish', this.response)
         },
-        handleUpdate(request) {
+        handleUpdate (request) {
             this.responseData[request.name] = request.value
         }
     },

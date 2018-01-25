@@ -13,7 +13,7 @@ export default {
                     param: {
                         options: [
                             {
-                                title: "c",
+                                title: 'c',
                                 value: 'c'
                             },
                             {
@@ -21,27 +21,27 @@ export default {
                                 value: 'cpp'
                             },
                             {
-                                title: "pascal",
+                                title: 'pascal',
                                 value: 'pascal'
                             },
                             {
-                                title: "python",
+                                title: 'python',
                                 value: 'python'
                             },
                             {
-                                title: "java",
+                                title: 'java',
                                 value: 'java'
                             },
                             {
-                                title: "javascript",
+                                title: 'javascript',
                                 value: 'javascript'
                             },
                             {
-                                title: "php",
+                                title: 'php',
                                 value: 'php'
                             },
                             {
-                                title: "未选择",
+                                title: '未选择',
                                 value: ''
                             }
                         ]
