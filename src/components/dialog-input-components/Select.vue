@@ -1,16 +1,18 @@
 <template>
-    <div id="mp-dialog-input">
+    <div id="mp-dialog-select">
         <label>{{ request.title }}</label>
-        <input v-model="value">
+        <select v-model="value">
+            <option v-for="option in request.param.options" :value="option.value">{{ option.title }}</option>
+        </select>
     </div>
 </template>
 
 <style>
-    #mp-dialog-input {
+    #mp-dialog-select {
         overflow: auto;
     }
 
-    #mp-dialog-input label {
+    #mp-dialog-select label {
         float: left;
         padding-top: 5px;
         vertical-align: top;
@@ -20,11 +22,12 @@
         color: #666;
     }
 
-    #mp-dialog-input input {
+    #mp-dialog-select select{
         float: left;
+        display: inline-block;
         width: 70%;
+        margin-top: 5px;
         color: #999;
-        padding: 8px;
         border: 1px solid #ddd;
     }
 </style>
@@ -33,7 +36,7 @@
     import abstractInputComponent from './AbstractInputComponent.vue'
 
     export default {
-        name: 'dialog-input',
+        name: 'dialog-select',
         extends: abstractInputComponent
     }
 </script>

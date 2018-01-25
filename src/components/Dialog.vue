@@ -47,7 +47,7 @@
     }
 
     .mp-dialog-container {
-        width: 380px;
+        width: 500px;
         margin: 0 auto;
         background-color: #fff;
         border-radius: 2px;

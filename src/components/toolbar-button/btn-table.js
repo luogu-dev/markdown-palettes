@@ -17,6 +17,28 @@ export default {
                     title: '列数',
                     type: 'dialog-input',
                     default: '2'
+                },
+                {
+                    name: 'align',
+                    title: '对齐方式',
+                    type: 'dialog-select',
+                    param: {
+                        options: [
+                            {
+                                title: "左对齐",
+                                value: 1
+                            },
+                            {
+                                title: "居中",
+                                value: 2
+                            },
+                            {
+                                title: "右对齐",
+                                value: 3
+                            }
+                        ]
+                    },
+                    default: 0
                 }
             ],
             callback (data) {
@@ -28,7 +50,14 @@ export default {
 
                 let divString = ''
                 for (let i = 0; i < data.col; i++) {
-                    divString += '| ------------ '
+                    if(data.align === 1)
+                        divString += '| :----------- '
+                    else if(data.align === 2)
+                        divString += '| :----------: '
+                    else if(data.align === 3)
+                        divString += '| -----------: '
+                    else
+                        divString += '| -----------: '
                 }
 
                 divString += '|'
