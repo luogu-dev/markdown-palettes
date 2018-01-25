@@ -37,28 +37,24 @@
         width: 50%;
         height: 100%;
         float: left;
-        overflow: auto;
-        border-bottom: 1px solid #ddd;
-        border-top: 1px solid #ddd;
+    }
+
+    #mp-editor-area {
+        overflow: hidden;
+        border: 1px solid #ddd;
     }
 
     .mp-editor-area-full {
         box-sizing: border-box;
         width: 100%;
-        border: 1px solid #ddd;
     }
 
     .mp-editor-area-hide {
         display: none;
     }
 
-    .mp-input-area {
-        border-right: 1px solid #ddd;
-        border-left: 1px solid #ddd;
-    }
-
     .mp-preview-area {
-        border-right: 1px solid #ddd;
+        border-left: 1px solid #ddd;
         padding-bottom: 2px;
     }
 
@@ -94,7 +90,7 @@ export default {
         }
     },
     data () {
-        let config = getConfig(this.config)
+        const config = getConfig(this.config)
         return {
             code: '',
             showDialog: false,

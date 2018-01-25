@@ -129,13 +129,13 @@ export default {
     },
     computed: {
         response () {
-            let res = this.request
+            const res = this.request
             res.data = this.responseData
             return res
         }
     },
     mounted () {
-        let initialData = {}
+        const initialData = {}
 
         this.request.body.forEach(function (field) {
             initialData[field.name] = field.default ? field.default : ''

@@ -42,14 +42,14 @@ export default {
         codemirror
     },
     mounted () {
-        let defaultSetting = {
+        const defaultSetting = {
             lineNumbers: true,
             lineWrapping: true,
             height: '200px'
         }
 
         if (!this.param.editorSetting) { this.param.editorSetting = defaultSetting } else {
-            for (let setting in defaultSetting) {
+            for (const setting in defaultSetting) {
                 if (this.param.editorSetting[setting] === undefined) { this.param.editorSetting[setting] = defaultSetting[setting] }
             }
         }

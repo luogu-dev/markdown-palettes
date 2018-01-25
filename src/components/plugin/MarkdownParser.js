@@ -3,15 +3,15 @@ import Highlight from './Highlight'
 import escapeHtml from 'escape-html'
 
 export function MarkdownParser (code, stringMap) {
-    let marked = require('marked')
+    const marked = require('marked')
 
-    let renderer = new marked.Renderer()
+    const renderer = new marked.Renderer()
 
     renderer.heading = function (text, level) {
         return '<h' + level + '>' + text + '</h' + level + '>'
     }
 
-    let highlight = function (code) {
+    const highlight = function (code) {
         return Highlight.highlightAuto(code).value
     }
 
@@ -20,7 +20,7 @@ export function MarkdownParser (code, stringMap) {
             code = code.replace(mapItem.hash, mapItem.segment)
         })
 
-        let out = highlight(code, lang)
+        const out = highlight(code, lang)
         if (out !== null) {
             code = out
         }

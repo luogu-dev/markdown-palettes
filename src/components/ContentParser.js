@@ -1,16 +1,16 @@
 import { MarkdownParser } from './plugin/MarkdownParser'
 
 export function ContentParser (content, parsers) {
-    let md5 = require('md5')
+    const md5 = require('md5')
 
     let newContent = content
-    let stringMap = []
+    const stringMap = []
 
     parsers.forEach(function (parserConfig) {
         let matches = newContent.match(parserConfig.reg)
 
         while (matches !== null) {
-            let mapItem = {
+            const mapItem = {
                 hash: md5(matches[0]),
                 segment: matches[0],
                 content: parserConfig.parser(matches)

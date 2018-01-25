@@ -10,9 +10,6 @@
 </template>
 
 <style>
-    #mp-input-area {
-        overflow: auto;
-    }
 </style>
 
 <script>
@@ -52,8 +49,8 @@ export default {
                 insert = [insert, '']
             }
 
-            let cursor = this.editor.getCursor()
-            let selection = this.editor.getSelection()
+            const cursor = this.editor.getCursor()
+            const selection = this.editor.getSelection()
 
             this.editor.replaceSelection(insert[0] + selection + insert[1])
 

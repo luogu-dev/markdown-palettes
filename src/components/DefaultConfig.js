@@ -3,7 +3,7 @@ import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
 function set (obj, config) {
-    for (let key in config) {
+    for (const key in config) {
         if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
             set(obj[key], config)
         }
@@ -12,7 +12,7 @@ function set (obj, config) {
     return obj
 }
 
-export let defaultConfig = {
+export const defaultConfig = {
     height: '500px',
     previewDisplay: 'normal',
     fullscreen: false,
