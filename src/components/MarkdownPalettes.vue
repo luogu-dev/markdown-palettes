@@ -90,7 +90,7 @@ export default {
         }
     },
     data () {
-        let config = getConfig(this.config)
+        const config = getConfig(this.config)
         return {
             code: '',
             showDialog: false,

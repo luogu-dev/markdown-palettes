@@ -13,7 +13,7 @@ import BtnCode from './btn-code'
 import BtnHide from './btn-hide'
 import BtnFullscreen from './btn-fullscreen'
 
-export let defaultBtns = [
+export const defaultBtns = [
     BtnBold,
     BtnStrikeThrough,
     BtnItalic,
@@ -39,7 +39,7 @@ export let defaultBtns = [
 ]
 
 function getDefaultBtnsMap () {
-    let btnsMap = {}
+    const btnsMap = {}
     defaultBtns.forEach(function (btn) {
         btnsMap[btn.name] = btn
     })
@@ -47,8 +47,8 @@ function getDefaultBtnsMap () {
 }
 
 export function getBtns (toolbarConfig) {
-    let btnsMap = getDefaultBtnsMap()
-    let btns = []
+    const btnsMap = getDefaultBtnsMap()
+    const btns = []
     toolbarConfig.forEach(function (btn) {
         if (typeof btn === 'object') { btns.push(btn) } else { btns.push(btnsMap[btn]) }
     })
