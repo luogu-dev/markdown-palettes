@@ -6,7 +6,8 @@
     "html/report-bad-indent": "error"
   },
   "rules": {
-    "indent": ["error", 4]
+    "indent": ["error", 4],
+    "prefer-const": ["warn"]
   },
   "env": {
     "browser": true
