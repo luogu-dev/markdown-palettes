@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
-    entry: ["babel-polyfill",'./src/main.js'],
+    entry: ['./src/main.js'],
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
