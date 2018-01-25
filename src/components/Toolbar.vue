@@ -35,7 +35,7 @@
         border: 1px solid #fff;
         transition: all 300ms ease-out;
     }
-    #mp-editor-menu>li>a.active, #editor-menu>li>a:hover {
+    #mp-editor-menu>li>a.active, #mp-editor-menu>li>a:hover {
         border: 1px solid #ddd;
         background-color: rgb(238, 238, 238);
     }
