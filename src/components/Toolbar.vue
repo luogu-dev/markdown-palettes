@@ -59,7 +59,7 @@
         position: relative;
     }
 
-    #mp-editor-menu>li.divider {
+    #mp-editor-menu>li .divider {
         display: inline-block;
         text-indent: -9999px;
         margin: 0 5px;

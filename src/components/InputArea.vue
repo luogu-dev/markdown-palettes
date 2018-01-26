@@ -78,7 +78,6 @@ export default {
     mounted: function () {
         this.code = this.value
         this.editor.setSize('100%', this.height)
-        this.editor.focus()
     },
     methods: {
         updateCode (code) {

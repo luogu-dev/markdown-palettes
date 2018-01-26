@@ -55,7 +55,6 @@ export default {
         }
 
         this.editor.setSize('100%', this.param.editorSetting.height)
-        this.editor.focus()
     },
     computed: {
         editor () {
