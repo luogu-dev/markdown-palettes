@@ -12,6 +12,7 @@ import BtnHr from './btn-hr'
 import BtnCode from './btn-code'
 import BtnHide from './btn-hide'
 import BtnFullscreen from './btn-fullscreen'
+import BtnInfo from './btn-info'
 
 export const defaultBtns = [
     BtnBold,
@@ -35,7 +36,9 @@ export const defaultBtns = [
     BtnTable,
     Divider,
     BtnHide,
-    BtnFullscreen
+    BtnFullscreen,
+    Divider,
+    BtnInfo
 ]
 
 function getDefaultBtnsMap () {
