@@ -40,7 +40,8 @@ export function MarkdownParser (code, stringMap) {
     }
 
     marked.setOptions({
-        renderer: renderer
+        renderer: renderer,
+        sanitize: true
     })
     return marked(code)
 }
