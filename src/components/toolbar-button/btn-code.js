@@ -41,6 +41,10 @@ export default {
                                 value: 'php'
                             },
                             {
+                                title: 'latex',
+                                value: 'latex'
+                            },
+                            {
                                 title: '未选择',
                                 value: ''
                             }
