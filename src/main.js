@@ -40,7 +40,7 @@ class MarkdownPalettes {
         })
     }
     getContentParaser () {
-        return contentParserFactory(getConfig(this.config))
+        return contentParserFactory(getConfig(this.config).parsers)
     }
 }
 

@@ -32,6 +32,9 @@
 </template>
 
 <style>
+    .mp-editor-container {
+        height: 100%;
+    }
     .mp-editor-area {
         box-sizing: border-box;
         width: 50%;
@@ -94,16 +97,28 @@ export default {
         const config = getConfig(this.config)
         return {
             code: '',
+            ready: false,
             showDialog: false,
             dialogRequest: {},
             insertCode: null,
             editorConfig: config,
-            editorHeight: config.height,
+            editorHeight: '500px',
             contentParser: contentParserFactory(config.parsers)
+        }
+    },
+    computed: {
+        elementHeight () {
+            if (this.ready) {
+                return this.$el.clientHeight
+            } else {
+                return '100%'
+            }
         }
     },
     mounted () {
         this.code = this.value
+        this.ready = true
+        this.updateEditorHeight()
     },
     components: {
         InputArea,
@@ -134,6 +149,13 @@ export default {
             this.dialogRequest = request
             this.showDialog = true
         },
+        updateEditorHeight () {
+            if (this.config.fullScreen) {
+                this.editorHeight = (window.innerHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
+            } else if (this.$el !== undefined) {
+                this.editorHeight = (this.elementHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
+            }
+        },
         handleToolbarOperation (operation) {
             if (operation === 'hide') {
                 if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
@@ -141,10 +163,10 @@ export default {
             if (operation === 'fullScreen') {
                 if (!this.config.fullScreen) {
                     this.config.fullScreen = true
-                    this.editorHeight = (window.innerHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
+                    this.updateEditorHeight()
                 } else {
                     this.config.fullScreen = false
-                    this.editorHeight = this.editorConfig.height
+                    this.updateEditorHeight()
                 }
             }
         }
@@ -153,6 +175,11 @@ export default {
         value (newValue) {
             this.code = newValue
             this.updateCode(newValue)
+        },
+        elementHeight () {
+            if (this.ready) {
+                this.updateEditorHeight()
+            }
         }
     }
 }

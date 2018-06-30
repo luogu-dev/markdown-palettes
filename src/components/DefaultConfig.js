@@ -13,7 +13,6 @@ function set (obj, config) {
 }
 
 export const defaultConfig = {
-    height: '500px',
     previewDisplay: 'normal',
     fullScreen: false,
     parsers: [
