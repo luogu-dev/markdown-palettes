@@ -21,7 +21,7 @@
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parser="contentParser" ref="previewArea"></preview-area>
+                <preview-area v-model="code" :parser="contentParser" ref="previewArea" :height="editorHeight"></preview-area>
             </div>
         </div>
         <div id="mp-editor-dialog">
@@ -91,13 +91,16 @@ export default {
             default: function () {
                 return defaultConfig
             }
+        },
+        size: {
+            required: false,
+            default: true
         }
     },
     data () {
         const config = getConfig(this.config)
         return {
             code: '',
-            ready: false,
             showDialog: false,
             dialogRequest: {},
             insertCode: null,
@@ -106,19 +109,9 @@ export default {
             contentParser: contentParserFactory(config.parsers)
         }
     },
-    computed: {
-        elementHeight () {
-            if (this.ready) {
-                return this.$el.clientHeight
-            } else {
-                return '100%'
-            }
-        }
-    },
     mounted () {
         this.code = this.value
-        this.ready = true
-        this.updateEditorHeight()
+        this.$nextTick(this.updateEditorHeight)
     },
     components: {
         InputArea,
@@ -152,8 +145,8 @@ export default {
         updateEditorHeight () {
             if (this.config.fullScreen) {
                 this.editorHeight = (window.innerHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
-            } else if (this.$el !== undefined) {
-                this.editorHeight = (this.elementHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
+            } else {
+                this.editorHeight = (this.$el.clientHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
             }
         },
         handleToolbarOperation (operation) {
@@ -176,10 +169,8 @@ export default {
             this.code = newValue
             this.updateCode(newValue)
         },
-        elementHeight () {
-            if (this.ready) {
-                this.updateEditorHeight()
-            }
+        size () {
+            this.$nextTick(this.updateEditorHeight)
         }
     }
 }

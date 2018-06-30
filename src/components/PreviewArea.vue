@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-preview-area">
+    <div id="mp-preview-area" :style="{ height: height }">
         <div id="mp-preview-content" v-html="content"></div>
     </div>
 </template>
@@ -88,6 +88,9 @@ export default {
         },
         parser: {
             type: Function
+        },
+        height: {
+            type: String
         }
     },
     data () {
