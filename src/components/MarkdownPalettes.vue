@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-luogu-markdown-editor" class="mp-editor-container" :class="{'mp-fullscreen': this.config.fullscreen}">
+    <div id="mp-luogu-markdown-editor" class="mp-editor-container" :class="{'mp-full-screen': this.config.fullScreen}">
         <div id="mp-editor-toolbar" class="mp-editor-toolbar">
             <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
                      :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
@@ -21,7 +21,7 @@
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parsers="editorConfig.parsers" ref="previewArea"></preview-area>
+                <preview-area v-model="code" :parser="contentParser" ref="previewArea"></preview-area>
             </div>
         </div>
         <div id="mp-editor-dialog">
@@ -58,7 +58,7 @@
         padding-bottom: 2px;
     }
 
-    .mp-fullscreen {
+    .mp-full-screen {
         position: fixed;
         z-index: 9997;
         top: 0;
@@ -74,7 +74,8 @@ import PreviewArea from './PreviewArea.vue'
 import Toolbar from './Toolbar.vue'
 import EditorDialog from './Dialog.vue'
 
-import {defaultConfig, getConfig} from './DefaultConfig'
+import { defaultConfig, getConfig } from './DefaultConfig'
+import { contentParserFactory } from './ContentParserFactory'
 
 export default {
     name: 'markdown-palettes',
@@ -97,7 +98,8 @@ export default {
             dialogRequest: {},
             insertCode: null,
             editorConfig: config,
-            editorHeight: config.height
+            editorHeight: config.height,
+            contentParser: contentParserFactory(config.parsers)
         }
     },
     mounted () {
@@ -136,12 +138,12 @@ export default {
             if (operation === 'hide') {
                 if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
             }
-            if (operation === 'fullscreen') {
-                if (!this.config.fullscreen) {
-                    this.config.fullscreen = true
+            if (operation === 'fullScreen') {
+                if (!this.config.fullScreen) {
+                    this.config.fullScreen = true
                     this.editorHeight = (window.innerHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
                 } else {
-                    this.config.fullscreen = false
+                    this.config.fullScreen = false
                     this.editorHeight = this.editorConfig.height
                 }
             }

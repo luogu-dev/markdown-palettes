@@ -15,7 +15,7 @@ function set (obj, config) {
 export const defaultConfig = {
     height: '500px',
     previewDisplay: 'normal',
-    fullscreen: false,
+    fullScreen: false,
     parsers: [
         KatexParser
     ],

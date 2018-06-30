@@ -79,8 +79,6 @@
 </style>
 
 <script>
-import { ContentParser } from './ContentParser'
-
 export default {
     name: 'preview-area',
     props: {
@@ -88,8 +86,8 @@ export default {
             type: String,
             default: ''
         },
-        parsers: {
-            type: Array
+        parser: {
+            type: Function
         }
     },
     data () {
@@ -102,7 +100,7 @@ export default {
     },
     methods: {
         updateContent (newContent) {
-            this.content = ContentParser(newContent, this.parsers)
+            this.content = this.parser(newContent)
         }
     },
     watch: {

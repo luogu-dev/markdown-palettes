@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Editor from './components/MarkdownPalettes.vue'
+import { getConfig } from './components/DefaultConfig'
+import { contentParserFactory } from './components/ContentParserFactory'
 
 Vue.config.productionTip = false
 
 class MarkdownPalettes {
-    constructor (el) {
+    constructor (el, config = {}) {
+        this.config = config
         this.editor = new Vue({
             el: el,
             data () {
@@ -16,7 +19,8 @@ class MarkdownPalettes {
                 const vm = this
                 return createElement(Editor, {
                     props: {
-                        value: vm.code
+                        value: vm.code,
+                        config: this.config
                     },
                     on: {
                         input (event) {
@@ -34,6 +38,9 @@ class MarkdownPalettes {
                 }
             }
         })
+    }
+    getContentParaser () {
+        return contentParserFactory(getConfig(this.config))
     }
 }
 
