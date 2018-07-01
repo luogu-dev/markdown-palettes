@@ -42,12 +42,13 @@
         top: 40px;
         bottom: 0;
         overflow: hidden;
-        border: 1px solid #ddd;
+        border-top: 1px solid #ddd;
     }
 
     .mp-editor-container {
         position:relative;
         height: 100%;
+        border: 1px solid #ddd;
     }
     .mp-editor-area {
         box-sizing: border-box;

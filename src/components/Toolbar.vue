@@ -17,10 +17,6 @@
         box-sizing: border-box;
         background-color: white;
         width: 100%;
-        padding-right: 1px;
-        border-right: 1px solid #ddd;
-        border-left: 1px solid #ddd;
-        border-top: 1px solid #ddd;
     }
 
     #mp-editor-menu>li>a {
