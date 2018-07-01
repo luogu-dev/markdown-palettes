@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-luogu-markdown-editor" class="mp-editor-container" :class="{'mp-full-screen': this.config.fullScreen}">
+    <div id="mp-luogu-markdown-editor" class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
         <div id="mp-editor-toolbar" class="mp-editor-toolbar">
             <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
                      :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
@@ -112,6 +112,7 @@ export default {
             insertCode: null,
             editorConfig: config,
             editorHeight: '500px',
+            fullScreen: config.fullScreen,
             contentParser: contentParserFactory(config.parsers)
         }
     },
@@ -146,6 +147,18 @@ export default {
             }
             this.dialogRequest = request
             this.showDialog = true
+        },
+        handleToolbarOperation (operation) {
+            if (operation === 'hide') {
+                if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
+            }
+            if (operation === 'fullScreen') {
+                if (!this.fullScreen) {
+                    this.fullScreen = true
+                } else {
+                    this.fullScreen = false
+                }
+            }
         }
     },
     watch: {
