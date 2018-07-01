@@ -10,6 +10,23 @@
 </template>
 
 <style>
+    #mp-input-area {
+        height: 100%;
+    }
+    /* hack CodeMirror */
+    .CodeMirror {
+        height: 100% !important;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+
+    .vue-codemirror-wrap {
+        height: 100%;
+    }
 </style>
 
 <script>
@@ -27,9 +44,6 @@ export default {
         },
         insertCode: {
             default: null
-        },
-        height: {
-            type: String
         }
     },
     computed: {
@@ -62,9 +76,6 @@ export default {
         },
         value (newValue) {
             this.code = newValue
-        },
-        height (newHeight) {
-            this.editor.setSize('100%', newHeight)
         }
     },
     data: function () {
@@ -77,7 +88,6 @@ export default {
     },
     mounted: function () {
         this.code = this.value
-        this.editor.setSize('100%', this.height)
     },
     methods: {
         updateCode (code) {

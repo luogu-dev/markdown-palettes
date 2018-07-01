@@ -23,6 +23,7 @@
     "lodash": "^4.17.4",
     "markdown-it": "^8.4.1",
     "markdown-it-highlightjs": "^3.0.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "vue": "^2.5.11",
     "vue-codemirror-lite": "^1.0.3"
   },

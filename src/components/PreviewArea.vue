@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-preview-area" :style="{ height: height }">
+    <div id="mp-preview-area">
         <div id="mp-preview-content" v-html="content"></div>
     </div>
 </template>
@@ -11,6 +11,7 @@
         padding-left: 20px;
         padding-right: 20px;
         overflow: auto;
+        height: auto;
         word-wrap:break-word;
     }
 

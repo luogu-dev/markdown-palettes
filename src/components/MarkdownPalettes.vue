@@ -4,7 +4,7 @@
             <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
                      :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
         </div>
-        <div id="mp-editor-area" :style="{ height: editorHeight }">
+        <div id="mp-editor-area">
             <div id="mp-editor-input-area" class="mp-editor-area mp-input-area" :class="{
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-full': this.config.previewDisplay === 'hide'
@@ -14,14 +14,13 @@
                             @input="updateCode"
                             @finish="insertCode = null"
                             :insertCode="insertCode"
-                            :height="editorHeight"
                             :editorOption="editorConfig.editorOption"></input-area>
             </div>
             <div id="mp-editor-preview-area" class="mp-editor-area mp-preview-area" :class="{
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parser="contentParser" ref="previewArea" :height="editorHeight"></preview-area>
+                <preview-area v-model="code" :parser="contentParser" ref="previewArea"></preview-area>
             </div>
         </div>
         <div id="mp-editor-dialog">
@@ -32,7 +31,22 @@
 </template>
 
 <style>
+    #mp-editor-toolbar {
+        float: left;
+        width: 100%;
+        height: 40px;
+    }
+    #mp-editor-area {
+        position: absolute;
+        width: 100%;
+        top: 40px;
+        bottom: 0;
+        overflow: hidden;
+        border: 1px solid #ddd;
+    }
+
     .mp-editor-container {
+        position:relative;
         height: 100%;
     }
     .mp-editor-area {
@@ -40,11 +54,6 @@
         width: 50%;
         height: 100%;
         float: left;
-    }
-
-    #mp-editor-area {
-        overflow: hidden;
-        border: 1px solid #ddd;
     }
 
     .mp-editor-area-full {
@@ -91,10 +100,6 @@ export default {
             default: function () {
                 return defaultConfig
             }
-        },
-        size: {
-            required: false,
-            default: true
         }
     },
     data () {
@@ -111,7 +116,6 @@ export default {
     },
     mounted () {
         this.code = this.value
-        this.$nextTick(this.updateEditorHeight)
     },
     components: {
         InputArea,
@@ -141,36 +145,12 @@ export default {
             }
             this.dialogRequest = request
             this.showDialog = true
-        },
-        updateEditorHeight () {
-            if (this.config.fullScreen) {
-                this.editorHeight = (window.innerHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
-            } else {
-                this.editorHeight = (this.$el.clientHeight - this.$refs.toolbar.$el.clientHeight).toString() + 'px'
-            }
-        },
-        handleToolbarOperation (operation) {
-            if (operation === 'hide') {
-                if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
-            }
-            if (operation === 'fullScreen') {
-                if (!this.config.fullScreen) {
-                    this.config.fullScreen = true
-                    this.updateEditorHeight()
-                } else {
-                    this.config.fullScreen = false
-                    this.updateEditorHeight()
-                }
-            }
         }
     },
     watch: {
         value (newValue) {
             this.code = newValue
             this.updateCode(newValue)
-        },
-        size () {
-            this.$nextTick(this.updateEditorHeight)
         }
     }
 }

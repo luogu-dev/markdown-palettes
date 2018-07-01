@@ -18,7 +18,6 @@
         background-color: white;
         width: 100%;
         padding-right: 1px;
-        min-height: 35px;
         border-right: 1px solid #ddd;
         border-left: 1px solid #ddd;
         border-top: 1px solid #ddd;
