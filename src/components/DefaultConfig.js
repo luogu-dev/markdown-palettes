@@ -1,4 +1,7 @@
-import KatexParser from './plugin/KatexParser'
+import KatexParser from '@iktakahiro/markdown-it-katex'
+import 'katex/dist/katex.css'
+import HighlightjsParser from 'markdown-it-highlightjs'
+import 'highlight.js/styles/tomorrow.css'
 import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
@@ -16,7 +19,8 @@ export const defaultConfig = {
     previewDisplay: 'normal',
     fullScreen: false,
     parsers: [
-        KatexParser
+        KatexParser,
+        HighlightjsParser
     ],
     toolbarConfig: defaultBtns,
     editorOption: {
