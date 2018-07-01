@@ -1,4 +1,4 @@
-import KatexParser from '@iktakahiro/markdown-it-katex'
+import KatexParser from '@luogu-dev/markdown-it-katex'
 import 'katex/dist/katex.css'
 import HighlightjsParser from 'markdown-it-highlightjs'
 import 'highlight.js/styles/tomorrow.css'
