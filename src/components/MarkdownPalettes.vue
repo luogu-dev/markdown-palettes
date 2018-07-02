@@ -113,7 +113,8 @@ export default {
             editorConfig: config,
             editorHeight: '500px',
             fullScreen: config.fullScreen,
-            contentParser: contentParserFactory(config.parsers)
+            contentParser: contentParserFactory(config.parsers),
+            cursorLine: 0
         }
     },
     mounted () {
