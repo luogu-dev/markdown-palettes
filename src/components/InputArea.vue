@@ -32,6 +32,7 @@
 <script>
 import {codemirror} from 'vue-codemirror-lite'
 import 'codemirror/mode/markdown/markdown.js'
+import computeFromParent from './utils/computeFromParent.js'
 
 export default {
     name: 'input-area',
@@ -50,30 +51,11 @@ export default {
         editor () {
             return this.$refs.editor.editor
         },
-        cursorLine: {
-            get () {
-                return this.$parent.cursorLine
-            },
-            set (val) {
-                this.$parent.cursorLine = val
-            }
-        },
-        cursorOffest: {
-            get () {
-                return this.$parent.cursorOffest
-            },
-            set (val) {
-                this.$parent.cursorOffest = val
-            }
-        },
-        scrolled: {
-            get () {
-                return this.$parent.scrolled
-            },
-            set (val) {
-                this.$parent.scrolled = val
-            }
-        }
+        ...computeFromParent('cursorLine'),
+        ...computeFromParent('cursorOffset'),
+        ...computeFromParent('scrolled'),
+        ...computeFromParent('clickLine'),
+        ...computeFromParent('clickOffset')
     },
     watch: {
         insertCode (insert) {
@@ -100,6 +82,11 @@ export default {
         },
         value (newValue) {
             this.code = newValue
+        },
+        clickLine (line) {
+            this.editor.setCursor({line, ch: 0})
+            const coord = this.editor.cursorCoords({line, ch: 0}, 'local')
+            this.editor.scrollTo(0, coord.bottom - this.clickOffset)
         }
     },
     data: function () {
@@ -116,7 +103,7 @@ export default {
         const updateScroll = (cm, scrolled) => {
             const cursor = cm.getCursor()
             this.cursorLine = cursor.line
-            this.cursorOffest = cm.cursorCoords(cursor, 'local').bottom - cm.getScrollInfo().top
+            this.cursorOffset = cm.cursorCoords(cursor, 'local').bottom - cm.getScrollInfo().top
             this.scrolled = scrolled === true
         }
         this.editor.on('cursorActivity', updateScroll)
