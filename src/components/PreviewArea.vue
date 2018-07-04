@@ -31,7 +31,7 @@
         margin: 10px;
     }
 
-    #mp-preview-content table th, td {
+    #mp-preview-content table th, #mp-preview-content table td {
         border: 1px solid #ddd;
         padding: 6px 13px;
     }
