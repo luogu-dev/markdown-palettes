@@ -1,7 +1,7 @@
 import MarkdownIt from 'markdown-it'
 
 export function MarkdownParser (code, parsers) {
-    var converter = MarkdownIt()
+    let converter = MarkdownIt()
     parsers.forEach(parser => {
         converter = converter.use(parser)
     })

@@ -36,7 +36,7 @@
         padding: 6px 13px;
     }
 
-    code.mp-code {
+    #mp-preview-content code {
         font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
         font-size: 15px;
     }

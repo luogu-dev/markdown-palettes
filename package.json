@@ -1,7 +1,7 @@
 {
   "name": "markdown-palettes",
   "description": "Markdown*Palettes: Markdown editor for the modern web.",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "author": "Luogu Dev Team",
   "license": "MIT",
   "module": "src/module.js",
@@ -15,7 +15,7 @@
     "analyze": "cross-env NODE_ENV=development BUNDLE_ANALYZE=true webpack --progress --hide-modules"
   },
   "dependencies": {
-    "@iktakahiro/markdown-it-katex": "^3.0.3",
+    "@luogu-dev/markdown-it-katex": "^0.0.1",
     "babel-runtime": "^6.26.0",
     "font-awesome": "^4.7.0",
     "highlight.js": "^9.9.0",
