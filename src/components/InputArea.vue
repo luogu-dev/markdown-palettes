@@ -10,9 +10,6 @@
 </template>
 
 <style>
-    #mp-input-area {
-        height: 100%;
-    }
     /* hack CodeMirror */
     .CodeMirror {
         height: 100% !important;
@@ -25,6 +22,12 @@
     }
 
     .vue-codemirror-wrap {
+        height: 100%;
+    }
+</style>
+
+<style scoped>
+    #mp-input-area {
         height: 100%;
     }
 </style>

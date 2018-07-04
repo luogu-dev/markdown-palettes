@@ -28,7 +28,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     .mp-dialog-mask {
         position: fixed;
         z-index: 9998;

@@ -30,7 +30,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     #mp-editor-toolbar {
         float: left;
         width: 100%;

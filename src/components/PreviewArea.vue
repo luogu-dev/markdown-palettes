@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     #mp-preview-content {
         color: #333;
         padding: 10px;

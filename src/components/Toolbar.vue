@@ -11,8 +11,7 @@
     </div>
 </template>
 
-<style>
-
+<style scoped>
     #mp-toolbar {
         box-sizing: border-box;
         background-color: white;
