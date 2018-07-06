@@ -49,14 +49,6 @@ export default {
     computed: {
         editor () {
             return this.$refs.editor.editor
-        },
-        cursorLine: {
-            get () {
-                return this.$parent.cursorLine
-            },
-            set (val) {
-                this.$parent.cursorLine = val
-            }
         }
     },
     watch: {
@@ -96,9 +88,6 @@ export default {
     },
     mounted: function () {
         this.code = this.value
-        this.editor.on('cursorActivity', cm => {
-            this.cursorLine = cm.getCursor().line
-        })
     },
     methods: {
         updateCode (code) {

@@ -1,6 +1,6 @@
 <template>
     <div id="mp-preview-area">
-        <div id="mp-preview-content" v-html="content" ref="previewArea"></div>
+        <div id="mp-preview-content" v-html="content"></div>
     </div>
 </template>
 
@@ -77,10 +77,6 @@
         border: none;
         border-bottom: solid 1px #eee;
     }
-
-    #mp-preview-content .current-line[data-line] {
-        background-color: yellow;
-    }
 </style>
 
 <script>
@@ -98,16 +94,6 @@ export default {
             type: String
         }
     },
-    computed: {
-        cursorLine: {
-            get () {
-                return this.$parent.cursorLine
-            },
-            set (val) {
-                this.$parent.cursorLine = val
-            }
-        }
-    },
     data () {
         return {
             content: ''
@@ -119,26 +105,11 @@ export default {
     methods: {
         updateContent (newContent) {
             this.content = this.parser(newContent)
-            this.$nextTick(this.updateScroll)
-        },
-        updateScroll () {
-            const previewArea = this.$refs.previewArea
-            let line = previewArea.querySelector('.current-line[data-line]')
-            if(line)
-                line.classList.remove('current-line')
-            line = previewArea.querySelector(`[data-line="${this.cursorLine}"]`)
-            if(line){
-                line.scrollIntoView()
-                line.classList.add('current-line')
-            }
         }
     },
     watch: {
         value (newContent) {
             this.updateContent(newContent)
-        },
-        cursorLine (val) {
-            this.updateScroll()
         }
     }
 }
