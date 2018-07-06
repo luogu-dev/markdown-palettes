@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-preview-area">
+    <div id="mp-preview-area" ref="previewArea">
         <div id="mp-preview-content" v-html="content"></div>
     </div>
 </template>
@@ -80,6 +80,8 @@
 </style>
 
 <script>
+import _ from 'lodash'
+
 export default {
     name: 'preview-area',
     props: {
@@ -105,6 +107,85 @@ export default {
     methods: {
         updateContent (newContent) {
             this.content = this.parser(newContent)
+        },
+        updateScrollSync ({ cursorLine, scrollInfo, viewport, linesOffset }) {
+            const previewArea = this.$refs.previewArea
+            const offset = ele => {
+                const eleRect = ele.getBoundingClientRect()
+                const araRect = previewArea.getBoundingClientRect()
+                return {
+                    top: eleRect.top - araRect.top,
+                    bottom: eleRect.bottom - araRect.top
+                }
+            }
+            const getLine = line => previewArea.querySelector(`[data-line="${line}"]`)
+            const getLineHeight = ele => {
+                const cst = getComputedStyle(ele)
+                const lh = parseFloat(cst.lineHeight)
+                const fz = parseFloat(cst.fontSize)
+                if (isNaN(lh)) {
+                    return fz;
+                } else {
+                    return lh;
+                }
+            }
+            const calcScroll = line => {
+                const lineE = getLine(line)
+                const previewLineOffset = offset(lineE)
+                const editorLineOffset = linesOffset[line]
+                if (typeof editorLineOffset === 'undefined') {
+                    return NaN
+                }
+                let scroll = previewLineOffset.top - editorLineOffset.top
+                const tagName = lineE.tagName
+                if (/^h\d$/i.test(tagName)) {
+                    scroll = previewLineOffset.bottom - editorLineOffset.top - getLineHeight(lineE)
+                }
+                if (previewLineOffset.top - scroll < 0) {
+                    scroll = -previewLineOffset.top
+                }
+                return scroll
+            }
+
+            const syncLine = _.inRange(cursorLine, viewport.from, viewport.to) ? cursorLine : Math.round((viewport.from + viewport.to) / 2)
+            let lowerLine, upperLine
+            for (lowerLine = syncLine; lowerLine >= viewport.from; --lowerLine) {
+                if (getLine(lowerLine) !== null) {
+                    break
+                }
+            }
+            for (upperLine = syncLine; upperLine < viewport.to; ++upperLine) {
+                if (getLine(upperLine) !== null) {
+                    break
+                }
+            }
+            const lowerLineE = getLine(lowerLine), upperLineE = getLine(upperLine)
+            const hasLowerLine = lowerLineE !== null,
+                  hasUpperLine = upperLineE !== null
+            if (!hasLowerLine && !hasUpperLine) {
+                // can't sync
+                return
+            }
+            let chosenLine
+            if (!hasLowerLine) {
+                chosenLine = upperLine
+            } else if (!hasUpperLine) {
+                chosenLine = lowerLine
+            } else if (lowerLine === upperLine) {
+                chosenLine = lowerLine
+            } else {
+                const lowerScroll = calcScroll(lowerLine)
+                const upperScroll = calcScroll(upperLine)
+                if (Math.abs(lowerScroll) < Math.abs(upperScroll) || isNaN(upperScroll)) {
+                    chosenLine = lowerLine
+                } else {
+                    chosenLine = upperLine
+                }
+            }
+            const scroll = calcScroll(chosenLine)
+            if (!isNaN(scroll)) {
+                previewArea.scrollTop += scroll
+            }
         }
     },
     watch: {

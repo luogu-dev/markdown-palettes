@@ -13,6 +13,7 @@
                             ref="inputArea"
                             @input="updateCode"
                             @finish="insertCode = null"
+                            @scroll-sync="scrollSync('editor', $event)"
                             :insertCode="insertCode"
                             :editorOption="editorConfig.editorOption"></input-area>
             </div>
@@ -159,6 +160,11 @@ export default {
                 } else {
                     this.fullScreen = false
                 }
+            }
+        },
+        scrollSync (emitter, info) {
+            if (emitter === 'editor') {
+                this.$refs.previewArea.updateScrollSync(info)
             }
         }
     },
