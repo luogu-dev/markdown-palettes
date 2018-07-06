@@ -81,7 +81,8 @@ export default {
     },
     data: function () {
         return {
-            code: ''
+            code: '',
+            scrollSynced: false
         }
     },
     components: {
@@ -90,7 +91,14 @@ export default {
     mounted: function () {
         this.code = this.value
 
-        const scrollSync = _.debounce(this.emitScrollSync, 50, { maxWait: 50 })
+        const debouncedEmitScrollSync = _.debounce(this.emitScrollSync, 50, { maxWait: 50 })
+        const scrollSync = () => {
+            if (this.scrollSynced) {
+                this.scrollSynced = false
+            } else {
+                debouncedEmitScrollSync()
+            }
+        }
         this.editor.on('cursorActivity', scrollSync)
         this.editor.on('scroll', scrollSync)
     },
@@ -118,6 +126,22 @@ export default {
                 cursorLine, scrollInfo, viewport, linesOffset
             }
             this.$emit('scroll-sync', event)
+        },
+        updateScrollSync ({ scrollInfo, linesOffset }) {
+            if (!linesOffset.length) {
+                return
+            }
+            const scrollMid = scrollInfo.height / 2
+            let syncLine
+            linesOffset.forEach(({ top }, line) => {
+                if (typeof syncLine === 'undefined' || Math.abs(top - scrollMid) < Math.abs(linesOffset[syncLine].top - scrollMid)) {
+                    syncLine = line
+                }
+            })
+            const scrollTop = this.editor.getScrollInfo().top
+            const editorLineOffset = this.editor.heightAtLine(syncLine, 'local') - scrollTop
+            this.scrollSynced = true
+            this.editor.scrollTo(null, scrollTop + editorLineOffset - linesOffset[syncLine].top)
         }
     }
 }

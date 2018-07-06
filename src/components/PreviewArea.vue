@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-preview-area" ref="previewArea">
+    <div id="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
         <div id="mp-preview-content" v-html="content"></div>
     </div>
 </template>
@@ -98,8 +98,13 @@ export default {
     },
     data () {
         return {
-            content: ''
+            content: '',
+            linesBounding: [],
+            scrollSynced: false
         }
+    },
+    created () {
+        this.debouncedEmitScrollSync = _.debounce(this.emitScrollSync, 100, { maxWait: 100 })
     },
     mounted () {
         this.updateContent(this.value)
@@ -107,6 +112,51 @@ export default {
     methods: {
         updateContent (newContent) {
             this.content = this.parser(newContent)
+            this.$nextTick(() => {
+                const previewArea = this.$refs.previewArea
+                this.linesBounding = []
+                previewArea.querySelectorAll('[data-line]').forEach(lineE => {
+                    const bounding = lineE.getBoundingClientRect()
+                    const line = parseInt(lineE.dataset.line)
+                    this.linesBounding.push({
+                        line,
+                        top: bounding.top,
+                        bottom: bounding.bottom
+                    })
+                })
+                _.sortBy(this.linesBounding, [b => b.top])
+            })
+        },
+
+        previewAreaScroll () {
+            if (this.scrollSynced) {
+                this.scrollSynced = false
+            } else {
+                this.debouncedEmitScrollSync()
+            }
+        },
+        emitScrollSync () {
+            const previewArea = this.$refs.previewArea
+            const scrollTop = previewArea.scrollTop
+            const scrollBottom = scrollTop + previewArea.getBoundingClientRect().height
+            const lowerLinePos = _.sortedIndexBy(this.linesBounding, { top: scrollTop }, b => b.top)
+            const upperLinePos = _.sortedIndexBy(this.linesBounding, { top: scrollBottom }, b => b.top)
+            const linesOffset = []
+            for (let linePos = lowerLinePos; linePos < upperLinePos; ++linePos) {
+                const line = this.linesBounding[linePos].line
+                linesOffset[line] = {
+                    top: this.linesBounding[linePos].top - scrollTop,
+                    bottom: this.linesBounding[linePos].bottom - scrollTop
+                }
+            }
+            this.$emit('scroll-sync', {
+                scrollInfo: {
+                    top: scrollTop,
+                    bottom: scrollBottom,
+                    height: scrollBottom - scrollTop
+                },
+                linesOffset: linesOffset
+            })
         },
         updateScrollSync ({ cursorLine, scrollInfo, viewport, linesOffset }) {
             const previewArea = this.$refs.previewArea
@@ -184,6 +234,7 @@ export default {
             }
             const scroll = calcScroll(chosenLine)
             if (!isNaN(scroll)) {
+                this.scrollSynced = true
                 previewArea.scrollTop += scroll
             }
         }

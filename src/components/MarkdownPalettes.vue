@@ -21,7 +21,7 @@
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parser="contentParser" ref="previewArea"></preview-area>
+                <preview-area v-model="code" :parser="contentParser" ref="previewArea" @scroll-sync="scrollSync('preview', $event)"></preview-area>
             </div>
         </div>
         <div id="mp-editor-dialog">
@@ -165,6 +165,8 @@ export default {
         scrollSync (emitter, info) {
             if (emitter === 'editor') {
                 this.$refs.previewArea.updateScrollSync(info)
+            } else if (emitter === 'preview') {
+                this.$refs.inputArea.updateScrollSync(info)
             }
         }
     },
