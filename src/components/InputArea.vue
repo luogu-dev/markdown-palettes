@@ -57,22 +57,6 @@ export default {
             set (val) {
                 this.$parent.cursorLine = val
             }
-        },
-        cursorOffest: {
-            get () {
-                return this.$parent.cursorOffest
-            },
-            set (val) {
-                this.$parent.cursorOffest = val
-            }
-        },
-        scrolled: {
-            get () {
-                return this.$parent.scrolled
-            },
-            set (val) {
-                this.$parent.scrolled = val
-            }
         }
     },
     watch: {
@@ -112,16 +96,9 @@ export default {
     },
     mounted: function () {
         this.code = this.value
-
-        const updateScroll = (cm, scrolled) => {
-            const cursor = cm.getCursor()
-            this.cursorLine = cursor.line
-            this.cursorOffest = cm.cursorCoords(cursor, 'local').bottom - cm.getScrollInfo().top
-            this.scrolled = scrolled === true
-        }
-        this.editor.on('cursorActivity', updateScroll)
-        this.editor.on('viewportChange', updateScroll)
-        this.editor.on('scroll', cm => updateScroll(cm, true))
+        this.editor.on('cursorActivity', cm => {
+            this.cursorLine = cm.getCursor().line
+        })
     },
     methods: {
         updateCode (code) {

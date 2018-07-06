@@ -1,6 +1,6 @@
 <template>
-    <div id="mp-preview-area" ref="previewArea">
-        <div id="mp-preview-content" v-html="content" ref="previewContent"></div>
+    <div id="mp-preview-area">
+        <div id="mp-preview-content" v-html="content" ref="previewArea"></div>
     </div>
 </template>
 
@@ -77,11 +77,13 @@
         border: none;
         border-bottom: solid 1px #eee;
     }
+
+    #mp-preview-content .current-line[data-line] {
+        background-color: yellow;
+    }
 </style>
 
 <script>
-import tween from './utils/tween.js'
-
 export default {
     name: 'preview-area',
     props: {
@@ -104,29 +106,11 @@ export default {
             set (val) {
                 this.$parent.cursorLine = val
             }
-        },
-        cursorOffest: {
-            get () {
-                return this.$parent.cursorOffest
-            },
-            set (val) {
-                this.$parent.cursorOffest = val
-            }
-        },
-        scrolled: {
-            get () {
-                return this.$parent.scrolled
-            },
-            set (val) {
-                this.$parent.scrolled = val
-            }
         }
     },
     data () {
         return {
-            content: '',
-            areaScrollTop: 0,
-            tweenAnimation: null
+            content: ''
         }
     },
     mounted () {
@@ -139,24 +123,12 @@ export default {
         },
         updateScroll () {
             const previewArea = this.$refs.previewArea
-            const previewContent = this.$refs.previewContent
             let line = previewArea.querySelector('.current-line[data-line]')
             if(line)
                 line.classList.remove('current-line')
             line = previewArea.querySelector(`[data-line="${this.cursorLine}"]`)
             if(line){
-                const lineBounding = line.getBoundingClientRect()
-                const contentTop = previewContent.getBoundingClientRect().top
-                const lineOffset = Math.min(lineBounding.bottom - contentTop - this.cursorOffest, lineBounding.top - contentTop)
-                this.areaScrollTop = previewArea.scrollTop
-                if(this.tweenAnimation){
-                    this.tweenAnimation.cancel()
-                    this.tweenAnimation = null
-                }
-                if(this.scrolled)
-                    this.areaScrollTop = lineOffset
-                else
-                    this.tweenAnimation = tween(this.$data, 0.1, {areaScrollTop: lineOffset})
+                line.scrollIntoView()
                 line.classList.add('current-line')
             }
         }
@@ -165,15 +137,8 @@ export default {
         value (newContent) {
             this.updateContent(newContent)
         },
-        cursorLine () {
+        cursorLine (val) {
             this.updateScroll()
-        },
-        cursorOffest () {
-            this.updateScroll()
-        },
-        areaScrollTop (val) {
-            const previewArea = this.$refs.previewArea
-            previewArea.scrollTop = val
         }
     }
 }
