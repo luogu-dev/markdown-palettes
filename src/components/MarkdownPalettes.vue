@@ -89,6 +89,7 @@ import EditorDialog from './Dialog.vue'
 
 import { defaultConfig, getConfig } from './DefaultConfig'
 import { contentParserFactory } from './ContentParserFactory'
+import InjectLnParser from './plugins/InjectLnParser.js'
 
 export default {
     name: 'markdown-palettes',
@@ -113,7 +114,7 @@ export default {
             editorConfig: config,
             editorHeight: '500px',
             fullScreen: config.fullScreen,
-            contentParser: contentParserFactory(config.parsers)
+            contentParser: contentParserFactory([...config.parsers, InjectLnParser])
         }
     },
     mounted () {

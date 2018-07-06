@@ -2,7 +2,6 @@ import KatexParser from '@luogu-dev/markdown-it-katex'
 import 'katex/dist/katex.css'
 import HighlightjsParser from 'markdown-it-highlightjs'
 import 'highlight.js/styles/tomorrow.css'
-import InjectLnParser from './plugins/InjectLnParser.js'
 import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
@@ -21,8 +20,7 @@ export const defaultConfig = {
     fullScreen: false,
     parsers: [
         KatexParser,
-        HighlightjsParser,
-        InjectLnParser
+        HighlightjsParser
     ],
     toolbarConfig: defaultBtns,
     editorOption: {
