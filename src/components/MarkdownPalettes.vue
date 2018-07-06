@@ -115,10 +115,8 @@ export default {
             fullScreen: config.fullScreen,
             contentParser: contentParserFactory(config.parsers),
             cursorLine: 0,
-            cursorOffset: 0,
-            scrolled: false,
-            clickLine: 0,
-            clickOffset: 0
+            cursorOffest: 0,
+            scrolled: false
         }
     },
     mounted () {

@@ -1,5 +1,5 @@
 <template>
-    <div id="mp-preview-area" ref="previewArea" @click="clickArea">
+    <div id="mp-preview-area" ref="previewArea">
         <div id="mp-preview-content" v-html="content" ref="previewContent"></div>
     </div>
 </template>
@@ -81,7 +81,6 @@
 
 <script>
 import tween from './utils/tween.js'
-import computeFromParent from './utils/computeFromParent.js'
 
 export default {
     name: 'preview-area',
@@ -98,11 +97,30 @@ export default {
         }
     },
     computed: {
-        ...computeFromParent('cursorLine'),
-        ...computeFromParent('cursorOffset'),
-        ...computeFromParent('scrolled'),
-        ...computeFromParent('clickLine'),
-        ...computeFromParent('clickOffset')
+        cursorLine: {
+            get () {
+                return this.$parent.cursorLine
+            },
+            set (val) {
+                this.$parent.cursorLine = val
+            }
+        },
+        cursorOffest: {
+            get () {
+                return this.$parent.cursorOffest
+            },
+            set (val) {
+                this.$parent.cursorOffest = val
+            }
+        },
+        scrolled: {
+            get () {
+                return this.$parent.scrolled
+            },
+            set (val) {
+                this.$parent.scrolled = val
+            }
+        }
     },
     data () {
         return {
@@ -129,7 +147,7 @@ export default {
             if(line){
                 const lineBounding = line.getBoundingClientRect()
                 const contentTop = previewContent.getBoundingClientRect().top
-                const lineOffset = Math.min(lineBounding.bottom - contentTop - this.cursorOffset, lineBounding.top - contentTop)
+                const lineOffset = Math.min(lineBounding.bottom - contentTop - this.cursorOffest, lineBounding.top - contentTop)
                 this.areaScrollTop = previewArea.scrollTop
                 if(this.tweenAnimation){
                     this.tweenAnimation.cancel()
@@ -141,14 +159,6 @@ export default {
                     this.tweenAnimation = tween(this.$data, 0.1, {areaScrollTop: lineOffset})
                 line.classList.add('current-line')
             }
-        },
-        clickArea ({target}) {
-            const clickLine = target.dataset.line
-            if(clickLine !== undefined) {
-                this.clickLine = clickLine
-                const previewArea = this.$refs.previewArea
-                this.clickOffset = target.getBoundingClientRect().bottom - previewArea.getBoundingClientRect().top
-            }
         }
     },
     watch: {
@@ -158,7 +168,7 @@ export default {
         cursorLine () {
             this.updateScroll()
         },
-        cursorOffset () {
+        cursorOffest () {
             this.updateScroll()
         },
         areaScrollTop (val) {
