@@ -13,7 +13,7 @@
                             ref="inputArea"
                             @input="updateCode"
                             @finish="insertCode = null"
-                            @scroll-sync="scrollSync('editor', $event)"
+                            @scroll-sync="doScrollSync('editor', $event)"
                             :insertCode="insertCode"
                             :editorOption="editorConfig.editorOption"></input-area>
             </div>
@@ -21,7 +21,7 @@
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parser="contentParser" ref="previewArea" @scroll-sync="scrollSync('preview', $event)"></preview-area>
+                <preview-area v-model="code" :parser="contentParser" ref="previewArea" @scroll-sync="doScrollSync('preview', $event)"></preview-area>
             </div>
         </div>
         <div id="mp-editor-dialog">
@@ -115,7 +115,8 @@ export default {
             editorConfig: config,
             editorHeight: '500px',
             fullScreen: config.fullScreen,
-            contentParser: contentParserFactory([...config.parsers, InjectLnParser])
+            contentParser: contentParserFactory([...config.parsers, InjectLnParser]),
+            scrollSync: config.scrollSync
         }
     },
     mounted () {
@@ -161,12 +162,17 @@ export default {
                     this.fullScreen = false
                 }
             }
+            if (operation === 'scrollSync') {
+                this.scrollSync = !this.scrollSync
+            }
         },
-        scrollSync (emitter, info) {
-            if (emitter === 'editor') {
-                this.$refs.previewArea.updateScrollSync(info)
-            } else if (emitter === 'preview') {
-                this.$refs.inputArea.updateScrollSync(info)
+        doScrollSync (emitter, info) {
+            if (this.scrollSync) {
+                if (emitter === 'editor') {
+                    this.$refs.previewArea.updateScrollSync(info)
+                } else if (emitter === 'preview') {
+                    this.$refs.inputArea.updateScrollSync(info)
+                }
             }
         }
     },
