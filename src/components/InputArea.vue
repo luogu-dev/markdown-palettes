@@ -82,7 +82,8 @@ export default {
     data: function () {
         return {
             code: '',
-            scrollSynced: false
+            scrollSynced: false,
+            scrollAnimation: null
         }
     },
     components: {
@@ -97,6 +98,9 @@ export default {
                 this.scrollSynced = false
             } else {
                 debouncedEmitScrollSync()
+                if (this.scrollAnimation) {
+                    this.scrollAnimation.cancel()
+                }
             }
         }
         this.editor.on('cursorActivity', scrollSync)
@@ -140,8 +144,38 @@ export default {
             })
             const scrollTop = this.editor.getScrollInfo().top
             const editorLineOffset = this.editor.heightAtLine(syncLine, 'local') - scrollTop
-            this.scrollSynced = true
-            this.editor.scrollTo(null, scrollTop + editorLineOffset - linesOffset[syncLine].top)
+            if (this.scrollAnimation) {
+                this.scrollAnimation.cancel()
+            }
+            let animationCancelled = false
+            let animationSkipFrame = false
+            const animationFrom = scrollTop, animationTo = scrollTop + editorLineOffset - linesOffset[syncLine].top
+            const animationStartTime = Date.now()
+            const animationDuration = 200
+            const animationFrameCallback = () => {
+                if (animationSkipFrame) {
+                    // skip frame so that user can scroll to interrupt animation
+                    requestAnimationFrame(animationFrameCallback)
+                    animationSkipFrame = false
+                } else if (!animationCancelled) {
+                    const currentTime = Date.now()
+                    const precent = (currentTime - animationStartTime) / animationDuration
+                    this.scrollSynced = true
+                    if (precent >= 1) {
+                        this.editor.scrollTo(null, animationTo)
+                    } else {
+                        this.editor.scrollTo(null, (animationTo - animationFrom) * precent + animationFrom)
+                        requestAnimationFrame(animationFrameCallback)
+                        animationSkipFrame = true
+                    }
+                }
+            }
+            animationFrameCallback()
+            this.scrollAnimation = {
+                cancel () {
+                    animationCancelled = true
+                }
+            }
         }
     }
 }
