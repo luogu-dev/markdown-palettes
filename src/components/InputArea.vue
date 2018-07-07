@@ -153,7 +153,8 @@ export default {
             }
             let animationCancelled = false
             let animationSkipFrame = false
-            const animationFrom = scrollTop, animationTo = scrollTop + editorLineOffset - linesOffset[syncLine].top
+            const animationFrom = scrollTop
+            const animationTo = scrollTop + editorLineOffset - linesOffset[syncLine].top
             const animationStartTime = Date.now()
             const animationDuration = 200
             const animationFrameCallback = () => {

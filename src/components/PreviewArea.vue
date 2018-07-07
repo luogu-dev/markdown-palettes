@@ -217,9 +217,10 @@ export default {
                     break
                 }
             }
-            const lowerLineE = getLine(lowerLine), upperLineE = getLine(upperLine)
-            const hasLowerLine = lowerLineE !== null,
-                  hasUpperLine = upperLineE !== null
+            const lowerLineE = getLine(lowerLine)
+            const upperLineE = getLine(upperLine)
+            const hasLowerLine = lowerLineE !== null
+            const hasUpperLine = upperLineE !== null
             if (!hasLowerLine && !hasUpperLine) {
                 // can't sync
                 return
