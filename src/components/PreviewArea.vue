@@ -1,6 +1,6 @@
 <template>
     <div id="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
-        <div id="mp-preview-content" v-html="content"></div>
+        <div id="mp-preview-content" v-html="content" ref="previewContent"></div>
     </div>
 </template>
 
@@ -113,22 +113,30 @@ export default {
         updateContent (newContent) {
             this.content = this.parser(newContent)
             this.$nextTick(() => {
+                this.updateLinesBounding()
                 const previewArea = this.$refs.previewArea
-                this.linesBounding = []
-                previewArea.querySelectorAll('[data-line]').forEach(lineE => {
-                    const bounding = lineE.getBoundingClientRect()
-                    const line = parseInt(lineE.dataset.line)
-                    const outerTop = previewArea.getBoundingClientRect().top
-                    this.linesBounding.push({
-                        line,
-                        top: bounding.top - outerTop,
-                        bottom: bounding.bottom - outerTop
-                    })
+                Array.from(previewArea.getElementsByTagName('img')).forEach(img => {
+                    // img will become "bigger" when it's loaded
+                    img.addEventListener('load', this.updateLinesBounding)
                 })
-                _.sortBy(this.linesBounding, [b => b.top])
             })
         },
-
+        updateLinesBounding () {
+            const previewArea = this.$refs.previewArea
+            const previewContent = this.$refs.previewContent
+            const outerTop = previewContent.getBoundingClientRect().top
+            this.linesBounding = []
+            previewArea.querySelectorAll('[data-line]').forEach(lineE => {
+                const bounding = lineE.getBoundingClientRect()
+                const line = parseInt(lineE.dataset.line)
+                this.linesBounding.push({
+                    line,
+                    top: bounding.top - outerTop,
+                    bottom: bounding.bottom - outerTop
+                })
+            })
+            _.sortBy(this.linesBounding, [b => b.top])
+        },
         previewAreaScroll () {
             if (this.scrollSynced) {
                 this.scrollSynced = false
