@@ -118,10 +118,11 @@ export default {
                 previewArea.querySelectorAll('[data-line]').forEach(lineE => {
                     const bounding = lineE.getBoundingClientRect()
                     const line = parseInt(lineE.dataset.line)
+                    const outerTop = previewArea.getBoundingClientRect().top
                     this.linesBounding.push({
                         line,
-                        top: bounding.top,
-                        bottom: bounding.bottom
+                        top: bounding.top - outerTop,
+                        bottom: bounding.bottom - outerTop
                     })
                 })
                 _.sortBy(this.linesBounding, [b => b.top])
