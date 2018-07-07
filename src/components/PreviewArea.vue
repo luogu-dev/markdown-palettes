@@ -178,16 +178,6 @@ export default {
                 }
             }
             const getLine = line => previewArea.querySelector(`[data-line="${line}"]`)
-            const getLineHeight = ele => {
-                const cst = getComputedStyle(ele)
-                const lh = parseFloat(cst.lineHeight)
-                const fz = parseFloat(cst.fontSize)
-                if (isNaN(lh)) {
-                    return fz;
-                } else {
-                    return lh;
-                }
-            }
             const calcScroll = line => {
                 const lineE = getLine(line)
                 const previewLineOffset = offset(lineE)
@@ -198,7 +188,7 @@ export default {
                 let scroll = previewLineOffset.top - editorLineOffset.top
                 const tagName = lineE.tagName
                 if (/^h\d$/i.test(tagName)) {
-                    scroll = previewLineOffset.bottom - editorLineOffset.top - getLineHeight(lineE)
+                    scroll = previewLineOffset.bottom - editorLineOffset.bottom
                 }
                 if (previewLineOffset.top - scroll < 0) {
                     scroll = -previewLineOffset.top
