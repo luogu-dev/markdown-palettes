@@ -94,6 +94,9 @@ export default {
         },
         height: {
             type: String
+        },
+        scrollSync: {
+            type: Boolean
         }
     },
     data () {
@@ -112,13 +115,18 @@ export default {
     methods: {
         updateContent (newContent) {
             this.content = this.parser(newContent)
-            this.$nextTick(() => {
-                this.updateLinesBounding()
-                const previewArea = this.$refs.previewArea
-                Array.from(previewArea.getElementsByTagName('img')).forEach(img => {
-                    // img will become "bigger" when it's loaded
-                    img.addEventListener('load', this.updateLinesBounding)
-                })
+            if (this.scrollSync) {
+                this.$nextTick(this.maintainLinesBounding)
+            } else {
+                this.linesBounding = []
+            }
+        },
+        maintainLinesBounding () {
+            this.updateLinesBounding()
+            const previewArea = this.$refs.previewArea
+            Array.from(previewArea.getElementsByTagName('img')).forEach(img => {
+                // img will become "bigger" when it's loaded
+                img.addEventListener('load', this.updateLinesBounding)
             })
         },
         updateLinesBounding () {
@@ -145,6 +153,7 @@ export default {
             }
         },
         emitScrollSync () {
+            if (!this.scrollSync) return
             const previewArea = this.$refs.previewArea
             const scrollTop = previewArea.scrollTop
             const scrollBottom = scrollTop + previewArea.getBoundingClientRect().height
@@ -241,6 +250,11 @@ export default {
     watch: {
         value (newContent) {
             this.updateContent(newContent)
+        },
+        scrollSync (val) {
+            if (val && this.linesBounding.length === 0) {
+                this.maintainLinesBounding()
+            }
         }
     }
 }

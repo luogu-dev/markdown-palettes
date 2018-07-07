@@ -15,13 +15,16 @@
                             @finish="insertCode = null"
                             @scroll-sync="doScrollSync('editor', $event)"
                             :insertCode="insertCode"
-                            :editorOption="editorConfig.editorOption"></input-area>
+                            :editorOption="editorConfig.editorOption"
+                            :scrollSync="scrollSync"></input-area>
             </div>
             <div id="mp-editor-preview-area" class="mp-editor-area mp-preview-area" :class="{
                         'mp-editor-area': this.config.previewDisplay === 'normal',
                         'mp-editor-area-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parser="contentParser" ref="previewArea" @scroll-sync="doScrollSync('preview', $event)"></preview-area>
+                <preview-area v-model="code" :parser="contentParser" ref="previewArea"
+                              @scroll-sync="doScrollSync('preview', $event)"
+                              :scrollSync="scrollSync"></preview-area>
             </div>
         </div>
         <div id="mp-editor-dialog">
@@ -167,12 +170,10 @@ export default {
             }
         },
         doScrollSync (emitter, info) {
-            if (this.scrollSync) {
-                if (emitter === 'editor') {
-                    this.$refs.previewArea.updateScrollSync(info)
-                } else if (emitter === 'preview') {
-                    this.$refs.inputArea.updateScrollSync(info)
-                }
+            if (emitter === 'editor') {
+                this.$refs.previewArea.updateScrollSync(info)
+            } else if (emitter === 'preview') {
+                this.$refs.inputArea.updateScrollSync(info)
             }
         }
     },

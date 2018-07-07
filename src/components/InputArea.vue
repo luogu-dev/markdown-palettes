@@ -45,6 +45,9 @@ export default {
         },
         insertCode: {
             default: null
+        },
+        scrollSync: {
+            type: Boolean
         }
     },
     computed: {
@@ -112,6 +115,7 @@ export default {
         },
 
         emitScrollSync () {
+            if (!this.scrollSync) return
             const cursorLine = this.editor.getCursor().line
             const scrollInfo = this.editor.getScrollInfo('local')
             const viewport = {
