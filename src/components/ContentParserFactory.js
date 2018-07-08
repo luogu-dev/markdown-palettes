@@ -1,9 +1,11 @@
-import { MarkdownParser } from './plugin/MarkdownParser'
+import MarkdownIt from 'markdown-it'
 
 function contentParserFactory (parsers) {
-    return content => {
-        return MarkdownParser(content, parsers)
-    }
+    let converter = MarkdownIt()
+    parsers.forEach(parser => {
+        converter = converter.use(parser)
+    })
+    return content => converter.render(content)
 }
 
 export { contentParserFactory }

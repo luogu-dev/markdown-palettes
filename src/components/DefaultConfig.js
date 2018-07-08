@@ -27,7 +27,8 @@ export const defaultConfig = {
         mode: 'markdown',
         lineNumbers: true,
         lineWrapping: true
-    }
+    },
+    scrollSync: true
 }
 
 export function getConfig (config) {
