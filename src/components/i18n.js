@@ -38,14 +38,15 @@ export const dictionary = new Map([
 ])
 
 export function getText (text) {
-    for (let language of navigator.languages) {
-        for (let [langReg, textMapping] of dictionary) {
+    for (const language of navigator.languages) {
+        for (const [langReg, textMapping] of dictionary) {
             if (langReg.test(language)) {
-                let result, match = null
+                let result
+                let match = null
                 if (textMapping.has(text)) {
                     result = textMapping.get(text)
                 } else {
-                    for (let [re, res] of textMapping) {
+                    for (const [re, res] of textMapping) {
                         if (_.isRegExp(re)) {
                             match = re.exec(text)
                             if (match !== null) {
