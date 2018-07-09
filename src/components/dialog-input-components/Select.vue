@@ -1,8 +1,8 @@
 <template>
     <div id="mp-dialog-select">
-        <label>{{ request.title }}</label>
+        <label>{{ title }}</label>
         <select v-model="value">
-            <option v-for="option in request.param.options" :value="option.value">{{ option.title }}</option>
+            <option v-for="option in request.param.options" :value="option.value">{{ t(option.title) }}</option>
         </select>
     </div>
 </template>
@@ -33,7 +33,7 @@
 </style>
 
 <script>
-import abstractInputComponent from './AbstractInputComponent.vue'
+import abstractInputComponent from './AbstractInputComponent'
 
 export default {
     name: 'dialog-select',

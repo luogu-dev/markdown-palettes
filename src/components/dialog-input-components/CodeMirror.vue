@@ -1,6 +1,6 @@
 <template>
     <div id="mp-dialog-codemirror">
-        <label v-if="request.title">{{ request.title }}</label>
+        <label v-if="title">{{ title }}</label>
         <div class="mp-dialog-codemirror-editor"></div>
         <codemirror
                 :value="value"
@@ -32,7 +32,7 @@
 </style>
 
 <script>
-import abstractInputComponent from './AbstractInputComponent.vue'
+import abstractInputComponent from './AbstractInputComponent'
 import { codemirror } from 'vue-codemirror-lite'
 
 export default {
