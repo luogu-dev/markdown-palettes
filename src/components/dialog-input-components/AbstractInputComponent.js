@@ -1,5 +1,3 @@
-import { mixin as getTextMixin } from '../i18n'
-
 export default {
     props: {
         requestField: {
@@ -26,5 +24,5 @@ export default {
             this.$emit('change', this.request)
         }
     },
-    mixins: [getTextMixin]
+    inject: ['t']
 }

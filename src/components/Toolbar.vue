@@ -64,7 +64,6 @@
 
 <script>
 import 'font-awesome/css/font-awesome.css'
-import { mixin as getTextMixin } from './i18n'
 
 /**
      * configItem = {
@@ -108,6 +107,6 @@ export default {
             }
         }
     },
-    mixins: [getTextMixin]
+    inject: ['t']
 }
 </script>

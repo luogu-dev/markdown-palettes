@@ -69,9 +69,3 @@ export function getText (text) {
     }
     return text
 }
-
-export const mixin = {
-    methods: {
-        t: getText
-    }
-}

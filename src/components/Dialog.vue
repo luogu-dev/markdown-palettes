@@ -114,7 +114,6 @@
 <script>
 import 'font-awesome/css/font-awesome.css'
 import DialogComponents from './dialog-input-components/components'
-import { mixin as getTextMixin } from './i18n'
 
 export default {
     name: 'editor-dialog',
@@ -156,6 +155,6 @@ export default {
         }
     },
     components: DialogComponents,
-    mixins: [getTextMixin]
+    inject: ['t']
 }
 </script>

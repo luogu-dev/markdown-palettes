@@ -94,6 +94,7 @@ import EditorDialog from './Dialog.vue'
 import { defaultConfig, getConfig } from './DefaultConfig'
 import { contentParserFactory } from './ContentParserFactory'
 import InjectLnParser from './plugins/InjectLnParser.js'
+import { getText } from './i18n'
 
 export default {
     name: 'markdown-palettes',
@@ -182,6 +183,7 @@ export default {
             this.code = newValue
             this.updateCode(newValue)
         }
-    }
+    },
+    provide: () => ({ t: getText })
 }
 </script>
