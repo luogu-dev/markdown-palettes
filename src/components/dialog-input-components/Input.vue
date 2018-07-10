@@ -1,6 +1,6 @@
 <template>
     <div id="mp-dialog-input">
-        <label>{{ request.title }}</label>
+        <label>{{ title }}</label>
         <input v-model="value">
     </div>
 </template>
@@ -30,7 +30,7 @@
 </style>
 
 <script>
-import abstractInputComponent from './AbstractInputComponent.vue'
+import abstractInputComponent from './AbstractInputComponent'
 
 export default {
     name: 'dialog-input',

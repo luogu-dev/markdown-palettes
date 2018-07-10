@@ -3,7 +3,7 @@
         <ul id="mp-editor-menu" v-if="toolbarConfig.length > 0">
             <li v-for="item in toolbarConfig" :class="{'mp-divider':item.name === '|'}" >
                 <span v-if="item.name === '|'">|</span>
-                <a v-else :title="item.title" @click="handleAction(item.action)" unselectable="on">
+                <a v-else :title="t(item.title)" @click="handleAction(item.action)" unselectable="on">
                     <i :class="['fa', item.icon]" :name="item.name" unselectable="on">{{ item.content }}</i>
                 </a>
             </li>
@@ -106,6 +106,7 @@ export default {
                 this.requestData(action.request)
             }
         }
-    }
+    },
+    inject: ['t']
 }
 </script>

@@ -5,7 +5,7 @@
                 <div class="mp-dialog-container">
 
                     <div class="mp-dialog-header">
-                        <strong>{{ request.title }}</strong>
+                        <strong>{{ t(request.title) }}</strong>
                         <a class="fa fa-close mp-dialog-close" @click="close()"></a>
                     </div>
                     <div class="mp-dialog-body">
@@ -17,8 +17,8 @@
 
                         <div class="mp-dialog-footer">
                             <div>
-                                <button class="mp-dialog-button" @click="close()">取消</button>
-                                <button class="mp-dialog-button" @click="finish()"  style="margin-right: 7px">确定</button>
+                                <button class="mp-dialog-button" @click="close()">{{ t('取消') }}</button>
+                                <button class="mp-dialog-button" @click="finish()"  style="margin-right: 7px">{{ t('确定') }}</button>
                             </div>
                         </div>
                     </div>
@@ -154,6 +154,7 @@ export default {
             this.responseData[request.name] = request.value
         }
     },
-    components: DialogComponents
+    components: DialogComponents,
+    inject: ['t']
 }
 </script>

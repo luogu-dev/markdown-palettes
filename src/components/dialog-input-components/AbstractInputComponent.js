@@ -1,4 +1,3 @@
-<script>
 export default {
     props: {
         requestField: {
@@ -16,11 +15,14 @@ export default {
             value: this.requestField.default ? this.requestField.default : ''
         }
     },
+    computed: {
+        title () { return this.t(this.request.title) }
+    },
     watch: {
         value (newValue) {
             this.request.value = newValue
             this.$emit('change', this.request)
         }
-    }
+    },
+    inject: ['t']
 }
-</script>
