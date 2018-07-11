@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 function mixin (dest, src) {
     for (const [key, value] of Object.entries(src)) {
-        if (typeof dest[key] === 'object' && !_.isArray(dest[key])) {
+        if (typeof dest[key] === 'object' && !Array.isArray(dest[key])) {
             mixin(dest[key], value)
         } else {
             dest[key] = value

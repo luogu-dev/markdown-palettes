@@ -1,22 +1,20 @@
 <template>
     <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
-        <!-- <div class="mp-editor-toolbar">
-            <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
-                     :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
-        </div> -->
+        <div class="mp-editor-toolbar">
+            <ul class="mp-editor-menu" v-if="toolbarConfig.length > 0">
+                <li v-for="(item, index) in toolbarConfig" :class="{'mp-divider':item.name === '|'}" :key="item.name + index">
+                    <span v-if="item.name === '|'">|</span>
+                    <a v-else :title="t(ensureValue(item.title))" @click="toolbarAction(item)" unselectable="on">
+                        <i :class="['fa', ensureValue(item.icon)]" unselectable="on">{{ ensureValue(item.content) }}</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="mp-editor-ground">
             <div class="mp-editor-zone mp-input-zone" :class="{
                         'mp-editor-zone': previewDisplay === 'normal',
                         'mp-editor-zone-full': previewDisplay === 'hide'
                  }">
-                <!-- <input-area v-model="code"
-                            ref="inputArea"
-                            @input="updateCode"
-                            @finish="insertCode = null"
-                            @scroll-sync="doScrollSync('editor', $event)"
-                            :insertCode="insertCode"
-                            :editorOption="editorConfig.editorOption"
-                            :scrollSync="scrollSync"></input-area> -->
                 <div class="mp-input-area" ref="inputArea"></div>
             </div>
             <div class="mp-editor-zone mp-preview-zone" :class="{
@@ -28,10 +26,10 @@
                 </div>
             </div>
         </div>
-        <!-- <div>
-            <editor-dialog v-if="showDialog" :request="dialogRequest" @finish="dialogFinish"
-                           @close="closeDialog" ref="dialog"></editor-dialog>
-        </div> -->
+        <div>
+            <editor-dialog v-if="showDialog" :request="dialogRequest"
+                @finish="dialogFinish" @close="closeDialog"></editor-dialog>
+        </div>
     </div>
 </template>
 
@@ -52,6 +50,8 @@
         float: left
         width: 100%
         height: 40px
+        box-sizing: border-box
+        background-color: white
     .mp-editor-ground
         position: absolute
         width: 100%
@@ -125,14 +125,47 @@
         height: 0
         border: none
         border-bottom: solid 1px #eee
+
+    .mp-editor-menu>li>a
+        outline: 0
+        color: #666
+        display: inline-block
+        min-width: 24px
+        font-size: 16px
+        text-decoration: none
+        text-align: center
+        border: 1px solid #fff
+        transition: all 300ms ease-out
+    .mp-editor-menu>li>a.active, .mp-editor-menu>li>a:hover
+        border: 1px solid #ddd
+        background-color: rgb(238, 238, 238)
+    .mp-editor-menu
+        margin: 0
+        padding-left: 8px
+        list-style: none
+    .mp-editor-menu>li>a>.fa
+        text-align: center
+        display: block
+        padding: 5px
+    .mp-editor-menu>li
+        margin: 0
+        padding: 5px 1px
+        display: inline-block
+        position: relative
+    .mp-editor-menu>li .divider
+        display: inline-block
+        text-indent: -9999px
+        margin: 0 5px
+        height: 65%
+        border-right: 1px solid #ddd
 </style>
 
 <script>
-// import PreviewArea from './PreviewArea.vue'
-// import Toolbar from './Toolbar.vue'
-// import EditorDialog from './Dialog.vue'
+import Dialog from './Dialog.vue'
+
 import InputAreaMixin from './InputAreaMixin'
 import PreviewAreaMixin from './PreviewAreaMixin'
+import ToolbarMixin from './ToolbarMixin'
 
 import { defaultConfig, getConfig } from './DefaultConfig'
 import { contentParserFactory } from './ContentParserFactory'
@@ -155,13 +188,11 @@ export default {
     },
     data () {
         return {
+            ...getConfig(this.config),
             editor: null,
             code: '',
-            // showDialog: false,
-            // dialogRequest: {},
-            // insertCode: null,
-            // editorHeight: '500px',
-            ...getConfig(this.config)
+            showDialog: false,
+            dialogRequest: {},
         }
     },
     computed: {
@@ -175,47 +206,53 @@ export default {
         getCode () {
             return this.code
         },
-        // insert (code) {
-        //     if (code !== null) {
-        //         this.insertCode = code
-        //     }
-        // },
-        // closeDialog () {
-        //     this.showDialog = false
-        // },
-        // dialogFinish (request) {
-        //     this.insert(request.callback(request.data))
-        //     this.closeDialog()
-        // },
-        // clickToolbar (request) {
-        //     if (this.showDialog) {
-        //         return
-        //     }
-        //     this.dialogRequest = request
-        //     this.showDialog = true
-        // },
-        // handleToolbarOperation (operation) {
-        //     if (operation === 'hide') {
-        //         if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
-        //     }
-        //     if (operation === 'fullScreen') {
-        //         if (!this.fullScreen) {
-        //             this.fullScreen = true
-        //         } else {
-        //             this.fullScreen = false
-        //         }
-        //     }
-        //     if (operation === 'scrollSync') {
-        //         this.scrollSync = !this.scrollSync
-        //     }
-        // },
+        insertCode (code) {
+            if (code != null) {
+                let insert = this.ensureValue(code)
+                if (!Array.isArray(insert)) {
+                    insert = [insert, '']
+                }
+                const cursor = this.editor.getCursor()
+                const selection = this.editor.getSelection()
+                this.editor.replaceSelection(insert[0] + selection + insert[1])
+                if (selection === '') {
+                    this.editor.setCursor(cursor.line, cursor.ch + 2)
+                }
+                this.editor.focus()
+            }
+        },
+        closeDialog () {
+            this.showDialog = false
+        },
+        openDialog (request) {
+            this.dialogRequest = request
+            this.showDialog = true
+        },
+        dialogFinish (request) {
+            this.insertCode(request.callback(request.data))
+            this.closeDialog()
+        },
+        requestData (request) {
+            if (this.showDialog) {
+                return
+            }
+            this.openDialog(request)
+        },
         doScrollSync (emitter, info) {
             if (emitter === 'inputArea') {
                 this.previewAreaUpdateScrollSync(info)
             } else if (emitter === 'previewArea') {
                 this.inputAreaUpdateScrollSync(info)
             }
-        }
+        },
+        ensureValue (val) {
+            if (typeof val === 'function') {
+                return val()
+            } else {
+                return val
+            }
+        },
+        t: getText
     },
     watch: {
         value (newValue) {
@@ -223,6 +260,7 @@ export default {
         }
     },
     provide: () => ({ t: getText }),
-    mixins: [InputAreaMixin, PreviewAreaMixin]
+    mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin],
+    components: { 'editor-dialog': Dialog }
 }
 </script>
