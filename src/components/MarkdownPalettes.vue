@@ -1,9 +1,9 @@
 <template>
     <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
-        <div class="mp-editor-toolbar">
+        <!-- <div class="mp-editor-toolbar">
             <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
                      :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
-        </div>
+        </div> -->
         <div class="mp-editor-ground">
             <div class="mp-editor-zone mp-input-zone" :class="{
                         'mp-editor-zone': this.config.previewDisplay === 'normal',
@@ -28,10 +28,10 @@
                               :scrollSync="scrollSync"></preview-area>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <editor-dialog v-if="showDialog" :request="dialogRequest" @finish="dialogFinish"
                            @close="closeDialog" ref="dialog"></editor-dialog>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -75,9 +75,7 @@
         border-left: 1px solid #ddd
         padding-bottom: 2px
 
-    .mp-input-area
-        height: 100%
-    .mp-input-area >>> .CodeMirror
+    .mp-input-area, .mp-input-area >>> .CodeMirror
         height: 100%
 </style>
 
@@ -87,8 +85,9 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/gfm/gfm'
 
 import PreviewArea from './PreviewArea.vue'
-import Toolbar from './Toolbar.vue'
-import EditorDialog from './Dialog.vue'
+// import Toolbar from './Toolbar.vue'
+// import EditorDialog from './Dialog.vue'
+import InputAreaScrollSync from './InputAreaScrollSync'
 
 import { defaultConfig, getConfig } from './DefaultConfig'
 import { contentParserFactory } from './ContentParserFactory'
@@ -114,11 +113,11 @@ export default {
         return {
             editor: null,
             code: '',
-            showDialog: false,
-            dialogRequest: {},
-            insertCode: null,
+            // showDialog: false,
+            // dialogRequest: {},
+            // insertCode: null,
+            // editorHeight: '500px',
             editorConfig: config,
-            editorHeight: '500px',
             fullScreen: config.fullScreen,
             contentParser: contentParserFactory([...config.parsers, InjectLnParser]),
             scrollSync: config.scrollSync
@@ -128,60 +127,67 @@ export default {
         this.editor = CodeMirror(this.$refs.inputArea, this.editorConfig.editorOption)
         this.editor.on('change', cm => {
             const code = cm.getValue()
+            if (this.code !== code) {
+                this.$emit('input', code)
+            }
             this.code = code
-            this.$emit('input', code)
         })
-        this.code = this.value
+        this.setCode(this.value)
+
+        this.inputAreaInitScrollSync()
     },
     components: {
         PreviewArea,
-        Toolbar,
-        EditorDialog
+        // Toolbar,
+        // EditorDialog
     },
     methods: {
         setCode (code) {
-            this.editor.setValue(code)
             this.code = code
+            this.editor.setValue(code)
         },
-        insert (code) {
-            if (code !== null) {
-                this.insertCode = code
-            }
+        getCode () {
+            return this.code
         },
-        closeDialog () {
-            this.showDialog = false
-        },
-        dialogFinish (request) {
-            this.insert(request.callback(request.data))
-            this.closeDialog()
-        },
-        clickToolbar (request) {
-            if (this.showDialog) {
-                return
-            }
-            this.dialogRequest = request
-            this.showDialog = true
-        },
-        handleToolbarOperation (operation) {
-            if (operation === 'hide') {
-                if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
-            }
-            if (operation === 'fullScreen') {
-                if (!this.fullScreen) {
-                    this.fullScreen = true
-                } else {
-                    this.fullScreen = false
-                }
-            }
-            if (operation === 'scrollSync') {
-                this.scrollSync = !this.scrollSync
-            }
-        },
+        // insert (code) {
+        //     if (code !== null) {
+        //         this.insertCode = code
+        //     }
+        // },
+        // closeDialog () {
+        //     this.showDialog = false
+        // },
+        // dialogFinish (request) {
+        //     this.insert(request.callback(request.data))
+        //     this.closeDialog()
+        // },
+        // clickToolbar (request) {
+        //     if (this.showDialog) {
+        //         return
+        //     }
+        //     this.dialogRequest = request
+        //     this.showDialog = true
+        // },
+        // handleToolbarOperation (operation) {
+        //     if (operation === 'hide') {
+        //         if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
+        //     }
+        //     if (operation === 'fullScreen') {
+        //         if (!this.fullScreen) {
+        //             this.fullScreen = true
+        //         } else {
+        //             this.fullScreen = false
+        //         }
+        //     }
+        //     if (operation === 'scrollSync') {
+        //         this.scrollSync = !this.scrollSync
+        //     }
+        // },
         doScrollSync (emitter, info) {
-            if (emitter === 'editor') {
+            if (emitter === 'inputArea') {
                 this.$refs.previewArea.updateScrollSync(info)
             } else if (emitter === 'preview') {
-                this.$refs.inputArea.updateScrollSync(info)
+                this.inputAreaUpdateScrollSync(info)
             }
         }
     },
@@ -190,6 +196,7 @@ export default {
             this.setCode(newValue)
         }
     },
-    provide: () => ({ t: getText })
+    provide: () => ({ t: getText }),
+    mixins: [InputAreaScrollSync]
 }
 </script>
