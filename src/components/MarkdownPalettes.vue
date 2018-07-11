@@ -23,9 +23,9 @@
                         'mp-editor-zone': this.config.previewDisplay === 'normal',
                         'mp-editor-zone-hide': this.config.previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parser="contentParser" ref="previewArea"
-                              @scroll-sync="doScrollSync('preview', $event)"
-                              :scrollSync="scrollSync"></preview-area>
+                <div class="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
+                    <div class="mp-preview-content" ref="previewContent" v-html="previewContent"></div>
+                </div>
             </div>
         </div>
         <!-- <div>
@@ -77,17 +77,62 @@
 
     .mp-input-area, .mp-input-area >>> .CodeMirror
         height: 100%
+
+    .mp-preview-area
+        overflow: auto
+        background-color: white
+        height: 100%
+    .mp-preview-content
+        color: #333
+        padding: 10px
+        padding-left: 20px
+        padding-right: 20px
+        overflow: auto
+        height: auto
+        word-wrap:break-word
+    .mp-preview-content table
+        border-collapse: collapse
+        border-spacing: 0
+        display: block
+        width: 100%
+        overflow: auto
+        word-break: keep-all
+        margin: 10px
+    .mp-preview-content table th, .mp-preview-content table td
+        border: 1px solid #ddd
+        padding: 6px 13px
+    .mp-preview-content code
+        font-family: Monaco, Menlo, Consolas, "Courier New", monospace
+        font-size: 15px
+    .mp-preview-content img
+        max-width: 100%
+    .mp-preview-content p
+        margin: 1rem 0
+    .mp-preview-content h1, .mp-preview-content h2, .mp-preview-content h3,
+    .mp-preview-content h4, .mp-preview-content h5, .mp-preview-content h6
+        margin: .5rem 0
+    .mp-preview-content h1, .mp-preview-content h2
+        padding-bottom: .2em
+        border-bottom: solid 1px #eee
+    .mp-preview-content ul, .mp-preview-content ol
+        padding-left: 1.5em
+    .mp-preview-content ul
+        list-style: outside disc
+    .mp-preview-content ol
+        list-style: outside decimal
+    .mp-preview-content hr
+        margin: 1em 0
+        height: 0
+        border: none
+        border-bottom: solid 1px #eee
 </style>
 
 <script>
-import CodeMirror from 'codemirror'
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/mode/gfm/gfm'
-
-import PreviewArea from './PreviewArea.vue'
+// import PreviewArea from './PreviewArea.vue'
 // import Toolbar from './Toolbar.vue'
 // import EditorDialog from './Dialog.vue'
-import InputAreaScrollSync from './InputAreaScrollSync'
+import InputAreaMixin from './InputAreaMixin'
+import PreviewAreaMixin from './PreviewAreaMixin'
 
 import { defaultConfig, getConfig } from './DefaultConfig'
 import { contentParserFactory } from './ContentParserFactory'
@@ -119,27 +164,9 @@ export default {
             // editorHeight: '500px',
             editorConfig: config,
             fullScreen: config.fullScreen,
-            contentParser: contentParserFactory([...config.parsers, InjectLnParser]),
-            scrollSync: config.scrollSync
+            scrollSync: config.scrollSync,
+            contentParser: contentParserFactory([...config.parsers, InjectLnParser])
         }
-    },
-    mounted () {
-        this.editor = CodeMirror(this.$refs.inputArea, this.editorConfig.editorOption)
-        this.editor.on('change', cm => {
-            const code = cm.getValue()
-            if (this.code !== code) {
-                this.$emit('input', code)
-            }
-            this.code = code
-        })
-        this.setCode(this.value)
-
-        this.inputAreaInitScrollSync()
-    },
-    components: {
-        PreviewArea,
-        // Toolbar,
-        // EditorDialog
     },
     methods: {
         setCode (code) {
@@ -185,8 +212,8 @@ export default {
         // },
         doScrollSync (emitter, info) {
             if (emitter === 'inputArea') {
-                this.$refs.previewArea.updateScrollSync(info)
-            } else if (emitter === 'preview') {
+                this.previewAreaUpdateScrollSync(info)
+            } else if (emitter === 'previewArea') {
                 this.inputAreaUpdateScrollSync(info)
             }
         }
@@ -197,6 +224,6 @@ export default {
         }
     },
     provide: () => ({ t: getText }),
-    mixins: [InputAreaScrollSync]
+    mixins: [InputAreaMixin, PreviewAreaMixin]
 }
 </script>

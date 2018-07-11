@@ -1,4 +1,7 @@
 import _ from 'lodash'
+import CodeMirror from 'codemirror'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/gfm/gfm'
 
 export default {
     data () {
@@ -7,22 +10,32 @@ export default {
             inputAreaScrollAnimation: null
         }
     },
-    methods: {
-        inputAreaInitScrollSync () {
-            const debouncedEmitScrollSync = _.debounce(this.inputAreaEmitScrollSync, 50, { maxWait: 50 })
-            const scrollSync = () => {
-                if (this.inputAreaScrollSynced) {
-                    this.inputAreaScrollSynced = false
-                } else {
-                    debouncedEmitScrollSync()
-                    if (this.inputAreaScrollAnimation) {
-                        this.inputAreaScrollAnimation.cancel()
-                    }
+    mounted () {
+        this.editor = CodeMirror(this.$refs.inputArea, this.editorConfig.editorOption)
+        this.editor.on('change', cm => {
+            const code = cm.getValue()
+            if (this.code !== code) {
+                this.$emit('input', code)
+            }
+            this.code = code
+        })
+        this.setCode(this.value)
+
+        const debouncedEmitScrollSync = _.debounce(this.inputAreaEmitScrollSync, 50, { maxWait: 50 })
+        const scrollSync = () => {
+            if (this.inputAreaScrollSynced) {
+                this.inputAreaScrollSynced = false
+            } else {
+                debouncedEmitScrollSync()
+                if (this.inputAreaScrollAnimation) {
+                    this.inputAreaScrollAnimation.cancel()
                 }
             }
-            this.editor.on('cursorActivity', scrollSync)
-            this.editor.on('scroll', scrollSync)
-        },
+        }
+        this.editor.on('cursorActivity', scrollSync)
+        this.editor.on('scroll', scrollSync)
+    },
+    methods: {
         inputAreaEmitScrollSync () {
             if (!this.scrollSync) return
             const cursorLine = this.editor.getCursor().line
