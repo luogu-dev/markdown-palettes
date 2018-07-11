@@ -1,92 +1,91 @@
 <template>
-    <div id="mp-luogu-markdown-editor" class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
-        <div id="mp-editor-toolbar" class="mp-editor-toolbar">
+    <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
+        <div class="mp-editor-toolbar">
             <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
                      :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
         </div>
-        <div id="mp-editor-area">
-            <div id="mp-editor-input-area" class="mp-editor-area mp-input-area" :class="{
-                        'mp-editor-area': this.config.previewDisplay === 'normal',
-                        'mp-editor-area-full': this.config.previewDisplay === 'hide'
+        <div class="mp-editor-ground">
+            <div class="mp-editor-zone mp-input-zone" :class="{
+                        'mp-editor-zone': this.config.previewDisplay === 'normal',
+                        'mp-editor-zone-full': this.config.previewDisplay === 'hide'
                  }">
-                <input-area v-model="code"
+                <!-- <input-area v-model="code"
                             ref="inputArea"
                             @input="updateCode"
                             @finish="insertCode = null"
                             @scroll-sync="doScrollSync('editor', $event)"
                             :insertCode="insertCode"
                             :editorOption="editorConfig.editorOption"
-                            :scrollSync="scrollSync"></input-area>
+                            :scrollSync="scrollSync"></input-area> -->
+                <div class="mp-input-area" ref="inputArea"></div>
             </div>
-            <div id="mp-editor-preview-area" class="mp-editor-area mp-preview-area" :class="{
-                        'mp-editor-area': this.config.previewDisplay === 'normal',
-                        'mp-editor-area-hide': this.config.previewDisplay === 'hide'
+            <div class="mp-editor-zone mp-preview-zone" :class="{
+                        'mp-editor-zone': this.config.previewDisplay === 'normal',
+                        'mp-editor-zone-hide': this.config.previewDisplay === 'hide'
                 }">
                 <preview-area v-model="code" :parser="contentParser" ref="previewArea"
                               @scroll-sync="doScrollSync('preview', $event)"
                               :scrollSync="scrollSync"></preview-area>
             </div>
         </div>
-        <div id="mp-editor-dialog">
+        <div>
             <editor-dialog v-if="showDialog" :request="dialogRequest" @finish="dialogFinish"
                            @close="closeDialog" ref="dialog"></editor-dialog>
         </div>
     </div>
 </template>
 
-<style scoped>
-    #mp-editor-toolbar {
-        float: left;
-        width: 100%;
-        height: 40px;
-    }
-    #mp-editor-area {
-        position: absolute;
-        width: 100%;
-        top: 40px;
-        bottom: 0;
-        overflow: hidden;
-        border-top: 1px solid #ddd;
-    }
+<style scoped lang="stylus">
+    .mp-editor-container
+        position:relative
+        height: 100%
+        border: 1px solid #ddd
+    .mp-full-screen
+        position: fixed
+        z-index: 9997
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
 
-    .mp-editor-container {
-        position:relative;
-        height: 100%;
-        border: 1px solid #ddd;
-    }
-    .mp-editor-area {
-        box-sizing: border-box;
-        width: 50%;
-        height: 100%;
-        float: left;
-    }
+    .mp-editor-toolbar
+        float: left
+        width: 100%
+        height: 40px
+    .mp-editor-ground
+        position: absolute
+        width: 100%
+        top: 40px
+        bottom: 0
+        overflow: hidden
+        border-top: 1px solid #ddd
 
-    .mp-editor-area-full {
-        box-sizing: border-box;
-        width: 100%;
-    }
+    .mp-editor-zone
+        box-sizing: border-box
+        width: 50%
+        height: 100%
+        float: left
+    .mp-editor-zone-full
+        box-sizing: border-box
+        width: 100%
+    .mp-editor-zone-hide
+        display: none
 
-    .mp-editor-area-hide {
-        display: none;
-    }
+    .mp-preview-zone
+        border-left: 1px solid #ddd
+        padding-bottom: 2px
 
-    .mp-preview-area {
-        border-left: 1px solid #ddd;
-        padding-bottom: 2px;
-    }
-
-    .mp-full-screen {
-        position: fixed;
-        z-index: 9997;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-    }
+    .mp-input-area
+        height: 100%
+    .mp-input-area >>> .CodeMirror
+        height: 100%
 </style>
 
 <script>
-import InputArea from './InputArea.vue'
+import CodeMirror from 'codemirror'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/gfm/gfm'
+
 import PreviewArea from './PreviewArea.vue'
 import Toolbar from './Toolbar.vue'
 import EditorDialog from './Dialog.vue'
@@ -100,7 +99,8 @@ export default {
     name: 'markdown-palettes',
     props: {
         value: {
-            type: String
+            type: String,
+            default: ''
         },
         config: {
             type: Object,
@@ -112,6 +112,7 @@ export default {
     data () {
         const config = getConfig(this.config)
         return {
+            editor: null,
             code: '',
             showDialog: false,
             dialogRequest: {},
@@ -124,17 +125,23 @@ export default {
         }
     },
     mounted () {
+        this.editor = CodeMirror(this.$refs.inputArea, this.editorConfig.editorOption)
+        this.editor.on('change', cm => {
+            const code = cm.getValue()
+            this.code = code
+            this.$emit('input', code)
+        })
         this.code = this.value
     },
     components: {
-        InputArea,
         PreviewArea,
         Toolbar,
         EditorDialog
     },
     methods: {
-        updateCode (code) {
-            this.$emit('input', code)
+        setCode (code) {
+            this.editor.setValue(code)
+            this.code = code
         },
         insert (code) {
             if (code !== null) {
@@ -180,8 +187,7 @@ export default {
     },
     watch: {
         value (newValue) {
-            this.code = newValue
-            this.updateCode(newValue)
+            this.setCode(newValue)
         }
     },
     provide: () => ({ t: getText })

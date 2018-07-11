@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@luogu-dev/markdown-it-katex": "^0.0.1",
+    "codemirror": "^5.39.0",
     "font-awesome": "^4.7.0",
     "highlight.js": "^9.12.0",
     "katex": "^0.9.0",
@@ -31,6 +32,8 @@
     "@vue/cli-service": "^3.0.0-beta.15",
     "@vue/eslint-config-standard": "^3.0.0-rc.3",
     "babel-plugin-lodash": "^3.3.4",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {

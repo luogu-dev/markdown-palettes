@@ -24,7 +24,7 @@ export const defaultConfig = {
     ],
     toolbarConfig: defaultBtns,
     editorOption: {
-        mode: 'markdown',
+        mode: 'gfm',
         lineNumbers: true,
         lineWrapping: true
     },
