@@ -6,8 +6,8 @@
         </div> -->
         <div class="mp-editor-ground">
             <div class="mp-editor-zone mp-input-zone" :class="{
-                        'mp-editor-zone': this.config.previewDisplay === 'normal',
-                        'mp-editor-zone-full': this.config.previewDisplay === 'hide'
+                        'mp-editor-zone': previewDisplay === 'normal',
+                        'mp-editor-zone-full': previewDisplay === 'hide'
                  }">
                 <!-- <input-area v-model="code"
                             ref="inputArea"
@@ -20,8 +20,8 @@
                 <div class="mp-input-area" ref="inputArea"></div>
             </div>
             <div class="mp-editor-zone mp-preview-zone" :class="{
-                        'mp-editor-zone': this.config.previewDisplay === 'normal',
-                        'mp-editor-zone-hide': this.config.previewDisplay === 'hide'
+                        'mp-editor-zone': previewDisplay === 'normal',
+                        'mp-editor-zone-hide': previewDisplay === 'hide'
                 }">
                 <div class="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
                     <div class="mp-preview-content" ref="previewContent" v-html="previewContent"></div>
@@ -90,7 +90,7 @@
         overflow: auto
         height: auto
         word-wrap:break-word
-    .mp-preview-content table
+    .mp-preview-content >>> table
         border-collapse: collapse
         border-spacing: 0
         display: block
@@ -98,29 +98,29 @@
         overflow: auto
         word-break: keep-all
         margin: 10px
-    .mp-preview-content table th, .mp-preview-content table td
+    .mp-preview-content >>> table th, .mp-preview-content >>> table td
         border: 1px solid #ddd
         padding: 6px 13px
-    .mp-preview-content code
+    .mp-preview-content >>> code
         font-family: Monaco, Menlo, Consolas, "Courier New", monospace
         font-size: 15px
-    .mp-preview-content img
+    .mp-preview-content >>> img
         max-width: 100%
-    .mp-preview-content p
+    .mp-preview-content >>> p
         margin: 1rem 0
-    .mp-preview-content h1, .mp-preview-content h2, .mp-preview-content h3,
-    .mp-preview-content h4, .mp-preview-content h5, .mp-preview-content h6
+    .mp-preview-content >>> h1, .mp-preview-content >>> h2, .mp-preview-content >>> h3,
+    .mp-preview-content >>> h4, .mp-preview-content >>> h5, .mp-preview-content >>> h6
         margin: .5rem 0
-    .mp-preview-content h1, .mp-preview-content h2
+    .mp-preview-content >>> h1, .mp-preview-content >>> h2
         padding-bottom: .2em
         border-bottom: solid 1px #eee
-    .mp-preview-content ul, .mp-preview-content ol
+    .mp-preview-content >>> ul, .mp-preview-content >>> ol
         padding-left: 1.5em
-    .mp-preview-content ul
+    .mp-preview-content >>> ul
         list-style: outside disc
-    .mp-preview-content ol
+    .mp-preview-content >>> ol
         list-style: outside decimal
-    .mp-preview-content hr
+    .mp-preview-content >>> hr
         margin: 1em 0
         height: 0
         border: none
@@ -154,7 +154,6 @@ export default {
         }
     },
     data () {
-        const config = getConfig(this.config)
         return {
             editor: null,
             code: '',
@@ -162,11 +161,11 @@ export default {
             // dialogRequest: {},
             // insertCode: null,
             // editorHeight: '500px',
-            editorConfig: config,
-            fullScreen: config.fullScreen,
-            scrollSync: config.scrollSync,
-            contentParser: contentParserFactory([...config.parsers, InjectLnParser])
+            ...getConfig(this.config)
         }
+    },
+    computed: {
+        contentParser () { return contentParserFactory([...this.parsers, InjectLnParser]) }
     },
     methods: {
         setCode (code) {

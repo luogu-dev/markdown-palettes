@@ -5,14 +5,15 @@ import 'highlight.js/styles/tomorrow.css'
 import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
-function set (obj, config) {
-    for (const key in config) {
-        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-            set(obj[key], config)
+function mixin (dest, src) {
+    for (const [key, value] of Object.entries(src)) {
+        if (typeof dest[key] === 'object' && !_.isArray(dest[key])) {
+            mixin(dest[key], value)
+        } else {
+            dest[key] = value
         }
-        obj[key] = config[key]
     }
-    return obj
+    return dest
 }
 
 export const defaultConfig = {
@@ -32,6 +33,11 @@ export const defaultConfig = {
 }
 
 export function getConfig (config) {
-    if (config.toolbarConfig !== undefined) { config.toolbarConfig = getBtns(config.toolbarConfig) }
-    return set(_.cloneDeep(defaultConfig), config)
+    const mergedConfig = mixin(_.cloneDeep(defaultConfig), config)
+    const processedConfig = {}
+    for (const key of Object.keys(defaultConfig)) {
+        processedConfig[key] = mergedConfig[key]
+    }
+    processedConfig.toolbarConfig = getBtns(processedConfig.toolbarConfig)
+    return processedConfig
 }

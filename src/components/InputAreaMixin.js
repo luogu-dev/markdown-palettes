@@ -11,7 +11,7 @@ export default {
         }
     },
     mounted () {
-        this.editor = CodeMirror(this.$refs.inputArea, this.editorConfig.editorOption)
+        this.editor = CodeMirror(this.$refs.inputArea, this.editorOption)
         this.editor.on('change', cm => {
             const code = cm.getValue()
             if (this.code !== code) {
