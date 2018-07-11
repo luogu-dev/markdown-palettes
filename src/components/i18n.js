@@ -9,7 +9,7 @@ export const dictionary = new Map([
         ['语言类型', 'Language'],
         ['未选择', 'Unselected'],
         ['全屏', 'Fullscreen'],
-        [/^(?<level>\d)级标题$/, (text, {groups: {level}}) => `Header ${level}`],
+        [/^(\d)级标题$/, (text, match) => `Header ${match[1]}`],
         ['隐藏', 'Hide'],
         ['分割线', 'Horizontal rule'],
         ['插入图片', 'Insert image'],
@@ -33,7 +33,7 @@ export const dictionary = new Map([
         ['无序列表', 'Unordered list']
     ])],
     [/^zh/, new Map([
-        [/^(?<level>\d)级标题$/, (text, {groups: {level}}) => `${'一二三四五六'[level - 1]}级标题`]
+        [/^(\d)级标题$/, (text, match) => `${'一二三四五六'[match[1] - 1]}级标题`]
     ])]
 ])
 
