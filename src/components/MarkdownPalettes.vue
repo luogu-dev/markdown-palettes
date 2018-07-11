@@ -166,6 +166,7 @@ import Dialog from './Dialog.vue'
 import InputAreaMixin from './InputAreaMixin'
 import PreviewAreaMixin from './PreviewAreaMixin'
 import ToolbarMixin from './ToolbarMixin'
+import ActionMixin from './ActionMixin'
 
 import { defaultConfig, getConfig } from './DefaultConfig'
 import { contentParserFactory } from './ContentParserFactory'
@@ -190,9 +191,7 @@ export default {
         return {
             ...getConfig(this.config),
             editor: null,
-            code: '',
-            showDialog: false,
-            dialogRequest: {},
+            code: ''
         }
     },
     computed: {
@@ -206,38 +205,7 @@ export default {
         getCode () {
             return this.code
         },
-        insertCode (code) {
-            if (code != null) {
-                let insert = this.ensureValue(code)
-                if (!Array.isArray(insert)) {
-                    insert = [insert, '']
-                }
-                const cursor = this.editor.getCursor()
-                const selection = this.editor.getSelection()
-                this.editor.replaceSelection(insert[0] + selection + insert[1])
-                if (selection === '') {
-                    this.editor.setCursor(cursor.line, cursor.ch + 2)
-                }
-                this.editor.focus()
-            }
-        },
-        closeDialog () {
-            this.showDialog = false
-        },
-        openDialog (request) {
-            this.dialogRequest = request
-            this.showDialog = true
-        },
-        dialogFinish (request) {
-            this.insertCode(request.callback(request.data))
-            this.closeDialog()
-        },
-        requestData (request) {
-            if (this.showDialog) {
-                return
-            }
-            this.openDialog(request)
-        },
+
         doScrollSync (emitter, info) {
             if (emitter === 'inputArea') {
                 this.previewAreaUpdateScrollSync(info)
@@ -252,6 +220,7 @@ export default {
                 return val
             }
         },
+
         t: getText
     },
     watch: {
@@ -260,7 +229,7 @@ export default {
         }
     },
     provide: () => ({ t: getText }),
-    mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin],
+    mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin, ActionMixin],
     components: { 'editor-dialog': Dialog }
 }
 </script>
