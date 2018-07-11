@@ -2,7 +2,7 @@ export default {
     data () {
         return {
             showDialog: false,
-            dialogRequest: {},
+            dialogRequest: {}
         }
     },
     methods: {

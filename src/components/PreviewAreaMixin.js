@@ -23,7 +23,7 @@ export default {
                 this.previewAreaLinesBounding = []
             }
         },
-        scrollSync () {
+        scrollSync (val) {
             if (val && this.previewAreaLinesBounding.length === 0) {
                 this.previewAreaMaintainLinesBounding()
             }
