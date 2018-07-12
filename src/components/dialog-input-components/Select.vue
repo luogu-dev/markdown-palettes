@@ -2,7 +2,7 @@
     <div id="mp-dialog-select">
         <label>{{ title }}</label>
         <select v-model="value">
-            <option v-for="option in request.param.options" :value="option.value">{{ t(option.title) }}</option>
+            <option v-for="option in param.options" :value="option.value">{{ t(option.title) }}</option>
         </select>
     </div>
 </template>

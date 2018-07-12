@@ -1,27 +1,25 @@
 export default {
     props: {
         requestField: {
-            type: Object
+            type: Object,
+            required: true
         },
-        param: {
-            default () {
-                return {}
-            }
-        }
+        fieldValue: {}
     },
-    data () {
-        return {
-            request: this.requestField,
-            value: this.requestField.default ? this.requestField.default : ''
-        }
+    model: {
+        prop: 'fieldValue',
+        event: 'change'
     },
     computed: {
-        title () { return this.t(this.request.title) }
-    },
-    watch: {
-        value (newValue) {
-            this.request.value = newValue
-            this.$emit('change', this.request)
+        title () { return this.t(this.requestField.title) },
+        param () { return this.requestField.param },
+        value: {
+            get () {
+                return this.fieldValue
+            },
+            set (val) {
+                this.$emit('change', val)
+            }
         }
     },
     inject: ['t']

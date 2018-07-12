@@ -1,69 +1,56 @@
 <template>
-    <div id="mp-dialog-codemirror">
+    <div class="mp-dialog-codemirror">
         <label v-if="title">{{ title }}</label>
-        <div class="mp-dialog-codemirror-editor"></div>
-        <codemirror
-                :value="value"
-                :options="this.param.editorSetting"
-                ref="editor"
-                @change="updateContent">
-        </codemirror>
+        <div class="mp-dialog-codemirror-editor" ref="inputArea"></div>
     </div>
 </template>
 
-<style>
-    #mp-dialog-codemirror {
-        overflow: auto;
-    }
-
-    #mp-dialog-codemirror label {
-        padding-top: 5px;
-        vertical-align: top;
-        margin-right: 10px;
-        width: 20%;
-        font-size: 14px;
-        color: #666;
-    }
-
-    #mp-dialog-codemirror .mp-dialog-codemirror-editor {
-        display: inline-block;
-        width: 95%;
-    }
+<style scoped lang="stylus">
+    .mp-dialog-codemirror
+        overflow: auto
+    .mp-dialog-codemirror label
+        padding-top: 5px
+        vertical-align: top
+        margin-right: 10px
+        width: 20%
+        font-size: 14px
+        color: #666
 </style>
 
 <script>
 import abstractInputComponent from './AbstractInputComponent'
-import { codemirror } from 'vue-codemirror-lite'
+import CodeMirror from 'codemirror'
+import 'codemirror/lib/codemirror.css'
 
 export default {
     name: 'dialog-codemirror',
     extends: abstractInputComponent,
-    components: {
-        codemirror
+    data () {
+        return {
+            editor: null
+        }
     },
     mounted () {
-        const defaultSetting = {
-            lineNumbers: true,
-            lineWrapping: true,
-            height: '200px'
-        }
-
-        if (!this.param.editorSetting) { this.param.editorSetting = defaultSetting } else {
-            for (const setting in defaultSetting) {
-                if (this.param.editorSetting[setting] === undefined) { this.param.editorSetting[setting] = defaultSetting[setting] }
-            }
-        }
-
-        this.editor.setSize('100%', this.param.editorSetting.height)
+        this.editor = CodeMirror(this.$refs.inputArea, this.editorOption)
+        this.editor.setValue(this.value)
+        this.editor.on('change', cm => void (this.value = cm.getValue()))
     },
     computed: {
-        editor () {
-            return this.$refs.editor.editor
+        editorOption () {
+            const defaultSetting = {
+                lineNumbers: true,
+                lineWrapping: true,
+                height: '200px'
+            }
+            Object.freeze(defaultSetting)
+            return Object.assign({}, defaultSetting, this.param ? this.param.editorSetting : undefined)
         }
     },
-    methods: {
-        updateContent (newContent) {
-            this.value = newContent
+    watch: {
+        value (val) {
+            if (this.editor.getValue() !== val) {
+                this.editor.setValue(val)
+            }
         }
     }
 }
