@@ -161,6 +161,9 @@
 </style>
 
 <script>
+import '@fortawesome/fontawesome-free/css/solid.css'
+import '@fortawesome/fontawesome-free/css/fontawesome.css'
+
 import Dialog from './Dialog.vue'
 
 import InputAreaMixin from './InputAreaMixin'
@@ -215,7 +218,7 @@ export default {
         },
         ensureValue (val) {
             if (typeof val === 'function') {
-                return val()
+                return val.call(this)
             } else {
                 return val
             }

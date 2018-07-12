@@ -15,9 +15,9 @@
     "analyze": "vue-cli-service build --name MarkdownPalettes --target lib src/module.js --report"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0",
     "@luogu-dev/markdown-it-katex": "^0.0.1",
     "codemirror": "^5.39.0",
-    "font-awesome": "^4.7.0",
     "highlight.js": "^9.12.0",
     "katex": "^0.9.0",
     "lodash": "^4.17.4",
@@ -52,11 +52,6 @@
     },
     "parserOptions": {
       "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
     }
   },
   "browserslist": [

@@ -6,7 +6,7 @@
 
                     <div class="mp-dialog-header">
                         <strong>{{ t(request.title) }}</strong>
-                        <a class="fa fa-close mp-dialog-close" @click="close"></a>
+                        <a class="fa fa-times mp-dialog-close" @click="close"></a>
                     </div>
 
                     <form class="mp-dialog-body" @submit.prevent="finish">
@@ -114,7 +114,6 @@
 </style>
 
 <script>
-import 'font-awesome/css/font-awesome.css'
 import DialogComponents from './dialog-input-components/components'
 
 export default {
