@@ -12,6 +12,7 @@ import BtnHr from './btn-hr'
 import BtnCode from './btn-code'
 import BtnHide from './btn-hide'
 import BtnFullscreen from './btn-fullscreen'
+import BtnZen from './btn-zen'
 import BtnScrollsync from './btn-scrollsync'
 import BtnInfo from './btn-info.jsx'
 
@@ -38,6 +39,7 @@ export const defaultBtns = [
     Divider,
     BtnHide,
     BtnFullscreen,
+    BtnZen,
     BtnScrollsync,
     Divider,
     BtnInfo

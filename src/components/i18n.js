@@ -32,7 +32,8 @@ export const dictionary = new Map([
         ['右对齐', 'Flush right'],
         ['无序列表', 'Unordered list'],
         ['是一个开源的 Markdown 编辑器，面向现代化网络环境。', 'is an open-source Markdown editor for the modern web.'],
-        ['访问 GitHub 项目地址', 'View it on GitHub']
+        ['访问 GitHub 项目地址', 'View it on GitHub'],
+        ['禅模式', 'Zen mode']
     ])],
     [/^zh/, new Map([
         [/^(\d)级标题$/, (text, match) => `${'一二三四五六'[match[1] - 1]}级标题`]
