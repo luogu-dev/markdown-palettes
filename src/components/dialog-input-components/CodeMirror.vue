@@ -43,7 +43,7 @@ export default {
                 height: '200px'
             }
             Object.freeze(defaultSetting)
-            return Object.assign({}, defaultSetting, this.param ? this.param.editorSetting : undefined)
+            return Object.assign({}, defaultSetting, this.param?.editorSetting)
         }
     },
     watch: {
