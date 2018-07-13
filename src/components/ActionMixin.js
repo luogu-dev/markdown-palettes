@@ -7,7 +7,7 @@ export default {
     },
     methods: {
         insertCode (code) {
-            if (code != null) {
+            if (code) {
                 let insert = this.ensureValue(code)
                 if (!Array.isArray(insert)) {
                     insert = [insert, '']
@@ -29,7 +29,9 @@ export default {
             this.showDialog = true
         },
         dialogFinish (request) {
-            this.insertCode(request.callback(request.data))
+            if (request.callback) {
+                this.insertCode(request.callback(request.data))
+            }
             this.closeDialog()
         },
         requestData (request) {
