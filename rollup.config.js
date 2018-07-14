@@ -27,6 +27,6 @@ export default {
         })
     ],
     watch: {
-        include: 'src/**',
+        include: 'src/**'
     }
 }
