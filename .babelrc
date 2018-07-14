@@ -1,8 +1,9 @@
 {
     "presets": [
-        "@vue/app"
+        "modern-browsers"
     ],
     "plugins": [
+        "transform-vue-jsx",
         "lodash"
     ]
 }

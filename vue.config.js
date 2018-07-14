@@ -5,5 +5,10 @@ module.exports = {
             template: 'index.html',
             filename: 'index.html'
         }
+    },
+    configureWebpack: {
+        output: {
+            libraryExport: 'default'
+        }
     }
 }
