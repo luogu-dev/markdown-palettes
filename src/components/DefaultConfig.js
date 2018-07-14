@@ -1,6 +1,6 @@
 import KatexParser from '@luogu-dev/markdown-it-katex'
 import 'katex/dist/katex.css'
-import HighlightjsParser from 'markdown-it-highlightjs'
+import HighlightjsParser from './plugins/HighlightjsParser'
 import 'highlight.js/styles/tomorrow.css'
 import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
