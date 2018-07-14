@@ -25,5 +25,8 @@ export default {
                 'lodash'
             ]
         })
-    ]
+    ],
+    watch: {
+        include: 'src/**',
+    }
 }

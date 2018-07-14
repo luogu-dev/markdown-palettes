@@ -10,5 +10,6 @@ module.exports = {
         output: {
             libraryExport: 'default'
         }
-    }
+    },
+    productionSourceMap: false
 }

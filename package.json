@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "vue-cli-service serve --open",
     "prod-test": "vue-cli-service serve --open --mode production",
-    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js && rollup -c && cp demo.html dist",
+    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js && rollup -c && cp demo.html dist && ./.after-build.sh",
     "build-dev": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js --mode development",
     "lint": "vue-cli-service lint",
     "lint-fix": "vue-cli-service lint --fix",
