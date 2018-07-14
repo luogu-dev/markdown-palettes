@@ -146,7 +146,7 @@
     .mp-editor-menu>li>a>.fa
         text-align: center
         display: block
-        padding: 5px
+        padding: 5px 0
     .mp-editor-menu>li
         margin: 0
         padding: 5px 1px
