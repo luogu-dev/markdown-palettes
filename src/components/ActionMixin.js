@@ -12,12 +12,23 @@ export default {
                 if (!Array.isArray(insert)) {
                     insert = [insert, '']
                 }
-                const cursor = this.editor.getCursor()
+                const { line: lineFrom, ch: chFrom } = this.editor.getCursor('from')
+                const { line: lineTo, ch: chTo } = this.editor.getCursor('to')
+                const { line: lineHead, ch: chHead } = this.editor.getCursor('head')
                 const selection = this.editor.getSelection()
                 this.editor.replaceSelection(insert[0] + selection + insert[1])
-                if (selection === '') {
-                    this.editor.setCursor(cursor.line, cursor.ch + 2)
-                }
+                const bfLns = insert[0].split('\n')
+                const secLns = selection.split('\n')
+                const newLineFrom = lineFrom + bfLns.length - 1
+                const newLineTo = newLineFrom + (lineTo - lineFrom)
+                const newChFrom = bfLns.length === 1 ? chFrom + bfLns[0].length : bfLns[bfLns.length - 1].length
+                const newChTo = secLns.length === 1 ? newChFrom + selection.length : chTo
+                const newFrom = { line: newLineFrom, ch: newChFrom }
+                const newTo = { line: newLineTo, ch: newChTo }
+                this.editor.setSelection(
+                    lineHead === lineFrom && chHead === chFrom ? newTo : newFrom,
+                    selection !== '' ? lineHead === lineFrom && chHead === chFrom ? newFrom : newTo : undefined
+                )
                 this.editor.focus()
             }
         },
