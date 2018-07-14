@@ -11,6 +11,7 @@ import 'codemirror/mode/clike/clike'
 
 // eslint-disable-next-line
 const app = new Vue({
+    functional: true,
     el: '#editor',
     render: h => h(Editor)
 })
