@@ -5,11 +5,11 @@ export default md => {
         if (lang) {
             try {
                 return hljs.highlight(lang, code).value
-            } catch(e) {}
+            } catch (e) {}
         } else {
             try {
                 return hljs.highlightAuto(code).value
-            } catch(e) {}
+            } catch (e) {}
         }
         return md.utils.escapeHtml(code)
     }
