@@ -4,7 +4,9 @@
   "version": "0.4.4",
   "author": "Luogu Dev Team",
   "license": "MIT",
-  "module": "src/module.js",
+  "module": "dist/MarkdownPalettes.esm.js",
+  "main": "dist/MarkdownPalettes.common.js",
+  "style": "dist/MarkdownPalettes.css",
   "scripts": {
     "dev": "vue-cli-service serve --open",
     "prod-test": "vue-cli-service serve --open --mode production",
