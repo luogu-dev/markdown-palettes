@@ -1,5 +1,5 @@
 <template>
-    <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}" ref="editorContainer">
+    <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
         <div class="mp-editor-toolbar">
             <ul class="mp-editor-menu" v-if="toolbarConfig.length > 0">
                 <li v-for="(item, index) in toolbarConfig" :class="{'mp-divider':item.name === '|'}" :key="item.name + index">
@@ -164,8 +164,6 @@
 import '@fortawesome/fontawesome-free/css/solid.css'
 import '@fortawesome/fontawesome-free/css/fontawesome.css'
 
-import screenfull from 'screenfull'
-
 import Dialog from './Dialog.vue'
 
 import InputAreaMixin from './InputAreaMixin'
@@ -196,12 +194,8 @@ export default {
         return {
             ...getConfig(this.config),
             editor: null,
-            code: '',
-            zen: screenfull.isFullscreen
+            code: ''
         }
-    },
-    created () {
-        screenfull.on('change', () => void (this.zen = screenfull.isFullscreen))
     },
     computed: {
         contentParser () { return contentParserFactory([...this.parsers, InjectLnParser]) }
@@ -228,9 +222,6 @@ export default {
             } else {
                 return val
             }
-        },
-        toggleZen () {
-            screenfull.toggle(this.$refs.editorContainer)
         },
 
         t: getText
