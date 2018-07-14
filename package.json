@@ -28,10 +28,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.53",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.53",
-    "@babel/plugin-proposal-optional-chaining": "^7.0.0-beta.53",
     "@babel/plugin-syntax-jsx": "^7.0.0-beta.53",
     "@babel/preset-env": "^7.0.0-beta.53",
+    "@babel/preset-stage-3": "^7.0.0-beta.53",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
@@ -49,29 +48,5 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.5.16"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "rules": {
-      "indent": [
-        "error",
-        4
-      ]
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  }
 }

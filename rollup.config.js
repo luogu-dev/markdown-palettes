@@ -9,11 +9,24 @@ const baseBabelConfig = {
     babelrc: false,
     exclude: 'node_modules/**',
     plugins: [
-        '@babel/plugin-proposal-object-rest-spread',
-        '@babel/plugin-proposal-optional-chaining',
         'transform-vue-jsx',
         'lodash'
+    ],
+    presets: [
+        '@babel/preset-stage-3'
     ]
+}
+Object.freeze(baseBabelConfig.plugins)
+Object.freeze(baseBabelConfig.presets)
+Object.freeze(baseBabelConfig)
+function genBabelConfig (presets = [], plugins = []) {
+    return Object.assign({}, baseBabelConfig, {
+        plugins: [...baseBabelConfig.plugins, ...plugins],
+        presets: [...baseBabelConfig.presets, ...presets]
+    })
+}
+function myBabel (presets = [], plugins = []) {
+    return babel(genBabelConfig(presets, plugins))
 }
 
 export default [
@@ -21,28 +34,26 @@ export default [
     {
         input: 'src/module.js',
         output: {
-            file: 'dist/MarkdownPalettes.esm.js',
+            file: 'dist/esm/MarkdownPalettes.js',
             format: 'es'
         },
         plugins: [
             vue(),
-            babel(Object.assign({}, baseBabelConfig, {
-                presets: [
-                    ['@babel/preset-env', {
-                        targets: {
-                            esmodules: true
-                        },
-                        modules: false
-                    }]
-                ]
-            }))
+            myBabel([
+                ['@babel/preset-env', {
+                    modules: false,
+                    targets: {
+                        esmodules: true
+                    }
+                }]
+            ])
         ]
     },
     // Browser without Vue
     {
         input: 'src/browserModule.js',
         output: {
-            file: 'dist/MarkdownPalettes.iife.js',
+            file: 'dist/iife/MarkdownPalettes.js',
             format: 'iife',
             name: 'MarkdownPalettes',
             exports: 'default'
@@ -56,16 +67,11 @@ export default [
             }),
             vue(),
             postcss(),
-            babel(Object.assign({}, baseBabelConfig, {
-                presets: [
-                    ['modern-browsers', {
-                        modules: false,
-                        es2018: false,
-                        shippedProposals: false,
-                        edge: true
-                    }]
-                ]
-            })),
+            myBabel([
+                ['modern-browsers', {
+                    modules: false
+                }]
+            ]),
             cjs(),
             json()
         ]
