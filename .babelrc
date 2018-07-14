@@ -1,6 +1,8 @@
 {
     "presets": [
-        "modern-browsers"
+        ["modern-browsers", {
+            "modules": false
+        }]
     ],
     "plugins": [
         "transform-vue-jsx",
