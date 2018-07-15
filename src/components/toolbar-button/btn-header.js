@@ -1,4 +1,4 @@
-export default function header (level) {
+export default function headerFactory (level) {
     return {
         name: 'h' + level,
         icon: 'icon-blold',

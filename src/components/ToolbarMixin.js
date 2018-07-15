@@ -19,7 +19,11 @@ export default {
         toolbarHandleEventLegacy (event) {
             if (event === 'hide') {
                 if (this.previewDisplay === 'normal') {
-                    this.previewDisplay = 'hide'
+                    if (window.screen.width > 768) {
+                        this.previewDisplay = 'hide'
+                    } else {
+                        this.previewDisplay = 'full'
+                    }
                 } else {
                     this.previewDisplay = 'normal'
                 }

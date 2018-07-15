@@ -11,7 +11,7 @@
 
                     <form class="mp-dialog-body" @submit.prevent="finish">
                         <div class="mp-dialog-form">
-                            <div class="mp-dialog-field" v-for="field in request.body">
+                            <div class="mp-dialog-field" v-for="field in request.body" :key="field.name">
                                 <component :is="field.type || field.component" :request-field="field" v-model="responseData[field.name]"></component>
                             </div>
                         </div>

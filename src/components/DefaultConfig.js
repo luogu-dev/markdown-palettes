@@ -2,7 +2,7 @@ import KatexParser from '@luogu-dev/markdown-it-katex'
 import 'katex/dist/katex.css'
 import HighlightjsParser from './plugins/HighlightjsParser'
 import 'highlight.js/styles/tomorrow.css'
-import { defaultBtns, getBtns } from './toolbar-button/toolbarBtn'
+import { defaultBtns, defaultSimpleBtns, getBtns } from './toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
 function mixin (dest, src) {
@@ -24,6 +24,8 @@ export const defaultConfig = {
         HighlightjsParser
     ],
     toolbarConfig: defaultBtns,
+    bigScreenToolbarConfig: defaultBtns,
+    smallScreenToolbarConfig: defaultSimpleBtns,
     editorOption: {
         mode: 'gfm',
         lineNumbers: true,

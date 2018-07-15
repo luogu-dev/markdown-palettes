@@ -1,8 +1,8 @@
 <template>
     <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
-        <div class="mp-editor-toolbar">
-            <ul class="mp-editor-menu" v-if="toolbarConfig.length > 0">
-                <li v-for="(item, index) in toolbarConfig" :class="{'mp-divider':item.name === '|'}" :key="item.name + index">
+        <div class="mp-editor-toolbar" v-if="toolbarBtns.length">
+            <ul class="mp-editor-menu">
+                <li v-for="(item, index) in toolbarBtns" :class="{'mp-divider':item.name === '|'}" :key="item.name + index">
                     <span v-if="item.name === '|'">|</span>
                     <a v-else :title="t(ensureValue(item.title))" @click="toolbarAction(item)" unselectable="on">
                         <i :class="['fa', ensureValue(item.icon)]" unselectable="on">{{ ensureValue(item.content) }}</i>
@@ -13,13 +13,15 @@
         <div class="mp-editor-ground">
             <div class="mp-editor-zone mp-input-zone" :class="{
                         'mp-editor-zone': previewDisplay === 'normal',
-                        'mp-editor-zone-full': previewDisplay === 'hide'
+                        'mp-editor-zone-full': previewDisplay === 'hide',
+                        'mp-editor-zone-hide': previewDisplay === 'full'
                  }">
                 <div class="mp-input-area" ref="inputArea"></div>
             </div>
             <div class="mp-editor-zone mp-preview-zone" :class="{
                         'mp-editor-zone': previewDisplay === 'normal',
-                        'mp-editor-zone-hide': previewDisplay === 'hide'
+                        'mp-editor-zone-hide': previewDisplay === 'hide',
+                        'mp-editor-zone-full': previewDisplay === 'full'
                 }">
                 <div class="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
                     <div class="mp-preview-content" ref="previewContent" v-html="previewContent"></div>
@@ -34,6 +36,29 @@
 </template>
 
 <style scoped lang="stylus">
+    .mp-editor-zone
+        height: 100%
+    .mp-input-zone
+        box-sizing: border-box
+        width: 100%
+        height: 100%
+    .mp-preview-zone
+        display: none
+
+    .mp-editor-zone-full
+        display: block
+        box-sizing: border-box
+        width: 100%
+        border: none !important
+    .mp-editor-zone-hide
+        display: none !important
+    @media only screen and (min-width: 768px)
+        .mp-editor-zone
+            display block
+            box-sizing: border-box
+            width: 50%
+            float: left
+
     .mp-editor-container
         position:relative
         height: 100%
@@ -59,18 +84,6 @@
         bottom: 0
         overflow: hidden
         border-top: 1px solid #ddd
-
-    .mp-editor-zone
-        box-sizing: border-box
-        width: 50%
-        height: 100%
-        float: left
-    .mp-editor-zone-full
-        box-sizing: border-box
-        width: 100%
-    .mp-editor-zone-hide
-        display: none
-
     .mp-preview-zone
         border-left: 1px solid #ddd
         padding-bottom: 2px
@@ -129,6 +142,7 @@
     .mp-editor-menu>li>a
         outline: 0
         color: #666
+        cursor pointer
         display: inline-block
         min-width: 24px
         font-size: 16px
@@ -198,7 +212,16 @@ export default {
         }
     },
     computed: {
-        contentParser () { return contentParserFactory([...this.parsers, InjectLnParser]) }
+        contentParser () {
+            return contentParserFactory([...this.parsers, InjectLnParser])
+        },
+        toolbarBtns () {
+            if (window.screen.width > 768) {
+                return this.config.bigScreenToolbarConfig
+            } else {
+                return this.config.smallScreenToolbarConfig
+            }
+        }
     },
     methods: {
         setCode (code) {

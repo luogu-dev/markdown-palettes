@@ -5,7 +5,7 @@ import Divider from './divider'
 import BtnImg from './btn-img'
 import BtnLink from './btn-link'
 import BtnTable from './btn-table'
-import BtnsHeader from './btn-header'
+import BtnsHeaderFactory from './btn-header'
 import BtnUl from './btn-ul'
 import BtnOl from './btn-ol'
 import BtnHr from './btn-hr'
@@ -21,12 +21,12 @@ export const defaultBtns = [
     BtnItalic,
     BtnHr,
     Divider,
-    BtnsHeader(1),
-    BtnsHeader(2),
-    BtnsHeader(3),
-    BtnsHeader(4),
-    BtnsHeader(5),
-    BtnsHeader(6),
+    BtnsHeaderFactory(1),
+    BtnsHeaderFactory(2),
+    BtnsHeaderFactory(3),
+    BtnsHeaderFactory(4),
+    BtnsHeaderFactory(5),
+    BtnsHeaderFactory(6),
     Divider,
     BtnUl,
     BtnOl,
@@ -40,6 +40,24 @@ export const defaultBtns = [
     BtnFullscreen,
     BtnScrollsync,
     Divider,
+    BtnInfo
+]
+
+export const defaultSimpleBtns = [
+    BtnBold,
+    BtnStrikeThrough,
+    BtnItalic,
+    BtnHr,
+    BtnsHeaderFactory(1),
+    BtnsHeaderFactory(2),
+    BtnsHeaderFactory(3),
+    BtnUl,
+    BtnOl,
+    BtnImg,
+    BtnLink,
+    BtnTable,
+    BtnHide,
+    BtnFullscreen,
     BtnInfo
 ]
 
