@@ -1,16 +1,16 @@
 <template>
-    <div id="mp-dialog-input">
+    <div class="mp-dialog-input">
         <label>{{ title }}</label>
         <input v-model="value">
     </div>
 </template>
 
-<style>
-    #mp-dialog-input {
+<style scoped>
+    .mp-dialog-input {
         overflow: auto;
     }
 
-    #mp-dialog-input label {
+    .mp-dialog-input label {
         float: left;
         padding-top: 5px;
         vertical-align: top;
@@ -20,7 +20,7 @@
         color: #666;
     }
 
-    #mp-dialog-input input {
+    .mp-dialog-input input {
         float: left;
         width: 70%;
         color: #999;

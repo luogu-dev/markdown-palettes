@@ -1,7 +1,7 @@
 export default {
     name: 'fullScreen',
-    icon: 'fa-arrows-alt',
-    title: '全屏',
+    icon: 'fa-expand-arrows-alt',
+    title () { return this.fullScreen ? '取消全屏' : '全屏' },
     action: {
         event: 'fullScreen'
     }

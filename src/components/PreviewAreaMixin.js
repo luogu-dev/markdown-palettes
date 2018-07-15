@@ -1,173 +1,82 @@
-<template>
-    <div id="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
-        <div id="mp-preview-content" v-html="content" ref="previewContent"></div>
-    </div>
-</template>
-
-<style scoped>
-    #mp-preview-content {
-        color: #333;
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-        overflow: auto;
-        height: auto;
-        word-wrap:break-word;
-    }
-
-    #mp-preview-area {
-        overflow: auto;
-        background-color: white;
-        height: 100%;
-    }
-
-    #mp-preview-content table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        display: block;
-        width: 100%;
-        overflow: auto;
-        word-break: keep-all;
-        margin: 10px;
-    }
-
-    #mp-preview-content table th, #mp-preview-content table td {
-        border: 1px solid #ddd;
-        padding: 6px 13px;
-    }
-
-    #mp-preview-content code {
-        font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-        font-size: 15px;
-    }
-
-    #mp-preview-content img {
-        max-width: 100%;
-    }
-
-    #mp-preview-content p {
-        margin: 1rem 0;
-    }
-
-    #mp-preview-content h1, #mp-preview-content h2, #mp-preview-content h3,
-    #mp-preview-content h4, #mp-preview-content h5, #mp-preview-content h6 {
-        margin: .5rem 0;
-    }
-
-    #mp-preview-content h1, #mp-preview-content h2 {
-        padding-bottom: .2em;
-        border-bottom: solid 1px #eee;
-    }
-
-    #mp-preview-content ul, #mp-preview-content ol {
-        padding-left: 1.5em;
-    }
-
-    #mp-preview-content ul {
-        list-style: outside disc;
-    }
-
-    #mp-preview-content ol {
-        list-style: outside decimal;
-    }
-
-    #mp-preview-content hr {
-        margin: 1em 0;
-        height: 0;
-        border: none;
-        border-bottom: solid 1px #eee;
-    }
-</style>
-
-<script>
 import _ from 'lodash'
 
 export default {
-    name: 'preview-area',
-    props: {
-        value: {
-            type: String,
-            default: ''
-        },
-        parser: {
-            type: Function
-        },
-        height: {
-            type: String
-        },
-        scrollSync: {
-            type: Boolean
-        }
-    },
     data () {
         return {
-            content: '',
-            linesBounding: [],
-            scrollSynced: false
+            previewAreaLinesBounding: [],
+            previewAreaScrollSynced: false
+        }
+    },
+    computed: {
+        previewContent () {
+            return this.contentParser(this.code)
         }
     },
     created () {
-        this.debouncedEmitScrollSync = _.debounce(this.emitScrollSync, 100, { maxWait: 100 })
+        this.debouncedPreviewAreaEmitScrollSync = _.debounce(this.previewAreaEmitScrollSync, 100, { maxWait: 100 })
     },
-    mounted () {
-        this.updateContent(this.value)
-    },
-    methods: {
-        updateContent (newContent) {
-            this.content = this.parser(newContent)
+    watch: {
+        previewContent () {
             if (this.scrollSync) {
-                this.$nextTick(this.maintainLinesBounding)
+                this.$nextTick(this.previewAreaMaintainLinesBounding)
             } else {
-                this.linesBounding = []
+                this.previewAreaLinesBounding = []
             }
         },
-        maintainLinesBounding () {
-            this.updateLinesBounding()
+        scrollSync (val) {
+            if (val && this.previewAreaLinesBounding.length === 0) {
+                this.previewAreaMaintainLinesBounding()
+            }
+        }
+    },
+    methods: {
+        previewAreaMaintainLinesBounding () {
+            this.previewAreaUpdateLinesBounding()
             const previewArea = this.$refs.previewArea
             Array.from(previewArea.getElementsByTagName('img')).forEach(img => {
                 // img will become "bigger" when it's loaded
-                img.addEventListener('load', this.updateLinesBounding)
+                img.addEventListener('load', this.previewAreaUpdateLinesBounding)
             })
         },
-        updateLinesBounding () {
+        previewAreaUpdateLinesBounding () {
             const previewArea = this.$refs.previewArea
             const previewContent = this.$refs.previewContent
             const outerTop = previewContent.getBoundingClientRect().top
-            this.linesBounding = []
+            this.previewAreaLinesBounding = []
             previewArea.querySelectorAll('[data-line]').forEach(lineE => {
                 const bounding = lineE.getBoundingClientRect()
                 const line = parseInt(lineE.dataset.line)
-                this.linesBounding.push({
+                this.previewAreaLinesBounding.push({
                     line,
                     top: bounding.top - outerTop,
                     bottom: bounding.bottom - outerTop
                 })
             })
-            _.sortBy(this.linesBounding, [b => b.top])
+            _.sortBy(this.previewAreaLinesBounding, [b => b.top])
         },
         previewAreaScroll () {
-            if (this.scrollSynced) {
-                this.scrollSynced = false
+            if (this.previewAreaScrollSynced) {
+                this.previewAreaScrollSynced = false
             } else {
-                this.debouncedEmitScrollSync()
+                this.debouncedPreviewAreaEmitScrollSync()
             }
         },
-        emitScrollSync () {
+        previewAreaEmitScrollSync () {
             if (!this.scrollSync) return
             const previewArea = this.$refs.previewArea
             const scrollTop = previewArea.scrollTop
             const scrollBottom = scrollTop + previewArea.getBoundingClientRect().height
-            const lowerLinePos = _.sortedIndexBy(this.linesBounding, { top: scrollTop }, b => b.top)
-            const upperLinePos = _.sortedIndexBy(this.linesBounding, { top: scrollBottom }, b => b.top)
+            const lowerLinePos = _.sortedIndexBy(this.previewAreaLinesBounding, { top: scrollTop }, b => b.top)
+            const upperLinePos = _.sortedIndexBy(this.previewAreaLinesBounding, { top: scrollBottom }, b => b.top)
             const linesOffset = []
             for (let linePos = lowerLinePos; linePos < upperLinePos; ++linePos) {
-                const line = this.linesBounding[linePos].line
+                const line = this.previewAreaLinesBounding[linePos].line
                 linesOffset[line] = {
-                    top: this.linesBounding[linePos].top - scrollTop,
-                    bottom: this.linesBounding[linePos].bottom - scrollTop
+                    top: this.previewAreaLinesBounding[linePos].top - scrollTop,
+                    bottom: this.previewAreaLinesBounding[linePos].bottom - scrollTop
                 }
             }
-            this.$emit('scroll-sync', {
+            this.doScrollSync('previewArea', {
                 scrollInfo: {
                     top: scrollTop,
                     bottom: scrollBottom,
@@ -176,7 +85,7 @@ export default {
                 linesOffset: linesOffset
             })
         },
-        updateScrollSync ({ cursorLine, scrollInfo, viewport, linesOffset }) {
+        previewAreaUpdateScrollSync ({ cursorLine, scrollInfo, viewport, linesOffset }) {
             const previewArea = this.$refs.previewArea
             const offset = ele => {
                 const eleRect = ele.getBoundingClientRect()
@@ -243,20 +152,9 @@ export default {
             }
             const scroll = calcScroll(chosenLine)
             if (!isNaN(scroll)) {
-                this.scrollSynced = true
+                this.previewAreaScrollSynced = true
                 previewArea.scrollTop += scroll
-            }
-        }
-    },
-    watch: {
-        value (newContent) {
-            this.updateContent(newContent)
-        },
-        scrollSync (val) {
-            if (val && this.linesBounding.length === 0) {
-                this.maintainLinesBounding()
             }
         }
     }
 }
-</script>

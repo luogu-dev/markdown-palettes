@@ -13,7 +13,7 @@ import BtnCode from './btn-code'
 import BtnHide from './btn-hide'
 import BtnFullscreen from './btn-fullscreen'
 import BtnScrollsync from './btn-scrollsync'
-import BtnInfo from './btn-info'
+import BtnInfo from './btn-info.jsx'
 
 export const defaultBtns = [
     BtnBold,

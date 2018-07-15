@@ -1,7 +1,12 @@
 {
-  "presets": [
-    ["env", { "modules": false }],
-    "stage-3"
-  ],
-  "plugins": ["lodash", "transform-runtime"]
+    "presets": [
+        ["modern-browsers", {
+            "modules": false
+        }],
+        "@babel/preset-stage-3"
+    ],
+    "plugins": [
+        "transform-vue-jsx",
+        "lodash"
+    ]
 }
