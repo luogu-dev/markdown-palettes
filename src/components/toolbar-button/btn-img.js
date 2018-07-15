@@ -1,6 +1,6 @@
 export default {
     name: 'img',
-    icon: 'fa-picture-o',
+    icon: 'fa-image',
     title: '插入图片',
     action: {
         request: {

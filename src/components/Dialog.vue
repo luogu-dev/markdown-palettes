@@ -1,27 +1,29 @@
 <template>
-    <div id="mp-editor-dialog">
+    <div class="mp-editor-dialog">
         <div class="mp-dialog-mask">
             <div class="mp-dialog-wrapper">
                 <div class="mp-dialog-container">
 
                     <div class="mp-dialog-header">
                         <strong>{{ t(request.title) }}</strong>
-                        <a class="fa fa-close mp-dialog-close" @click="close()"></a>
+                        <a class="fa fa-times mp-dialog-close" @click="close"></a>
                     </div>
-                    <div class="mp-dialog-body">
+
+                    <form class="mp-dialog-body" @submit.prevent="finish">
                         <div class="mp-dialog-form">
                             <div class="mp-dialog-field" v-for="field in request.body">
-                                <component :is="field.type" :requestField="field" :param="field.param" @change="handleUpdate"></component>
+                                <component :is="field.type || field.component" :request-field="field" v-model="responseData[field.name]"></component>
                             </div>
                         </div>
 
                         <div class="mp-dialog-footer">
                             <div>
-                                <button class="mp-dialog-button" @click="close()">{{ t('取消') }}</button>
-                                <button class="mp-dialog-button" @click="finish()"  style="margin-right: 7px">{{ t('确定') }}</button>
+                                <button class="mp-dialog-button" type="button" @click="close">{{ t('取消') }}</button>
+                                <button class="mp-dialog-button" type="submit" style="margin-right: 7px">{{ t('确定') }}</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -112,36 +114,29 @@
 </style>
 
 <script>
-import 'font-awesome/css/font-awesome.css'
 import DialogComponents from './dialog-input-components/components'
 
 export default {
     name: 'editor-dialog',
     props: {
         request: {
-            type: Object
+            type: Object,
+            required: true
         }
     },
     data () {
+        const initialData = {}
+        this.request.body.forEach(function (field) {
+            initialData[field.name] = field.default ? field.default : ''
+        })
         return {
-            responseData: {}
+            responseData: initialData
         }
     },
     computed: {
         response () {
-            const res = this.request
-            res.data = this.responseData
-            return res
+            return { ...this.request, data: this.responseData }
         }
-    },
-    mounted () {
-        const initialData = {}
-
-        this.request.body.forEach(function (field) {
-            initialData[field.name] = field.default ? field.default : ''
-        })
-
-        this.responseData = initialData
     },
     methods: {
         close () {
@@ -149,9 +144,6 @@ export default {
         },
         finish () {
             this.$emit('finish', this.response)
-        },
-        handleUpdate (request) {
-            this.responseData[request.name] = request.value
         }
     },
     components: DialogComponents,

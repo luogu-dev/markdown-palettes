@@ -1,95 +1,175 @@
 <template>
-    <div id="mp-luogu-markdown-editor" class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
-        <div id="mp-editor-toolbar" class="mp-editor-toolbar">
-            <toolbar @change="insert" @click="clickToolbar" @input="handleToolbarOperation"
-                     :toolbarConfig="editorConfig.toolbarConfig" ref="toolbar"></toolbar>
+    <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
+        <div class="mp-editor-toolbar">
+            <ul class="mp-editor-menu" v-if="toolbarConfig.length > 0">
+                <li v-for="(item, index) in toolbarConfig" :class="{'mp-divider':item.name === '|'}" :key="item.name + index">
+                    <span v-if="item.name === '|'">|</span>
+                    <a v-else :title="t(ensureValue(item.title))" @click="toolbarAction(item)" unselectable="on">
+                        <i :class="['fa', ensureValue(item.icon)]" unselectable="on">{{ ensureValue(item.content) }}</i>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div id="mp-editor-area">
-            <div id="mp-editor-input-area" class="mp-editor-area mp-input-area" :class="{
-                        'mp-editor-area': this.config.previewDisplay === 'normal',
-                        'mp-editor-area-full': this.config.previewDisplay === 'hide'
+        <div class="mp-editor-ground">
+            <div class="mp-editor-zone mp-input-zone" :class="{
+                        'mp-editor-zone': previewDisplay === 'normal',
+                        'mp-editor-zone-full': previewDisplay === 'hide'
                  }">
-                <input-area v-model="code"
-                            ref="inputArea"
-                            @input="updateCode"
-                            @finish="insertCode = null"
-                            @scroll-sync="doScrollSync('editor', $event)"
-                            :insertCode="insertCode"
-                            :editorOption="editorConfig.editorOption"
-                            :scrollSync="scrollSync"></input-area>
+                <div class="mp-input-area" ref="inputArea"></div>
             </div>
-            <div id="mp-editor-preview-area" class="mp-editor-area mp-preview-area" :class="{
-                        'mp-editor-area': this.config.previewDisplay === 'normal',
-                        'mp-editor-area-hide': this.config.previewDisplay === 'hide'
+            <div class="mp-editor-zone mp-preview-zone" :class="{
+                        'mp-editor-zone': previewDisplay === 'normal',
+                        'mp-editor-zone-hide': previewDisplay === 'hide'
                 }">
-                <preview-area v-model="code" :parser="contentParser" ref="previewArea"
-                              @scroll-sync="doScrollSync('preview', $event)"
-                              :scrollSync="scrollSync"></preview-area>
+                <div class="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
+                    <div class="mp-preview-content" ref="previewContent" v-html="previewContent"></div>
+                </div>
             </div>
         </div>
-        <div id="mp-editor-dialog">
-            <editor-dialog v-if="showDialog" :request="dialogRequest" @finish="dialogFinish"
-                           @close="closeDialog" ref="dialog"></editor-dialog>
+        <div>
+            <editor-dialog v-if="showDialog" :request="dialogRequest"
+                @finish="dialogFinish" @close="closeDialog"></editor-dialog>
         </div>
     </div>
 </template>
 
-<style scoped>
-    #mp-editor-toolbar {
-        float: left;
-        width: 100%;
-        height: 40px;
-    }
-    #mp-editor-area {
-        position: absolute;
-        width: 100%;
-        top: 40px;
-        bottom: 0;
-        overflow: hidden;
-        border-top: 1px solid #ddd;
-    }
+<style scoped lang="stylus">
+    .mp-editor-container
+        position:relative
+        height: 100%
+        border: 1px solid #ddd
+    .mp-full-screen
+        position: fixed
+        z-index: 9997
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
 
-    .mp-editor-container {
-        position:relative;
-        height: 100%;
-        border: 1px solid #ddd;
-    }
-    .mp-editor-area {
-        box-sizing: border-box;
-        width: 50%;
-        height: 100%;
-        float: left;
-    }
+    .mp-editor-toolbar
+        float: left
+        width: 100%
+        height: 40px
+        box-sizing: border-box
+        background-color: white
+    .mp-editor-ground
+        position: absolute
+        width: 100%
+        top: 40px
+        bottom: 0
+        overflow: hidden
+        border-top: 1px solid #ddd
 
-    .mp-editor-area-full {
-        box-sizing: border-box;
-        width: 100%;
-    }
+    .mp-editor-zone
+        box-sizing: border-box
+        width: 50%
+        height: 100%
+        float: left
+    .mp-editor-zone-full
+        box-sizing: border-box
+        width: 100%
+    .mp-editor-zone-hide
+        display: none
 
-    .mp-editor-area-hide {
-        display: none;
-    }
+    .mp-preview-zone
+        border-left: 1px solid #ddd
+        padding-bottom: 2px
 
-    .mp-preview-area {
-        border-left: 1px solid #ddd;
-        padding-bottom: 2px;
-    }
+    .mp-input-area, .mp-input-area >>> .CodeMirror
+        height: 100%
 
-    .mp-full-screen {
-        position: fixed;
-        z-index: 9997;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-    }
+    .mp-preview-area
+        overflow: auto
+        background-color: white
+        height: 100%
+    .mp-preview-content
+        color: #333
+        padding: 10px
+        padding-left: 20px
+        padding-right: 20px
+        overflow: auto
+        height: auto
+        word-wrap:break-word
+    .mp-preview-content >>> table
+        border-collapse: collapse
+        border-spacing: 0
+        display: block
+        width: 100%
+        overflow: auto
+        word-break: keep-all
+        margin: 10px
+    .mp-preview-content >>> table th, .mp-preview-content >>> table td
+        border: 1px solid #ddd
+        padding: 6px 13px
+    .mp-preview-content >>> code
+        font-family: Monaco, Menlo, Consolas, "Courier New", monospace
+        font-size: 15px
+    .mp-preview-content >>> img
+        max-width: 100%
+    .mp-preview-content >>> p
+        margin: 1rem 0
+    .mp-preview-content >>> h1, .mp-preview-content >>> h2, .mp-preview-content >>> h3,
+    .mp-preview-content >>> h4, .mp-preview-content >>> h5, .mp-preview-content >>> h6
+        margin: .5rem 0
+    .mp-preview-content >>> h1, .mp-preview-content >>> h2
+        padding-bottom: .2em
+        border-bottom: solid 1px #eee
+    .mp-preview-content >>> ul, .mp-preview-content >>> ol
+        padding-left: 1.5em
+    .mp-preview-content >>> ul
+        list-style: outside disc
+    .mp-preview-content >>> ol
+        list-style: outside decimal
+    .mp-preview-content >>> hr
+        margin: 1em 0
+        height: 0
+        border: none
+        border-bottom: solid 1px #eee
+
+    .mp-editor-menu>li>a
+        outline: 0
+        color: #666
+        display: inline-block
+        min-width: 24px
+        font-size: 16px
+        text-decoration: none
+        text-align: center
+        border: 1px solid #fff
+        transition: all 300ms ease-out
+    .mp-editor-menu>li>a.active, .mp-editor-menu>li>a:hover
+        border: 1px solid #ddd
+        background-color: rgb(238, 238, 238)
+    .mp-editor-menu
+        margin: 0
+        padding-left: 8px
+        list-style: none
+    .mp-editor-menu>li>a>.fa
+        text-align: center
+        display: block
+        padding: 5px 0
+    .mp-editor-menu>li
+        margin: 0
+        padding: 5px 1px
+        display: inline-block
+        position: relative
+    .mp-editor-menu>li .divider
+        display: inline-block
+        text-indent: -9999px
+        margin: 0 5px
+        height: 65%
+        border-right: 1px solid #ddd
 </style>
 
 <script>
-import InputArea from './InputArea.vue'
-import PreviewArea from './PreviewArea.vue'
-import Toolbar from './Toolbar.vue'
-import EditorDialog from './Dialog.vue'
+import '@fortawesome/fontawesome-free/css/solid.css'
+import '@fortawesome/fontawesome-free/css/fontawesome.css'
+
+import Dialog from './Dialog.vue'
+
+import InputAreaMixin from './InputAreaMixin'
+import PreviewAreaMixin from './PreviewAreaMixin'
+import ToolbarMixin from './ToolbarMixin'
+import ActionMixin from './ActionMixin'
 
 import { defaultConfig, getConfig } from './DefaultConfig'
 import { contentParserFactory } from './ContentParserFactory'
@@ -100,7 +180,8 @@ export default {
     name: 'markdown-palettes',
     props: {
         value: {
-            type: String
+            type: String,
+            default: ''
         },
         config: {
             type: Object,
@@ -110,80 +191,48 @@ export default {
         }
     },
     data () {
-        const config = getConfig(this.config)
         return {
-            code: '',
-            showDialog: false,
-            dialogRequest: {},
-            insertCode: null,
-            editorConfig: config,
-            editorHeight: '500px',
-            fullScreen: config.fullScreen,
-            contentParser: contentParserFactory([...config.parsers, InjectLnParser]),
-            scrollSync: config.scrollSync
+            ...getConfig(this.config),
+            editor: null,
+            code: ''
         }
     },
-    mounted () {
-        this.code = this.value
-    },
-    components: {
-        InputArea,
-        PreviewArea,
-        Toolbar,
-        EditorDialog
+    computed: {
+        contentParser () { return contentParserFactory([...this.parsers, InjectLnParser]) }
     },
     methods: {
-        updateCode (code) {
-            this.$emit('input', code)
+        setCode (code) {
+            this.code = code
+            this.editor.setValue(code)
         },
-        insert (code) {
-            if (code !== null) {
-                this.insertCode = code
-            }
+        getCode () {
+            return this.code
         },
-        closeDialog () {
-            this.showDialog = false
-        },
-        dialogFinish (request) {
-            this.insert(request.callback(request.data))
-            this.closeDialog()
-        },
-        clickToolbar (request) {
-            if (this.showDialog) {
-                return
-            }
-            this.dialogRequest = request
-            this.showDialog = true
-        },
-        handleToolbarOperation (operation) {
-            if (operation === 'hide') {
-                if (this.config.previewDisplay === 'normal') { this.config.previewDisplay = 'hide' } else { this.config.previewDisplay = 'normal' }
-            }
-            if (operation === 'fullScreen') {
-                if (!this.fullScreen) {
-                    this.fullScreen = true
-                } else {
-                    this.fullScreen = false
-                }
-            }
-            if (operation === 'scrollSync') {
-                this.scrollSync = !this.scrollSync
-            }
-        },
+
         doScrollSync (emitter, info) {
-            if (emitter === 'editor') {
-                this.$refs.previewArea.updateScrollSync(info)
-            } else if (emitter === 'preview') {
-                this.$refs.inputArea.updateScrollSync(info)
+            if (emitter === 'inputArea') {
+                this.previewAreaUpdateScrollSync(info)
+            } else if (emitter === 'previewArea') {
+                this.inputAreaUpdateScrollSync(info)
             }
-        }
+        },
+        ensureValue (val) {
+            if (typeof val === 'function') {
+                return val.call(this)
+            } else {
+                return val
+            }
+        },
+
+        t: getText
     },
     watch: {
         value (newValue) {
-            this.code = newValue
-            this.updateCode(newValue)
+            this.setCode(newValue)
         }
     },
-    provide: () => ({ t: getText })
+    provide: () => ({ t: getText }),
+    mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin, ActionMixin],
+    components: { 'editor-dialog': Dialog }
 }
 </script>

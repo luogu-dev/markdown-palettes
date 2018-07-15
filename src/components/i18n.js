@@ -9,8 +9,10 @@ export const dictionary = new Map([
         ['语言类型', 'Language'],
         ['未选择', 'Unselected'],
         ['全屏', 'Fullscreen'],
-        [/^(?<level>\d)级标题$/, (text, {groups: {level}}) => `Header ${level}`],
-        ['隐藏', 'Hide'],
+        ['取消全屏', 'Exit fullscreen'],
+        [/^(\d)级标题$/, (text, match) => `Header ${match[1]}`],
+        ['隐藏预览', 'Hide preview'],
+        ['显示预览', 'Show preview'],
         ['分割线', 'Horizontal rule'],
         ['插入图片', 'Insert image'],
         ['图片地址', 'Image URL'],
@@ -21,7 +23,8 @@ export const dictionary = new Map([
         ['链接地址', 'Link URL'],
         ['链接标题', 'Link title'],
         ['有序列表', 'Ordered list'],
-        ['同步滚动', 'Scroll sync'],
+        ['停用滚动同步', 'Disable scroll sync'],
+        ['启用滚动同步', 'Enable scroll sync'],
         ['删除线', 'Strikeout'],
         ['插入表格', 'Insert table'],
         ['行数', 'Number of rows'],
@@ -30,10 +33,12 @@ export const dictionary = new Map([
         ['左对齐', 'Flush left'],
         ['居中', 'Centered'],
         ['右对齐', 'Flush right'],
-        ['无序列表', 'Unordered list']
+        ['无序列表', 'Unordered list'],
+        ['是一个开源的 Markdown 编辑器，面向现代化网络环境。', 'is an open-source Markdown editor for the modern web.'],
+        ['访问 GitHub 项目地址', 'View it on GitHub']
     ])],
     [/^zh/, new Map([
-        [/^(?<level>\d)级标题$/, (text, {groups: {level}}) => `${'一二三四五六'[level - 1]}级标题`]
+        [/^(\d)级标题$/, (text, match) => `${'一二三四五六'[match[1] - 1]}级标题`]
     ])]
 ])
 

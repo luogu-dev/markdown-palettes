@@ -1,16 +1,16 @@
 {
-  "extends": ["standard"],
-  "plugins": ["html"],
-  "settings": {
-    "html/indent": "0",
-    "html/report-bad-indent": "error"
-  },
-  "rules": {
-    "indent": ["error", 4],
-    "prefer-const": ["warn"]
-  },
-  "env": {
-    "browser": true
-  },
-  "parser": "babel-eslint"
+    "root": true,
+    "env": {
+        "node": true
+    },
+    "extends": [
+        "plugin:vue/essential",
+        "@vue/standard"
+    ],
+    "rules": {
+        "indent": ["error", 4]
+    },
+    "parserOptions": {
+        "parser": "babel-eslint"
+    }
 }

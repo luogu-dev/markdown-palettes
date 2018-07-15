@@ -1,111 +1,34 @@
-<template>
-    <div id="mp-input-area">
-        <codemirror
-                :value="code"
-                :options="editorOption"
-                ref="editor"
-                @change="updateCode">
-        </codemirror>
-    </div>
-</template>
-
-<style>
-    /* hack CodeMirror */
-    .CodeMirror {
-        height: 100% !important;
-    }
-
-    .CodeMirror-scroll {
-        height: 100%;
-        overflow-y: hidden;
-        overflow-x: auto;
-    }
-
-    .vue-codemirror-wrap {
-        height: 100%;
-    }
-</style>
-
-<style scoped>
-    #mp-input-area {
-        height: 100%;
-    }
-</style>
-
-<script>
-import {codemirror} from 'vue-codemirror-lite'
-import 'codemirror/mode/markdown/markdown.js'
 import _ from 'lodash'
+import CodeMirror from 'codemirror'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/gfm/gfm'
 
 export default {
-    name: 'input-area',
-    props: {
-        value: {
-            type: String
-        },
-        editorOption: {
-            type: Object
-        },
-        insertCode: {
-            default: null
-        },
-        scrollSync: {
-            type: Boolean
-        }
-    },
-    computed: {
-        editor () {
-            return this.$refs.editor.editor
-        }
-    },
-    watch: {
-        insertCode (insert) {
-            if (insert === null) {
-                return
-            }
-
-            if (typeof insert === 'function') { insert = insert() }
-
-            if (!Array.isArray(insert)) {
-                insert = [insert, '']
-            }
-
-            const cursor = this.editor.getCursor()
-            const selection = this.editor.getSelection()
-
-            this.editor.replaceSelection(insert[0] + selection + insert[1])
-
-            if (selection === '') {
-                this.editor.setCursor(cursor.line, cursor.ch + 2)
-            }
-
-            this.$emit('finish')
-        },
-        value (newValue) {
-            this.code = newValue
-        }
-    },
-    data: function () {
+    data () {
         return {
-            code: '',
-            scrollSynced: false,
-            scrollAnimation: null
+            inputAreaScrollSynced: false,
+            inputAreaScrollAnimation: null
         }
     },
-    components: {
-        codemirror
-    },
-    mounted: function () {
-        this.code = this.value
+    mounted () {
+        this.editor = CodeMirror(this.$refs.inputArea, this.editorOption)
+        this.editor.on('change', cm => {
+            const code = cm.getValue()
+            if (this.code !== code) {
+                this.$emit('input', code)
+            }
+            this.code = code
+        })
+        this.setCode(this.value)
 
-        const debouncedEmitScrollSync = _.debounce(this.emitScrollSync, 50, { maxWait: 50 })
+        const debouncedEmitScrollSync = _.debounce(this.inputAreaEmitScrollSync, 50, { maxWait: 50 })
         const scrollSync = () => {
-            if (this.scrollSynced) {
-                this.scrollSynced = false
+            if (this.inputAreaScrollSynced) {
+                this.inputAreaScrollSynced = false
             } else {
                 debouncedEmitScrollSync()
-                if (this.scrollAnimation) {
-                    this.scrollAnimation.cancel()
+                if (this.inputAreaScrollAnimation) {
+                    this.inputAreaScrollAnimation.cancel()
                 }
             }
         }
@@ -113,11 +36,7 @@ export default {
         this.editor.on('scroll', scrollSync)
     },
     methods: {
-        updateCode (code) {
-            this.$emit('input', code)
-        },
-
-        emitScrollSync () {
+        inputAreaEmitScrollSync () {
             if (!this.scrollSync) return
             const cursorLine = this.editor.getCursor().line
             const scrollInfo = this.editor.getScrollInfo('local')
@@ -136,9 +55,9 @@ export default {
             const event = {
                 cursorLine, scrollInfo, viewport, linesOffset
             }
-            this.$emit('scroll-sync', event)
+            this.doScrollSync('inputArea', event)
         },
-        updateScrollSync ({ scrollInfo, linesOffset }) {
+        inputAreaUpdateScrollSync ({ scrollInfo, linesOffset }) {
             if (!linesOffset.length) {
                 return
             }
@@ -151,8 +70,8 @@ export default {
             })
             const scrollTop = this.editor.getScrollInfo().top
             const editorLineOffset = this.editor.heightAtLine(syncLine, 'local') - scrollTop
-            if (this.scrollAnimation) {
-                this.scrollAnimation.cancel()
+            if (this.inputAreaScrollAnimation) {
+                this.inputAreaScrollAnimation.cancel()
             }
             let animationCancelled = false
             let animationSkipFrame = false
@@ -168,7 +87,7 @@ export default {
                 } else if (!animationCancelled) {
                     const currentTime = Date.now()
                     const precent = (currentTime - animationStartTime) / animationDuration
-                    this.scrollSynced = true
+                    this.inputAreaScrollSynced = true
                     if (precent >= 1) {
                         this.editor.scrollTo(null, animationTo)
                     } else {
@@ -179,7 +98,7 @@ export default {
                 }
             }
             animationFrameCallback()
-            this.scrollAnimation = {
+            this.inputAreaScrollAnimation = {
                 cancel () {
                     animationCancelled = true
                 }
@@ -187,4 +106,3 @@ export default {
         }
     }
 }
-</script>

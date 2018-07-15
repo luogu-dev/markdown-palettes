@@ -1,18 +1,18 @@
 <template>
-    <div id="mp-dialog-select">
+    <div class="mp-dialog-select">
         <label>{{ title }}</label>
         <select v-model="value">
-            <option v-for="option in request.param.options" :value="option.value">{{ t(option.title) }}</option>
+            <option v-for="option in param.options" :value="option.value">{{ t(option.title) }}</option>
         </select>
     </div>
 </template>
 
-<style>
-    #mp-dialog-select {
+<style scoped>
+    .mp-dialog-select {
         overflow: auto;
     }
 
-    #mp-dialog-select label {
+    .mp-dialog-select label {
         float: left;
         padding-top: 5px;
         vertical-align: top;
@@ -22,7 +22,7 @@
         color: #666;
     }
 
-    #mp-dialog-select select{
+    .mp-dialog-select select{
         float: left;
         display: inline-block;
         width: 70%;
