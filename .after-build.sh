@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 src=dist/MarkdownPalettes.umd.min.js
 dist=dist/markdown-palettes.js
 vue=https://cdn.jsdelivr.net/npm/vue@2.5
