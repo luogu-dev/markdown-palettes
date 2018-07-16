@@ -138,6 +138,10 @@
         height: 0
         border: none
         border-bottom: solid 1px #eee
+    .mp-preview-content >>> span.darkmaku
+        background-color: black
+    .mp-preview-content >>> span.darkmaku:hover
+        background-color: transparent
 
     .mp-editor-menu>li>a
         outline: 0
