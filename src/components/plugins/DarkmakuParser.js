@@ -8,14 +8,16 @@ export default md => {
                 for (let i = tokens.length - 1; i >= 0; --i) {
                     const token = tokens[i]
                     if (token.type === 'text') {
-                        const re = /\[\[(.+)\]\]/
+                        const re = /\[\[(.+?)\]\]/g
                         const newTokens = []
                         let lastIndex = 0
                         let newToken
                         for (const match of matchAll(token.content, re)) {
-                            newToken = new state.Token('text', '', 0)
-                            newToken.content = token.content.slice(lastIndex, match.index)
-                            newTokens.push(newToken)
+                            if (match.index !== 0) {
+                                newToken = new state.Token('text', '', 0)
+                                newToken.content = token.content.slice(lastIndex, match.index)
+                                newTokens.push(newToken)
+                            }
                             newToken = new state.Token('darkmaku', '', 0)
                             newToken.content = match[1]
                             newTokens.push(newToken)
