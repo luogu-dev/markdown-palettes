@@ -23,7 +23,8 @@
     "highlight.js": "^9.12.0",
     "katex": "^0.9.0",
     "lodash": "^4.17.4",
-    "markdown-it": "^8.4.1"
+    "markdown-it": "^8.4.1",
+    "string.prototype.matchall": "^3.0.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.0.0-beta.53",
