@@ -4,5 +4,6 @@ export default {
     title: '无序列表',
     action: {
         insert: '- '
-    }
+    },
+    keyBinding: 'Shift-F12'
 }
