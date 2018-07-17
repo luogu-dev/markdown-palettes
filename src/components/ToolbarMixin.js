@@ -35,5 +35,15 @@ export default {
                 this.scrollSync = !this.scrollSync
             }
         }
+    },
+    mounted () {
+        const keyMap = {}
+        for (const btn of this.toolbarBtns) {
+            const keyBinding = this.ensureValue(btn.keyBinding)
+            if (typeof keyBinding !== 'undefined') {
+                keyMap[keyBinding] = () => void this.toolbarAction(btn)
+            }
+        }
+        this.editor.addKeyMap(keyMap)
     }
 }

@@ -1,5 +1,5 @@
 export default function headerFactory (level) {
-    return {
+    const btn = {
         name: 'h' + level,
         icon: 'icon-blold',
         content: 'H' + level,
@@ -12,4 +12,9 @@ export default function headerFactory (level) {
             this.editor.focus()
         }
     }
+    if (level < 5) {
+        // Cannot use Ctrl-5. Well, I don't know why.
+        btn.keyBinding = `Ctrl-${level}`
+    }
+    return btn
 }
