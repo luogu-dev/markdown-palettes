@@ -9,7 +9,7 @@
                         <a class="fa fa-times mp-dialog-close" @click="close"></a>
                     </div>
 
-                    <form class="mp-dialog-body" @submit.prevent="finish">
+                    <form class="mp-dialog-body" @submit.prevent="finish" v-focus tabindex="-1">
                         <div class="mp-dialog-form">
                             <div class="mp-dialog-field" v-for="field in request.body" :key="field.name">
                                 <component :is="field.type || field.component" :request-field="field" v-model="responseData[field.name]"></component>
@@ -69,6 +69,9 @@
     .mp-dialog-body {
         padding: 20px 30px;
         padding-bottom: 10px;
+    }
+    .mp-dialog-body:focus {
+        outline: none;
     }
 
     .mp-dialog-field {
@@ -139,11 +142,29 @@ export default {
         }
     },
     methods: {
+        escListener ({ key }) {
+            if (key === 'Escape') {
+                this.close()
+            }
+        },
         close () {
             this.$emit('close')
         },
         finish () {
             this.$emit('finish', this.response)
+        }
+    },
+    mounted () {
+        window.addEventListener('keyup', this.escListener)
+    },
+    destroyed () {
+        window.removeEventListener('keyup', this.escListener)
+    },
+    directives: {
+        focus: {
+            inserted (el) {
+                el.focus()
+            }
         }
     },
     components: DialogComponents,
