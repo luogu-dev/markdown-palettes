@@ -1,8 +1,8 @@
 import KatexParser from '@luogu-dev/markdown-it-katex'
 import 'katex/dist/katex.css'
-import HighlightjsParser from './plugins/HighlightjsParser'
+import HighlightjsParser from '../parsers/HighlightjsParser'
 import 'highlight.js/styles/tomorrow.css'
-import { defaultBtns, defaultSimpleBtns, getBtns } from './toolbar-button/toolbarBtn'
+import { defaultBtns, defaultSimpleBtns, getBtns } from '../components/toolbar-button/toolbarBtn'
 import _ from 'lodash'
 
 function mixin (dest, src) {

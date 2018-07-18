@@ -10,11 +10,7 @@
                     </div>
 
                     <form class="mp-dialog-body" @submit.prevent="finish">
-                        <div class="mp-dialog-form">
-                            <div class="mp-dialog-field" v-for="field in request.body" :key="field.name">
-                                <component :is="field.type || field.component" :request-field="field" v-model="responseData[field.name]"></component>
-                            </div>
-                        </div>
+                        <dialog-form :fields="this.request.body" v-model="responseData"></dialog-form>
 
                         <div class="mp-dialog-footer">
                             <div>
@@ -71,11 +67,6 @@
         padding-bottom: 10px;
     }
 
-    .mp-dialog-field {
-        margin: 10px 8px;
-        overflow:auto;
-    }
-
     .mp-dialog-footer {
         overflow:auto;
     }
@@ -114,7 +105,7 @@
 </style>
 
 <script>
-import DialogComponents from './dialog-input-components/components'
+import DialogForm from './DialogForm'
 
 export default {
     name: 'editor-dialog',
@@ -146,7 +137,7 @@ export default {
             this.$emit('finish', this.response)
         }
     },
-    components: DialogComponents,
+    components: { DialogForm },
     inject: ['t']
 }
 </script>

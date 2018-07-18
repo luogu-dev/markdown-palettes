@@ -2,7 +2,7 @@
     <div class="mp-dialog-select">
         <label>{{ title }}</label>
         <select v-model="value">
-            <option v-for="option in param.options" :value="option.value">{{ t(option.title) }}</option>
+            <option v-for="option in param.options" :key="option.title" :value="option.value">{{ t(option.title) }}</option>
         </select>
     </div>
 </template>
@@ -33,10 +33,10 @@
 </style>
 
 <script>
-import abstractInputComponent from './AbstractInputComponent'
+import AbstractDialogComponent from './AbstractDialogComponent'
 
 export default {
     name: 'dialog-select',
-    extends: abstractInputComponent
+    extends: AbstractDialogComponent
 }
 </script>

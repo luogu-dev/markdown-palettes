@@ -18,13 +18,13 @@
 </style>
 
 <script>
-import abstractInputComponent from './AbstractInputComponent'
+import AbstractDialogComponent from './AbstractDialogComponent'
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 
 export default {
     name: 'dialog-codemirror',
-    extends: abstractInputComponent,
+    extends: AbstractDialogComponent,
     data () {
         return {
             editor: null

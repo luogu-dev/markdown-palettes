@@ -19,6 +19,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.1.0",
     "@luogu-dev/markdown-it-katex": "^0.0.1",
+    "axios": "^0.18.0",
     "codemirror": "^5.39.0",
     "highlight.js": "^9.12.0",
     "katex": "^0.9.0",

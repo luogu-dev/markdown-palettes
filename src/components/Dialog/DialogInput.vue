@@ -30,10 +30,10 @@
 </style>
 
 <script>
-import abstractInputComponent from './AbstractInputComponent'
+import AbstractDialogComponent from './AbstractDialogComponent'
 
 export default {
     name: 'dialog-input',
-    extends: abstractInputComponent
+    extends: AbstractDialogComponent
 }
 </script>

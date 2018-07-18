@@ -178,17 +178,17 @@
 import '@fortawesome/fontawesome-free/css/solid.css'
 import '@fortawesome/fontawesome-free/css/fontawesome.css'
 
-import Dialog from './Dialog.vue'
+import Dialog from './components/Dialog/Dialog.vue'
 
-import InputAreaMixin from './InputAreaMixin'
-import PreviewAreaMixin from './PreviewAreaMixin'
-import ToolbarMixin from './ToolbarMixin'
-import ActionMixin from './ActionMixin'
+import InputAreaMixin from './mixins/InputAreaMixin'
+import PreviewAreaMixin from './mixins/PreviewAreaMixin'
+import ToolbarMixin from './mixins/ToolbarMixin'
+import ActionMixin from './mixins/ActionMixin'
 
-import { defaultConfig, getConfig } from './DefaultConfig'
-import { contentParserFactory } from './ContentParserFactory'
-import InjectLnParser from './plugins/InjectLnParser.js'
-import { getText } from './i18n'
+import { defaultConfig, getConfig } from './utils/DefaultConfig'
+import { contentParserFactory } from './parsers/ContentParserFactory'
+import InjectLnParser from './parsers/InjectLnParser.js'
+import { getText } from './utils/i18n'
 
 export default {
     name: 'markdown-palettes',

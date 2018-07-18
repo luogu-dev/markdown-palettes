@@ -1,7 +1,7 @@
-import Editor from './components/MarkdownPalettes.vue'
+import Editor from './MarkdownPalettes.vue'
 
-import { contentParserFactory } from './components/ContentParserFactory'
-import { defaultConfig } from './components/DefaultConfig'
+import { contentParserFactory } from './parsers/ContentParserFactory'
+import { defaultConfig } from './utils/DefaultConfig'
 
 export default Editor
 
