@@ -4,5 +4,6 @@ export default {
     title: '斜体',
     action: {
         insert: [' _', '_ ']
-    }
+    },
+    keyBinding: 'Ctrl-I'
 }

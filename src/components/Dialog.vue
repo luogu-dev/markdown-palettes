@@ -9,7 +9,7 @@
                         <a class="fa fa-times mp-dialog-close" @click="close"></a>
                     </div>
 
-                    <form class="mp-dialog-body" @submit.prevent="finish">
+                    <form class="mp-dialog-body" @submit.prevent="finish" v-focus v-keep-focus ref="form" tabindex="-1">
                         <div class="mp-dialog-form">
                             <div class="mp-dialog-field" v-for="field in request.body" :key="field.name">
                                 <component :is="field.type || field.component" :request-field="field" v-model="responseData[field.name]"></component>
@@ -70,6 +70,9 @@
         padding: 20px 30px;
         padding-bottom: 10px;
     }
+    .mp-dialog-body:focus {
+        outline: none;
+    }
 
     .mp-dialog-field {
         margin: 10px 8px;
@@ -116,6 +119,13 @@
 <script>
 import DialogComponents from './dialog-input-components/components'
 
+let windowKeepFocusEl = null
+window.addEventListener('focusin', ({ target }) => {
+    if (windowKeepFocusEl != null && !Array.prototype.includes.call(windowKeepFocusEl.querySelectorAll('*'), target)) {
+        windowKeepFocusEl.focus()
+    }
+})
+
 export default {
     name: 'editor-dialog',
     props: {
@@ -139,11 +149,37 @@ export default {
         }
     },
     methods: {
+        escListener ({ key, target }) {
+            if (key === 'Escape' && [this.$refs.form, ...this.$refs.form.querySelectorAll('.mp-dialog-footer *')].includes(target)) {
+                this.close()
+            }
+        },
         close () {
             this.$emit('close')
         },
         finish () {
             this.$emit('finish', this.response)
+        }
+    },
+    mounted () {
+        window.addEventListener('keyup', this.escListener)
+    },
+    destroyed () {
+        window.removeEventListener('keyup', this.escListener)
+    },
+    directives: {
+        focus: {
+            inserted (el) {
+                el.focus()
+            }
+        },
+        keepFocus: {
+            bind (el) {
+                windowKeepFocusEl = el
+            },
+            unbind (el) {
+                windowKeepFocusEl = null
+            }
         }
     },
     components: DialogComponents,

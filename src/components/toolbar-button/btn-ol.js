@@ -4,5 +4,6 @@ export default {
     title: '有序列表',
     action: {
         insert: '1. '
-    }
+    },
+    keyBinding: 'F12'
 }

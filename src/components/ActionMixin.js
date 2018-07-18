@@ -2,7 +2,8 @@ export default {
     data () {
         return {
             showDialog: false,
-            dialogRequest: {}
+            dialogRequest: {},
+            dialogBeforeOpenIsFocusEditor: null
         }
     },
     methods: {
@@ -34,10 +35,14 @@ export default {
         },
         closeDialog () {
             this.showDialog = false
+            if (this.dialogBeforeOpenIsFocusEditor) {
+                this.$nextTick(() => void this.editor.focus())
+            }
         },
         openDialog (request) {
             this.dialogRequest = request
             this.showDialog = true
+            this.dialogBeforeOpenIsFocusEditor = this.editor.hasFocus()
         },
         dialogFinish (request) {
             if (request.callback) {

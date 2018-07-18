@@ -4,5 +4,6 @@ export default {
     title: '粗体',
     action: {
         insert: ['**', '**']
-    }
+    },
+    keyBinding: 'Ctrl-B'
 }
