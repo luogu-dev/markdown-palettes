@@ -36,7 +36,7 @@ export default {
         closeDialog () {
             this.showDialog = false
             if (this.dialogBeforeOpenIsFocusEditor) {
-                this.editor.focus()
+                this.$nextTick(() => void this.editor.focus())
             }
         },
         openDialog (request) {
