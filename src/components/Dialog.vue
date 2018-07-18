@@ -9,7 +9,7 @@
                         <a class="fa fa-times mp-dialog-close" @click="close"></a>
                     </div>
 
-                    <form class="mp-dialog-body" @submit.prevent="finish" v-focus v-keep-focus tabindex="-1">
+                    <form class="mp-dialog-body" @submit.prevent="finish" v-focus v-keep-focus ref="form" tabindex="-1">
                         <div class="mp-dialog-form">
                             <div class="mp-dialog-field" v-for="field in request.body" :key="field.name">
                                 <component :is="field.type || field.component" :request-field="field" v-model="responseData[field.name]"></component>
@@ -149,8 +149,8 @@ export default {
         }
     },
     methods: {
-        escListener ({ key }) {
-            if (key === 'Escape') {
+        escListener ({ key, target }) {
+            if (key === 'Escape' && [this.$refs.form, ...this.$refs.form.querySelectorAll('.mp-dialog-footer *')].includes(target)) {
                 this.close()
             }
         },
