@@ -1,7 +1,7 @@
-import DialogInput from './DialogInput'
-import DialogSelect from './DialogSelect'
-import DialogCodeMirror from './DialogCodeMirror'
-import DialogFile from './DialogFile'
+import DialogInput from './DialogInput.vue'
+import DialogSelect from './DialogSelect.vue'
+import DialogCodeMirror from './DialogCodeMirror.vue'
+import DialogFile from './DialogFile.vue'
 
 export default {
     'dialog-input': DialogInput,

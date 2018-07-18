@@ -105,7 +105,7 @@
 </style>
 
 <script>
-import DialogForm from './DialogForm'
+import DialogForm from './DialogForm.vue'
 
 export default {
     name: 'editor-dialog',
