@@ -6,6 +6,7 @@ export default {
         const selection = this.editor.getSelection()
         const request = {
             title: '插入代码',
+            type: 'form',
             body: [
                 {
                     name: 'lang',

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import DialogComponents from './DialogComponentMap'
+import DialogComponents from './FormComponent/DialogFormComponentMap'
 
 export default {
     name: 'dialog-form',
@@ -25,22 +25,22 @@ export default {
         prop: 'value',
         event: 'change'
     },
-    computed: {
-        data: {
-            get () {
-                return this.value
-            },
-            set (value) {
-                this.$emit('change', value)
-            }
+    data () {
+        const initialData = {}
+        this.fields.forEach((field) => {
+            initialData[field.name] = field.default ? field.default : ''
+        })
+        return {
+            selectId: 1,
+            data: initialData
         }
     },
-    methods: {
-        close () {
-            this.$emit('close')
-        },
-        finish () {
-            this.$emit('finish', this.response)
+    watch: {
+        data: {
+            deep: true,
+            callback (newData) {
+                this.$emit('change', newData)
+            }
         }
     },
     components: DialogComponents,

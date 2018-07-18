@@ -169,15 +169,15 @@ __vue_render__._withStripped = true;
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-608c49c6_0", {
-    source: "\n.mp-dialog-input[data-v-608c49c6] {\n    overflow: auto;\n}\n.mp-dialog-input label[data-v-608c49c6] {\n    float: left;\n    padding-top: 5px;\n    vertical-align: top;\n    margin-right: 10px;\n    width: 20%;\n    font-size: 14px;\n    color: #666;\n}\n.mp-dialog-input input[data-v-608c49c6] {\n    float: left;\n    width: 70%;\n    color: #999;\n    padding: 8px;\n    border: 1px solid #ddd;\n}\n",
+  inject("data-v-201a76d8_0", {
+    source: "\n.mp-dialog-input[data-v-201a76d8] {\n    overflow: auto;\n}\n.mp-dialog-input label[data-v-201a76d8] {\n    float: left;\n    padding-top: 5px;\n    vertical-align: top;\n    margin-right: 10px;\n    width: 20%;\n    font-size: 14px;\n    color: #666;\n}\n.mp-dialog-input input[data-v-201a76d8] {\n    float: left;\n    width: 70%;\n    color: #999;\n    padding: 8px;\n    border: 1px solid #ddd;\n}\n",
     map: {
       "version": 3,
-      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogInput.vue"],
+      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogInput.vue"],
       "names": [],
       "mappings": ";AAQA;IACA,eAAA;CACA;AAEA;IACA,YAAA;IACA,iBAAA;IACA,oBAAA;IACA,mBAAA;IACA,WAAA;IACA,gBAAA;IACA,YAAA;CACA;AAEA;IACA,YAAA;IACA,WAAA;IACA,YAAA;IACA,aAAA;IACA,uBAAA;CACA",
       "file": "DialogInput.vue",
-      "sourcesContent": ["<template>\n    <div class=\"mp-dialog-input\">\n        <label>{{ title }}</label>\n        <input v-model=\"value\">\n    </div>\n</template>\n\n<style scoped>\n    .mp-dialog-input {\n        overflow: auto;\n    }\n\n    .mp-dialog-input label {\n        float: left;\n        padding-top: 5px;\n        vertical-align: top;\n        margin-right: 10px;\n        width: 20%;\n        font-size: 14px;\n        color: #666;\n    }\n\n    .mp-dialog-input input {\n        float: left;\n        width: 70%;\n        color: #999;\n        padding: 8px;\n        border: 1px solid #ddd;\n    }\n</style>\n\n<script>\nimport AbstractDialogComponent from './AbstractDialogComponent'\n\nexport default {\n    name: 'dialog-input',\n    extends: AbstractDialogComponent\n}\n</script>\n"]
+      "sourcesContent": ["<template>\n    <div class=\"mp-dialog-input\">\n        <label>{{ title }}</label>\n        <input v-model=\"value\">\n    </div>\n</template>\n\n<style scoped>\n    .mp-dialog-input {\n        overflow: auto;\n    }\n\n    .mp-dialog-input label {\n        float: left;\n        padding-top: 5px;\n        vertical-align: top;\n        margin-right: 10px;\n        width: 20%;\n        font-size: 14px;\n        color: #666;\n    }\n\n    .mp-dialog-input input {\n        float: left;\n        width: 70%;\n        color: #999;\n        padding: 8px;\n        border: 1px solid #ddd;\n    }\n</style>\n\n<script>\nimport AbstractDialogComponent from './AbstractDialogFormComponent'\n\nexport default {\n    name: 'dialog-input',\n    extends: AbstractDialogComponent\n}\n</script>\n"]
     },
     media: undefined
   });
@@ -185,7 +185,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-608c49c6";
+const __vue_scope_id__ = "data-v-201a76d8";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
@@ -198,7 +198,7 @@ function __vue_normalize__(template, style, script$$1, scope, functional, module
   const component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
   {
-    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogInput.vue";
+    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogInput.vue";
   }
 
   if (!component.render) {
@@ -355,15 +355,15 @@ __vue_render__$1._withStripped = true;
 
 const __vue_inject_styles__$1 = function (inject) {
   if (!inject) return;
-  inject("data-v-60ddefe6_0", {
-    source: "\n.mp-dialog-select[data-v-60ddefe6] {\n    overflow: auto;\n}\n.mp-dialog-select label[data-v-60ddefe6] {\n    float: left;\n    padding-top: 5px;\n    vertical-align: top;\n    margin-right: 10px;\n    width: 20%;\n    font-size: 14px;\n    color: #666;\n}\n.mp-dialog-select select[data-v-60ddefe6]{\n    float: left;\n    display: inline-block;\n    width: 70%;\n    margin-top: 5px;\n    color: #999;\n    border: 1px solid #ddd;\n}\n",
+  inject("data-v-9f78a7da_0", {
+    source: "\n.mp-dialog-select[data-v-9f78a7da] {\n    overflow: auto;\n}\n.mp-dialog-select label[data-v-9f78a7da] {\n    float: left;\n    padding-top: 5px;\n    vertical-align: top;\n    margin-right: 10px;\n    width: 20%;\n    font-size: 14px;\n    color: #666;\n}\n.mp-dialog-select select[data-v-9f78a7da]{\n    float: left;\n    display: inline-block;\n    width: 70%;\n    margin-top: 5px;\n    color: #999;\n    border: 1px solid #ddd;\n}\n",
     map: {
       "version": 3,
-      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogSelect.vue"],
+      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogSelect.vue"],
       "names": [],
       "mappings": ";AAUA;IACA,eAAA;CACA;AAEA;IACA,YAAA;IACA,iBAAA;IACA,oBAAA;IACA,mBAAA;IACA,WAAA;IACA,gBAAA;IACA,YAAA;CACA;AAEA;IACA,YAAA;IACA,sBAAA;IACA,WAAA;IACA,gBAAA;IACA,YAAA;IACA,uBAAA;CACA",
       "file": "DialogSelect.vue",
-      "sourcesContent": ["<template>\n    <div class=\"mp-dialog-select\">\n        <label>{{ title }}</label>\n        <select v-model=\"value\">\n            <option v-for=\"option in param.options\" :key=\"option.title\" :value=\"option.value\">{{ t(option.title) }}</option>\n        </select>\n    </div>\n</template>\n\n<style scoped>\n    .mp-dialog-select {\n        overflow: auto;\n    }\n\n    .mp-dialog-select label {\n        float: left;\n        padding-top: 5px;\n        vertical-align: top;\n        margin-right: 10px;\n        width: 20%;\n        font-size: 14px;\n        color: #666;\n    }\n\n    .mp-dialog-select select{\n        float: left;\n        display: inline-block;\n        width: 70%;\n        margin-top: 5px;\n        color: #999;\n        border: 1px solid #ddd;\n    }\n</style>\n\n<script>\nimport AbstractDialogComponent from './AbstractDialogComponent'\n\nexport default {\n    name: 'dialog-select',\n    extends: AbstractDialogComponent\n}\n</script>\n"]
+      "sourcesContent": ["<template>\n    <div class=\"mp-dialog-select\">\n        <label>{{ title }}</label>\n        <select v-model=\"value\">\n            <option v-for=\"option in param.options\" :key=\"option.title\" :value=\"option.value\">{{ t(option.title) }}</option>\n        </select>\n    </div>\n</template>\n\n<style scoped>\n    .mp-dialog-select {\n        overflow: auto;\n    }\n\n    .mp-dialog-select label {\n        float: left;\n        padding-top: 5px;\n        vertical-align: top;\n        margin-right: 10px;\n        width: 20%;\n        font-size: 14px;\n        color: #666;\n    }\n\n    .mp-dialog-select select{\n        float: left;\n        display: inline-block;\n        width: 70%;\n        margin-top: 5px;\n        color: #999;\n        border: 1px solid #ddd;\n    }\n</style>\n\n<script>\nimport AbstractDialogComponent from './AbstractDialogFormComponent'\n\nexport default {\n    name: 'dialog-select',\n    extends: AbstractDialogComponent\n}\n</script>\n"]
     },
     media: undefined
   });
@@ -371,7 +371,7 @@ const __vue_inject_styles__$1 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$1 = "data-v-60ddefe6";
+const __vue_scope_id__$1 = "data-v-9f78a7da";
 /* module identifier */
 
 const __vue_module_identifier__$1 = undefined;
@@ -384,7 +384,7 @@ function __vue_normalize__$1(template, style, script, scope, functional, moduleI
   const component = (typeof script === 'function' ? script.options : script) || {};
 
   {
-    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogSelect.vue";
+    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogSelect.vue";
   }
 
   if (!component.render) {
@@ -552,11 +552,11 @@ __vue_render__$2._withStripped = true;
 
 const __vue_inject_styles__$2 = function (inject) {
   if (!inject) return;
-  inject("data-v-6bc5c4ee_0", {
-    source: "\n.mp-dialog-codemirror[data-v-6bc5c4ee] {\n  overflow: auto;\n}\n.mp-dialog-codemirror label[data-v-6bc5c4ee] {\n  padding-top: 5px;\n  vertical-align: top;\n  margin-right: 10px;\n  width: 20%;\n  font-size: 14px;\n  color: #666;\n}\n",
+  inject("data-v-78e523fb_0", {
+    source: "\n.mp-dialog-codemirror[data-v-78e523fb] {\n  overflow: auto;\n}\n.mp-dialog-codemirror label[data-v-78e523fb] {\n  padding-top: 5px;\n  vertical-align: top;\n  margin-right: 10px;\n  width: 20%;\n  font-size: 14px;\n  color: #666;\n}\n",
     map: {
       "version": 3,
-      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogCodeMirror.vue", "DialogCodeMirror.vue"],
+      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogCodeMirror.vue", "DialogCodeMirror.vue"],
       "names": [],
       "mappings": ";AAQA;EACA,eAAA;CCPC;ADQD;EACA,iBAAA;EACA,oBAAA;EACA,mBAAA;EACA,WAAA;EACA,gBAAA;EACA,YAAA;CCNC",
       "file": "DialogCodeMirror.vue",
@@ -568,7 +568,7 @@ const __vue_inject_styles__$2 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$2 = "data-v-6bc5c4ee";
+const __vue_scope_id__$2 = "data-v-78e523fb";
 /* module identifier */
 
 const __vue_module_identifier__$2 = undefined;
@@ -581,7 +581,7 @@ function __vue_normalize__$2(template, style, script, scope, functional, moduleI
   const component = (typeof script === 'function' ? script.options : script) || {};
 
   {
-    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogCodeMirror.vue";
+    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogCodeMirror.vue";
   }
 
   if (!component.render) {
@@ -728,15 +728,15 @@ __vue_render__$3._withStripped = true;
 
 const __vue_inject_styles__$3 = function (inject) {
   if (!inject) return;
-  inject("data-v-77ed8a2a_0", {
-    source: "\n.mp-dialog-input[data-v-77ed8a2a] {\n    overflow: auto;\n}\n.mp-dialog-input label[data-v-77ed8a2a] {\n    float: left;\n    padding-top: 5px;\n    vertical-align: top;\n    margin-right: 10px;\n    width: 20%;\n    font-size: 14px;\n    color: #666;\n}\n.mp-dialog-input input[data-v-77ed8a2a] {\n    float: left;\n    width: 70%;\n    color: #999;\n    padding: 8px;\n    border: 1px solid #ddd;\n}\n",
+  inject("data-v-46a465ae_0", {
+    source: "\n.mp-dialog-input[data-v-46a465ae] {\n    overflow: auto;\n}\n.mp-dialog-input label[data-v-46a465ae] {\n    float: left;\n    padding-top: 5px;\n    vertical-align: top;\n    margin-right: 10px;\n    width: 20%;\n    font-size: 14px;\n    color: #666;\n}\n.mp-dialog-input input[data-v-46a465ae] {\n    float: left;\n    width: 70%;\n    color: #999;\n    padding: 8px;\n}\n",
     map: {
       "version": 3,
-      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogFile.vue"],
+      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogFile.vue"],
       "names": [],
-      "mappings": ";AAQA;IACA,eAAA;CACA;AAEA;IACA,YAAA;IACA,iBAAA;IACA,oBAAA;IACA,mBAAA;IACA,WAAA;IACA,gBAAA;IACA,YAAA;CACA;AAEA;IACA,YAAA;IACA,WAAA;IACA,YAAA;IACA,aAAA;IACA,uBAAA;CACA",
+      "mappings": ";AAQA;IACA,eAAA;CACA;AAEA;IACA,YAAA;IACA,iBAAA;IACA,oBAAA;IACA,mBAAA;IACA,WAAA;IACA,gBAAA;IACA,YAAA;CACA;AAEA;IACA,YAAA;IACA,WAAA;IACA,YAAA;IACA,aAAA;CACA",
       "file": "DialogFile.vue",
-      "sourcesContent": ["<template>\r\n    <div class=\"mp-dialog-input\">\r\n        <label>{{ title }}</label>\r\n        <input type=\"file\" name=\"picture\" @change=\"handleFile\">\r\n    </div>\r\n</template>\r\n\r\n<style scoped>\r\n    .mp-dialog-input {\r\n        overflow: auto;\r\n    }\r\n\r\n    .mp-dialog-input label {\r\n        float: left;\r\n        padding-top: 5px;\r\n        vertical-align: top;\r\n        margin-right: 10px;\r\n        width: 20%;\r\n        font-size: 14px;\r\n        color: #666;\r\n    }\r\n\r\n    .mp-dialog-input input {\r\n        float: left;\r\n        width: 70%;\r\n        color: #999;\r\n        padding: 8px;\r\n        border: 1px solid #ddd;\r\n    }\r\n</style>\r\n\r\n<script>\r\nimport abstractInputComponent from './AbstractDialogComponent'\r\n\r\nexport default {\r\n    name: 'file',\r\n    extends: abstractInputComponent,\r\n    methods: {\r\n        async handleFile (event) {\r\n            let file = event.target.files[0]\r\n            this.fieldValue = await this.param.callback(file)\r\n        }\r\n    }\r\n}\r\n</script>\r\n"]
+      "sourcesContent": ["<template>\n    <div class=\"mp-dialog-input\">\n        <label>{{ title }}</label>\n        <input type=\"file\" name=\"picture\" @change=\"handleFile\">\n    </div>\n</template>\n\n<style scoped>\n    .mp-dialog-input {\n        overflow: auto;\n    }\n\n    .mp-dialog-input label {\n        float: left;\n        padding-top: 5px;\n        vertical-align: top;\n        margin-right: 10px;\n        width: 20%;\n        font-size: 14px;\n        color: #666;\n    }\n\n    .mp-dialog-input input {\n        float: left;\n        width: 70%;\n        color: #999;\n        padding: 8px;\n    }\n</style>\n\n<script>\nimport abstractInputComponent from './AbstractDialogFormComponent'\n\nexport default {\n    name: 'file',\n    extends: abstractInputComponent,\n    methods: {\n        async handleFile (event) {\n            let file = event.target.files[0]\n            this.fieldValue = await this.param.callback(file)\n        }\n    }\n}\n</script>\n"]
     },
     media: undefined
   });
@@ -744,7 +744,7 @@ const __vue_inject_styles__$3 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$3 = "data-v-77ed8a2a";
+const __vue_scope_id__$3 = "data-v-46a465ae";
 /* module identifier */
 
 const __vue_module_identifier__$3 = undefined;
@@ -757,7 +757,7 @@ function __vue_normalize__$3(template, style, script, scope, functional, moduleI
   const component = (typeof script === 'function' ? script.options : script) || {};
 
   {
-    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogFile.vue";
+    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/FormComponent/DialogFile.vue";
   }
 
   if (!component.render) {
@@ -885,27 +885,27 @@ var script$4 = {
     prop: 'value',
     event: 'change'
   },
-  computed: {
-    data: {
-      get() {
-        return this.value;
-      },
 
-      set(value) {
-        this.$emit('change', value);
+  data() {
+    const initialData = {};
+    this.fields.forEach(field => {
+      initialData[field.name] = field.default ? field.default : '';
+    });
+    return {
+      selectId: 1,
+      data: initialData
+    };
+  },
+
+  watch: {
+    data: {
+      deep: true,
+
+      callback(newData) {
+        this.$emit('change', newData);
       }
 
     }
-  },
-  methods: {
-    close() {
-      this.$emit('close');
-    },
-
-    finish() {
-      this.$emit('finish', this.response);
-    }
-
   },
   components: DialogComponents,
   inject: ['t']
@@ -950,15 +950,15 @@ __vue_render__$4._withStripped = true;
 
 const __vue_inject_styles__$4 = function (inject) {
   if (!inject) return;
-  inject("data-v-305090d6_0", {
-    source: "\n.mp-dialog-field[data-v-305090d6] {\n    margin: 10px 8px;\n    overflow:auto;\n}\n",
+  inject("data-v-42781105_0", {
+    source: "\n.mp-dialog-field[data-v-42781105] {\n    margin: 10px 8px;\n    overflow:auto;\n}\n",
     map: {
       "version": 3,
       "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogForm.vue"],
       "names": [],
       "mappings": ";AAmDA;IACA,iBAAA;IACA,cAAA;CACA",
       "file": "DialogForm.vue",
-      "sourcesContent": ["<template>\n    <div class=\"dialog-form\">\n        <div class=\"mp-dialog-field\" v-for=\"field in fields\" :key=\"field.name\">\n            <component :is=\"field.type || field.component\" :request-field=\"field\" v-model=\"data[field.name]\"></component>\n        </div>\n    </div>\n</template>\n\n<script>\nimport DialogComponents from './DialogComponentMap'\n\nexport default {\n    name: 'dialog-form',\n    props: {\n        fields: {\n            type: Array,\n            required: true\n        },\n        value: {\n            type: Object,\n            required: true\n        }\n    },\n    model: {\n        prop: 'value',\n        event: 'change'\n    },\n    computed: {\n        data: {\n            get () {\n                return this.value\n            },\n            set (value) {\n                this.$emit('change', value)\n            }\n        }\n    },\n    methods: {\n        close () {\n            this.$emit('close')\n        },\n        finish () {\n            this.$emit('finish', this.response)\n        }\n    },\n    components: DialogComponents,\n    inject: ['t']\n}\n</script>\n\n<style scoped>\n    .mp-dialog-field {\n        margin: 10px 8px;\n        overflow:auto;\n    }\n</style>\n"]
+      "sourcesContent": ["<template>\n    <div class=\"dialog-form\">\n        <div class=\"mp-dialog-field\" v-for=\"field in fields\" :key=\"field.name\">\n            <component :is=\"field.type || field.component\" :request-field=\"field\" v-model=\"data[field.name]\"></component>\n        </div>\n    </div>\n</template>\n\n<script>\nimport DialogComponents from './FormComponent/DialogFormComponentMap'\n\nexport default {\n    name: 'dialog-form',\n    props: {\n        fields: {\n            type: Array,\n            required: true\n        },\n        value: {\n            type: Object,\n            required: true\n        }\n    },\n    model: {\n        prop: 'value',\n        event: 'change'\n    },\n    data () {\n        const initialData = {}\n        this.fields.forEach((field) => {\n            initialData[field.name] = field.default ? field.default : ''\n        })\n        return {\n            selectId: 1,\n            data: initialData\n        }\n    },\n    watch: {\n        data: {\n            deep: true,\n            callback (newData) {\n                this.$emit('change', newData)\n            }\n        }\n    },\n    components: DialogComponents,\n    inject: ['t']\n}\n</script>\n\n<style scoped>\n    .mp-dialog-field {\n        margin: 10px 8px;\n        overflow:auto;\n    }\n</style>\n"]
     },
     media: undefined
   });
@@ -966,7 +966,7 @@ const __vue_inject_styles__$4 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$4 = "data-v-305090d6";
+const __vue_scope_id__$4 = "data-v-42781105";
 /* module identifier */
 
 const __vue_module_identifier__$4 = undefined;
@@ -1083,10 +1083,15 @@ var DialogForm = __vue_normalize__$4({
   staticRenderFns: __vue_staticRenderFns__$4
 }, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, __vue_create_injector__$4, undefined);
 
+//
 var script$5 = {
-  name: 'editor-dialog',
+  name: 'dialog-tab',
   props: {
-    request: {
+    fields: {
+      type: Array,
+      required: true
+    },
+    value: {
       type: Object,
       required: true
     }
@@ -1094,29 +1099,32 @@ var script$5 = {
 
   data() {
     const initialData = {};
-    this.request.body.forEach(function (field) {
-      initialData[field.name] = field.default ? field.default : '';
+    this.fields.forEach(category => {
+      initialData[category.name] = {};
+      category.body.forEach(field => {
+        initialData[category.name][field.name] = field.default ? field.default : {};
+      });
     });
     return {
-      responseData: initialData
+      selectId: 1,
+      data: initialData,
+      count: this.fields.length
     };
   },
 
-  computed: {
-    response() {
-      return _objectSpread({}, this.request, {
-        data: this.responseData
-      });
-    }
+  watch: {
+    data: {
+      deep: true,
 
+      callback(newData) {
+        this.$emit('change', newData);
+      }
+
+    }
   },
   methods: {
-    close() {
-      this.$emit('close');
-    },
-
-    finish() {
-      this.$emit('finish', this.response);
+    focus(index) {
+      this.selectId = index;
     }
 
   },
@@ -1138,58 +1146,47 @@ var __vue_render__$5 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("div", {
-    staticClass: "mp-editor-dialog"
+    staticClass: "dialog-tab"
   }, [_c("div", {
-    staticClass: "mp-dialog-mask"
-  }, [_c("div", {
-    staticClass: "mp-dialog-wrapper"
-  }, [_c("div", {
-    staticClass: "mp-dialog-container"
-  }, [_c("div", {
-    staticClass: "mp-dialog-header"
-  }, [_c("strong", [_vm._v(_vm._s(_vm.t(_vm.request.title)))]), _vm._v(" "), _c("a", {
-    staticClass: "fa fa-times mp-dialog-close",
-    on: {
-      click: _vm.close
-    }
-  })]), _vm._v(" "), _c("form", {
-    staticClass: "mp-dialog-body",
-    on: {
-      submit: function submit($event) {
-        $event.preventDefault();
-        return _vm.finish($event);
-      }
-    }
-  }, [_c("dialog-form", {
-    attrs: {
-      fields: this.request.body
-    },
-    model: {
-      value: _vm.responseData,
-      callback: function callback($$v) {
-        _vm.responseData = $$v;
+    staticClass: "dialog-switch-container"
+  }, [_c("ul", _vm._l(this.fields, function (category, index) {
+    return _c("li", {
+      key: category.name,
+      staticClass: "dialog-switch",
+      class: {
+        "dialog-switch-focus": _vm.selectId === index,
+        "dialog-switch-not-focus": _vm.selectId !== index,
+        "dialog-switch-not-last": index !== _vm.count - 1
       },
-      expression: "responseData"
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "mp-dialog-footer"
-  }, [_c("div", [_c("button", {
-    staticClass: "mp-dialog-button",
-    attrs: {
-      type: "button"
-    },
-    on: {
-      click: _vm.close
-    }
-  }, [_vm._v(_vm._s(_vm.t("取消")))]), _vm._v(" "), _c("button", {
-    staticClass: "mp-dialog-button",
-    staticStyle: {
-      "margin-right": "7px"
-    },
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v(_vm._s(_vm.t("确定")))])])])], 1)])])])]);
+      style: {
+        width: 100 / _vm.count + "%"
+      },
+      on: {
+        click: function click($event) {
+          _vm.focus(index);
+        }
+      }
+    }, [_c("strong", [_vm._v(_vm._s(category.title) + " ")])]);
+  }))]), _vm._v(" "), _c("div", {
+    staticClass: "dialog-panel-container"
+  }, _vm._l(this.fields, function (category, index) {
+    return _c("div", {
+      key: category.name,
+      staticClass: "dialog-panel",
+      class: _vm.selectId === index ? "dialog-panel-focus" : "dialog-panel-hide"
+    }, [_c("dialog-form", {
+      attrs: {
+        fields: category.body
+      },
+      model: {
+        value: _vm.data[category.name],
+        callback: function callback($$v) {
+          _vm.$set(_vm.data, category.name, $$v);
+        },
+        expression: "data[category.name]"
+      }
+    })], 1);
+  }))]);
 };
 
 var __vue_staticRenderFns__$5 = [];
@@ -1198,15 +1195,15 @@ __vue_render__$5._withStripped = true;
 
 const __vue_inject_styles__$5 = function (inject) {
   if (!inject) return;
-  inject("data-v-b87930ae_0", {
-    source: "\n.mp-dialog-mask[data-v-b87930ae] {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, .5);\n    display: table;\n    transition: opacity .3s ease;\n}\n.mp-dialog-wrapper[data-v-b87930ae] {\n    display: table-cell;\n    vertical-align: middle;\n}\n.mp-dialog-container[data-v-b87930ae] {\n    width: 500px;\n    margin: 0 auto;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n    transition: all .3s ease;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.mp-dialog-header[data-v-b87930ae] {\n    padding: 11px 20px;\n    border-bottom: 1px solid #eee;\n}\n.dialog-header strong[data-v-b87930ae] {\n    color: #666;\n}\n.mp-dialog-body[data-v-b87930ae] {\n    padding: 20px 30px;\n    padding-bottom: 10px;\n}\n.mp-dialog-footer[data-v-b87930ae] {\n    overflow:auto;\n}\n.mp-dialog-button[data-v-b87930ae] {\n    display: inline-block;\n    float: right;\n    color: #666;\n    min-width: 75px;\n    cursor: pointer;\n    background: #fff;\n    padding: 7px 10px;\n    border: 1px solid #ddd;\n    border-radius: 3px;\n}\n.mp-dialog-enter[data-v-b87930ae] {\n    opacity: 0;\n}\n.mp-dialog-leave-active[data-v-b87930ae] {\n    opacity: 0;\n}\n.mp-dialog-enter .mp-dialog-container[data-v-b87930ae],\n.mp-dialog-leave-active .mp-dialog-container[data-v-b87930ae] {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n}\n.mp-dialog-close[data-v-b87930ae] {\n    font-size: 18px;\n    color: #ccc;\n    float: right;\n}\n",
+  inject("data-v-6faaf33d_0", {
+    source: "\n.dialog-tab[data-v-6faaf33d] {\n    width: 100%;\n    margin-bottom: 10px;\n    border: 1px solid #ddd;\n    border-radius: 3px 3px 0 0;\n}\n.dialog-switch-container[data-v-6faaf33d] {\n    width: 100%;\n    height: 25px;\n}\n.dialog-switch-container ul[data-v-6faaf33d] {\n    margin: 0;\n    padding: 0;\n    width: 100%;\n    height: 100%;\n}\n.dialog-switch[data-v-6faaf33d] {\n    float: left;\n    height: 100%;\n    cursor: pointer;\n    list-style: none;\n    text-align: center;\n    box-sizing: border-box;\n}\n.dialog-switch-not-last[data-v-6faaf33d] {\n    border-right: 1px solid #ddd;\n}\n.dialog-switch-not-focus[data-v-6faaf33d] {\n    border-bottom: 1px solid #ddd;\n}\n.dialog-panel-container[data-v-6faaf33d] {\n    width: 100%;\n}\n.dialog-panel-hide[data-v-6faaf33d] {\n    display: none;\n}\n\n",
     map: {
       "version": 3,
-      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/Dialog.vue"],
+      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogTab.vue"],
       "names": [],
-      "mappings": ";AA6BA;IACA,gBAAA;IACA,cAAA;IACA,OAAA;IACA,QAAA;IACA,YAAA;IACA,aAAA;IACA,oCAAA;IACA,eAAA;IACA,6BAAA;CACA;AAEA;IACA,oBAAA;IACA,uBAAA;CACA;AAEA;IACA,aAAA;IACA,eAAA;IACA,uBAAA;IACA,mBAAA;IACA,yCAAA;IACA,yBAAA;IACA,0CAAA;CACA;AACA;IACA,mBAAA;IACA,8BAAA;CACA;AAEA;IACA,YAAA;CACA;AAEA;IACA,mBAAA;IACA,qBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,sBAAA;IACA,aAAA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;IACA,uBAAA;IACA,mBAAA;CACA;AAEA;IACA,WAAA;CACA;AAEA;IACA,WAAA;CACA;AAEA;;IAEA,8BAAA;IACA,sBAAA;CACA;AAEA;IACA,gBAAA;IACA,YAAA;IACA,aAAA;CACA",
-      "file": "Dialog.vue",
-      "sourcesContent": ["<template>\n    <div class=\"mp-editor-dialog\">\n        <div class=\"mp-dialog-mask\">\n            <div class=\"mp-dialog-wrapper\">\n                <div class=\"mp-dialog-container\">\n\n                    <div class=\"mp-dialog-header\">\n                        <strong>{{ t(request.title) }}</strong>\n                        <a class=\"fa fa-times mp-dialog-close\" @click=\"close\"></a>\n                    </div>\n\n                    <form class=\"mp-dialog-body\" @submit.prevent=\"finish\">\n                        <dialog-form :fields=\"this.request.body\" v-model=\"responseData\"></dialog-form>\n\n                        <div class=\"mp-dialog-footer\">\n                            <div>\n                                <button class=\"mp-dialog-button\" type=\"button\" @click=\"close\">{{ t('取消') }}</button>\n                                <button class=\"mp-dialog-button\" type=\"submit\" style=\"margin-right: 7px\">{{ t('确定') }}</button>\n                            </div>\n                        </div>\n                    </form>\n\n                </div>\n            </div>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n    .mp-dialog-mask {\n        position: fixed;\n        z-index: 9998;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background-color: rgba(0, 0, 0, .5);\n        display: table;\n        transition: opacity .3s ease;\n    }\n\n    .mp-dialog-wrapper {\n        display: table-cell;\n        vertical-align: middle;\n    }\n\n    .mp-dialog-container {\n        width: 500px;\n        margin: 0 auto;\n        background-color: #fff;\n        border-radius: 2px;\n        box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n        transition: all .3s ease;\n        font-family: Helvetica, Arial, sans-serif;\n    }\n    .mp-dialog-header {\n        padding: 11px 20px;\n        border-bottom: 1px solid #eee;\n    }\n\n    .dialog-header strong {\n        color: #666;\n    }\n\n    .mp-dialog-body {\n        padding: 20px 30px;\n        padding-bottom: 10px;\n    }\n\n    .mp-dialog-footer {\n        overflow:auto;\n    }\n\n    .mp-dialog-button {\n        display: inline-block;\n        float: right;\n        color: #666;\n        min-width: 75px;\n        cursor: pointer;\n        background: #fff;\n        padding: 7px 10px;\n        border: 1px solid #ddd;\n        border-radius: 3px;\n    }\n\n    .mp-dialog-enter {\n        opacity: 0;\n    }\n\n    .mp-dialog-leave-active {\n        opacity: 0;\n    }\n\n    .mp-dialog-enter .mp-dialog-container,\n    .mp-dialog-leave-active .mp-dialog-container {\n        -webkit-transform: scale(1.1);\n        transform: scale(1.1);\n    }\n\n    .mp-dialog-close {\n        font-size: 18px;\n        color: #ccc;\n        float: right;\n    }\n</style>\n\n<script>\nimport DialogForm from './DialogForm.vue'\n\nexport default {\n    name: 'editor-dialog',\n    props: {\n        request: {\n            type: Object,\n            required: true\n        }\n    },\n    data () {\n        const initialData = {}\n        this.request.body.forEach(function (field) {\n            initialData[field.name] = field.default ? field.default : ''\n        })\n        return {\n            responseData: initialData\n        }\n    },\n    computed: {\n        response () {\n            return { ...this.request, data: this.responseData }\n        }\n    },\n    methods: {\n        close () {\n            this.$emit('close')\n        },\n        finish () {\n            this.$emit('finish', this.response)\n        }\n    },\n    components: { DialogForm },\n    inject: ['t']\n}\n</script>\n"]
+      "mappings": ";AAuEA;IACA,YAAA;IACA,oBAAA;IACA,uBAAA;IACA,2BAAA;CACA;AACA;IACA,YAAA;IACA,aAAA;CACA;AAEA;IACA,UAAA;IACA,WAAA;IACA,YAAA;IACA,aAAA;CAEA;AAEA;IACA,YAAA;IACA,aAAA;IACA,gBAAA;IACA,iBAAA;IACA,mBAAA;IACA,uBAAA;CACA;AAEA;IACA,6BAAA;CACA;AAEA;IACA,8BAAA;CACA;AAEA;IACA,YAAA;CACA;AAEA;IACA,cAAA;CACA",
+      "file": "DialogTab.vue",
+      "sourcesContent": ["<template>\n    <div class=\"dialog-tab\">\n        <div class=\"dialog-switch-container\">\n            <ul>\n                <li class=\"dialog-switch\" :class=\"{\n                        'dialog-switch-focus': selectId === index,\n                        'dialog-switch-not-focus': selectId !== index,\n                        'dialog-switch-not-last': index !== count - 1\n                    }\" :style=\"{'width': (100 / count) + '%'}\"\n                    v-for=\"(category, index) in this.fields\" :key=\"category.name\" @click=\"focus(index)\">\n                    <strong>{{ category.title }} </strong>\n                </li>\n            </ul>\n        </div>\n        <div class=\"dialog-panel-container\">\n            <div class=\"dialog-panel\" :class=\"selectId === index ? 'dialog-panel-focus' : 'dialog-panel-hide'\"\n                 v-for=\"(category, index) in this.fields\" :key=\"category.name\">\n                <dialog-form :fields=\"category.body\" v-model=\"data[category.name]\"></dialog-form>\n            </div>\n        </div>\n    </div>\n</template>\n\n<script>\nimport DialogForm from './DialogForm.vue'\n\nexport default {\n    name: 'dialog-tab',\n    props: {\n        fields: {\n            type: Array,\n            required: true\n        },\n        value: {\n            type: Object,\n            required: true\n        }\n    },\n    data () {\n        const initialData = {}\n        this.fields.forEach((category) => {\n            initialData[category.name] = {}\n            category.body.forEach((field) => {\n                initialData[category.name][field.name] = field.default ? field.default : {}\n            })\n        })\n        return {\n            selectId: 1,\n            data: initialData,\n            count: this.fields.length\n        }\n    },\n    watch: {\n        data: {\n            deep: true,\n            callback (newData) {\n                this.$emit('change', newData)\n            }\n        }\n    },\n    methods: {\n        focus (index) {\n            this.selectId = index\n        }\n    },\n    components: { DialogForm },\n    inject: ['t']\n}\n</script>\n\n<style scoped>\n    .dialog-tab {\n        width: 100%;\n        margin-bottom: 10px;\n        border: 1px solid #ddd;\n        border-radius: 3px 3px 0 0;\n    }\n    .dialog-switch-container {\n        width: 100%;\n        height: 25px;\n    }\n\n    .dialog-switch-container ul {\n        margin: 0;\n        padding: 0;\n        width: 100%;\n        height: 100%;\n\n    }\n\n    .dialog-switch {\n        float: left;\n        height: 100%;\n        cursor: pointer;\n        list-style: none;\n        text-align: center;\n        box-sizing: border-box;\n    }\n\n    .dialog-switch-not-last {\n        border-right: 1px solid #ddd;\n    }\n\n    .dialog-switch-not-focus {\n        border-bottom: 1px solid #ddd;\n    }\n\n    .dialog-panel-container {\n        width: 100%;\n    }\n\n    .dialog-panel-hide {\n        display: none;\n    }\n\n</style>\n"]
     },
     media: undefined
   });
@@ -1214,7 +1211,7 @@ const __vue_inject_styles__$5 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$5 = "data-v-b87930ae";
+const __vue_scope_id__$5 = "data-v-6faaf33d";
 /* module identifier */
 
 const __vue_module_identifier__$5 = undefined;
@@ -1227,7 +1224,7 @@ function __vue_normalize__$5(template, style, script, scope, functional, moduleI
   const component = (typeof script === 'function' ? script.options : script) || {};
 
   {
-    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/Dialog.vue";
+    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/DialogTab.vue";
   }
 
   if (!component.render) {
@@ -1326,10 +1323,274 @@ function __vue_create_injector__$5() {
 /* style inject SSR */
 
 
-var Dialog = __vue_normalize__$5({
+var DialogTab = __vue_normalize__$5({
   render: __vue_render__$5,
   staticRenderFns: __vue_staticRenderFns__$5
 }, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, __vue_create_injector__$5, undefined);
+
+var script$6 = {
+  name: 'editor-dialog',
+  props: {
+    request: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data() {
+    const initialData = {};
+    this.request.body.forEach(field => {
+      if (this.request.type === 'form') {
+        initialData[field.name] = field.default ? field.default : '';
+      } else if (this.request.type === 'tab') {
+        initialData[field.name] = {};
+      }
+    });
+    return {
+      responseData: initialData
+    };
+  },
+
+  computed: {
+    response() {
+      return _objectSpread({}, this.request, {
+        data: this.responseData
+      });
+    }
+
+  },
+  methods: {
+    close() {
+      this.$emit('close');
+    },
+
+    finish() {
+      this.$emit('finish', this.response);
+    }
+
+  },
+  components: {
+    DialogForm,
+    DialogTab
+  },
+  inject: ['t']
+};
+
+/* script */
+const __vue_script__$6 = script$6;
+/* template */
+
+var __vue_render__$6 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("div", {
+    staticClass: "mp-editor-dialog"
+  }, [_c("div", {
+    staticClass: "mp-dialog-mask"
+  }, [_c("div", {
+    staticClass: "mp-dialog-wrapper"
+  }, [_c("div", {
+    staticClass: "mp-dialog-container"
+  }, [_c("div", {
+    staticClass: "mp-dialog-header"
+  }, [_c("strong", [_vm._v(_vm._s(_vm.t(_vm.request.title)))]), _vm._v(" "), _c("a", {
+    staticClass: "fa fa-times mp-dialog-close",
+    on: {
+      click: _vm.close
+    }
+  })]), _vm._v(" "), _c("form", {
+    staticClass: "mp-dialog-body",
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.finish($event);
+      }
+    }
+  }, [this.request.type === "form" ? _c("dialog-form", {
+    attrs: {
+      fields: this.request.body
+    },
+    model: {
+      value: _vm.responseData,
+      callback: function callback($$v) {
+        _vm.responseData = $$v;
+      },
+      expression: "responseData"
+    }
+  }) : this.request.type === "tab" ? _c("dialog-tab", {
+    attrs: {
+      fields: this.request.body
+    },
+    model: {
+      value: _vm.responseData,
+      callback: function callback($$v) {
+        _vm.responseData = $$v;
+      },
+      expression: "responseData"
+    }
+  }) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "mp-dialog-footer"
+  }, [_c("div", [_c("button", {
+    staticClass: "mp-dialog-button",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: _vm.close
+    }
+  }, [_vm._v(_vm._s(_vm.t("取消")))]), _vm._v(" "), _c("button", {
+    staticClass: "mp-dialog-button",
+    staticStyle: {
+      "margin-right": "7px"
+    },
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v(_vm._s(_vm.t("确定")))])])])], 1)])])])]);
+};
+
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
+/* style */
+
+const __vue_inject_styles__$6 = function (inject) {
+  if (!inject) return;
+  inject("data-v-e20ada30_0", {
+    source: "\n.mp-dialog-mask[data-v-e20ada30] {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, .5);\n    display: table;\n    transition: opacity .3s ease;\n}\n.mp-dialog-wrapper[data-v-e20ada30] {\n    display: table-cell;\n    vertical-align: middle;\n}\n.mp-dialog-container[data-v-e20ada30] {\n    width: 500px;\n    margin: 0 auto;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n    transition: all .3s ease;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.mp-dialog-header[data-v-e20ada30] {\n    padding: 11px 20px;\n    border-bottom: 1px solid #eee;\n}\n.dialog-header strong[data-v-e20ada30] {\n    color: #666;\n}\n.mp-dialog-body[data-v-e20ada30] {\n    padding: 20px 30px;\n    padding-bottom: 10px;\n}\n.mp-dialog-footer[data-v-e20ada30] {\n    overflow:auto;\n}\n.mp-dialog-button[data-v-e20ada30] {\n    display: inline-block;\n    float: right;\n    color: #666;\n    min-width: 75px;\n    cursor: pointer;\n    background: #fff;\n    padding: 7px 10px;\n    border: 1px solid #ddd;\n    border-radius: 3px;\n}\n.mp-dialog-enter[data-v-e20ada30] {\n    opacity: 0;\n}\n.mp-dialog-leave-active[data-v-e20ada30] {\n    opacity: 0;\n}\n.mp-dialog-enter .mp-dialog-container[data-v-e20ada30],\n.mp-dialog-leave-active .mp-dialog-container[data-v-e20ada30] {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n}\n.mp-dialog-close[data-v-e20ada30] {\n    font-size: 18px;\n    color: #ccc;\n    float: right;\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/Dialog.vue"],
+      "names": [],
+      "mappings": ";AA8BA;IACA,gBAAA;IACA,cAAA;IACA,OAAA;IACA,QAAA;IACA,YAAA;IACA,aAAA;IACA,oCAAA;IACA,eAAA;IACA,6BAAA;CACA;AAEA;IACA,oBAAA;IACA,uBAAA;CACA;AAEA;IACA,aAAA;IACA,eAAA;IACA,uBAAA;IACA,mBAAA;IACA,yCAAA;IACA,yBAAA;IACA,0CAAA;CACA;AACA;IACA,mBAAA;IACA,8BAAA;CACA;AAEA;IACA,YAAA;CACA;AAEA;IACA,mBAAA;IACA,qBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,sBAAA;IACA,aAAA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;IACA,uBAAA;IACA,mBAAA;CACA;AAEA;IACA,WAAA;CACA;AAEA;IACA,WAAA;CACA;AAEA;;IAEA,8BAAA;IACA,sBAAA;CACA;AAEA;IACA,gBAAA;IACA,YAAA;IACA,aAAA;CACA",
+      "file": "Dialog.vue",
+      "sourcesContent": ["<template>\n    <div class=\"mp-editor-dialog\">\n        <div class=\"mp-dialog-mask\">\n            <div class=\"mp-dialog-wrapper\">\n                <div class=\"mp-dialog-container\">\n\n                    <div class=\"mp-dialog-header\">\n                        <strong>{{ t(request.title) }}</strong>\n                        <a class=\"fa fa-times mp-dialog-close\" @click=\"close\"></a>\n                    </div>\n\n                    <form class=\"mp-dialog-body\" @submit.prevent=\"finish\">\n                        <dialog-form v-if=\"this.request.type === 'form'\" :fields=\"this.request.body\" v-model=\"responseData\"></dialog-form>\n                        <dialog-tab v-else-if=\"this.request.type === 'tab'\" :fields=\"this.request.body\" v-model=\"responseData\"></dialog-tab>\n\n                        <div class=\"mp-dialog-footer\">\n                            <div>\n                                <button class=\"mp-dialog-button\" type=\"button\" @click=\"close\">{{ t('取消') }}</button>\n                                <button class=\"mp-dialog-button\" type=\"submit\" style=\"margin-right: 7px\">{{ t('确定') }}</button>\n                            </div>\n                        </div>\n                    </form>\n\n                </div>\n            </div>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n    .mp-dialog-mask {\n        position: fixed;\n        z-index: 9998;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background-color: rgba(0, 0, 0, .5);\n        display: table;\n        transition: opacity .3s ease;\n    }\n\n    .mp-dialog-wrapper {\n        display: table-cell;\n        vertical-align: middle;\n    }\n\n    .mp-dialog-container {\n        width: 500px;\n        margin: 0 auto;\n        background-color: #fff;\n        border-radius: 2px;\n        box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n        transition: all .3s ease;\n        font-family: Helvetica, Arial, sans-serif;\n    }\n    .mp-dialog-header {\n        padding: 11px 20px;\n        border-bottom: 1px solid #eee;\n    }\n\n    .dialog-header strong {\n        color: #666;\n    }\n\n    .mp-dialog-body {\n        padding: 20px 30px;\n        padding-bottom: 10px;\n    }\n\n    .mp-dialog-footer {\n        overflow:auto;\n    }\n\n    .mp-dialog-button {\n        display: inline-block;\n        float: right;\n        color: #666;\n        min-width: 75px;\n        cursor: pointer;\n        background: #fff;\n        padding: 7px 10px;\n        border: 1px solid #ddd;\n        border-radius: 3px;\n    }\n\n    .mp-dialog-enter {\n        opacity: 0;\n    }\n\n    .mp-dialog-leave-active {\n        opacity: 0;\n    }\n\n    .mp-dialog-enter .mp-dialog-container,\n    .mp-dialog-leave-active .mp-dialog-container {\n        -webkit-transform: scale(1.1);\n        transform: scale(1.1);\n    }\n\n    .mp-dialog-close {\n        font-size: 18px;\n        color: #ccc;\n        float: right;\n    }\n</style>\n\n<script>\nimport DialogForm from './DialogForm.vue'\nimport DialogTab from './DialogTab.vue'\n\nexport default {\n    name: 'editor-dialog',\n    props: {\n        request: {\n            type: Object,\n            required: true\n        }\n    },\n    data () {\n        const initialData = {}\n        this.request.body.forEach((field) => {\n            if (this.request.type === 'form') {\n                initialData[field.name] = field.default ? field.default : ''\n            } else if (this.request.type === 'tab') {\n                initialData[field.name] = {}\n            }\n        })\n        return {\n            responseData: initialData\n        }\n    },\n    computed: {\n        response () {\n            return { ...this.request, data: this.responseData }\n        }\n    },\n    methods: {\n        close () {\n            this.$emit('close')\n        },\n        finish () {\n            this.$emit('finish', this.response)\n        }\n    },\n    components: { DialogForm, DialogTab },\n    inject: ['t']\n}\n</script>\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+const __vue_scope_id__$6 = "data-v-e20ada30";
+/* module identifier */
+
+const __vue_module_identifier__$6 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$6 = false;
+/* component normalizer */
+
+function __vue_normalize__$6(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
+  const component = (typeof script === 'function' ? script.options : script) || {};
+
+  {
+    component.__file = "/mnt/c/Users/darkflames/Documents/Development/markdown-palettes/src/components/Dialog/Dialog.vue";
+  }
+
+  if (!component.render) {
+    component.render = template.render;
+    component.staticRenderFns = template.staticRenderFns;
+    component._compiled = true;
+    if (functional) component.functional = true;
+  }
+
+  component._scopeId = scope;
+
+  {
+    let hook;
+
+    if (style) {
+      hook = function hook(context) {
+        style.call(this, createInjector(context));
+      };
+    }
+
+    if (hook !== undefined) {
+      if (component.functional) {
+        // register for functional component in vue file
+        const originalRender = component.render;
+
+        component.render = function renderWithStyleInjection(h, context) {
+          hook.call(context);
+          return originalRender(h, context);
+        };
+      } else {
+        // inject component registration as beforeCreate hook
+        const existing = component.beforeCreate;
+        component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+      }
+    }
+  }
+
+  return component;
+}
+/* style inject */
+
+
+function __vue_create_injector__$6() {
+  const head = document.head || document.getElementsByTagName('head')[0];
+  const styles = __vue_create_injector__$6.styles || (__vue_create_injector__$6.styles = {});
+  const isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+  return function addStyle(id, css) {
+    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
+
+    const group = isOldIE ? css.media || 'default' : id;
+    const style = styles[group] || (styles[group] = {
+      ids: [],
+      parts: [],
+      element: undefined
+    });
+
+    if (!style.ids.includes(id)) {
+      let code = css.source;
+      let index = style.ids.length;
+      style.ids.push(id);
+
+      if (isOldIE) {
+        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+      }
+
+      if (!style.element) {
+        const el = style.element = document.createElement('style');
+        el.type = 'text/css';
+        if (css.media) el.setAttribute('media', css.media);
+
+        if (isOldIE) {
+          el.setAttribute('data-group', group);
+          el.setAttribute('data-next-index', '0');
+        }
+
+        head.appendChild(el);
+      }
+
+      if (isOldIE) {
+        index = parseInt(style.element.getAttribute('data-next-index'));
+        style.element.setAttribute('data-next-index', index + 1);
+      }
+
+      if (style.element.styleSheet) {
+        style.parts.push(code);
+        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
+      } else {
+        const textNode = document.createTextNode(code);
+        const nodes = style.element.childNodes;
+        if (nodes[index]) style.element.removeChild(nodes[index]);
+        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
+      }
+    }
+  };
+}
+/* style inject SSR */
+
+
+var Dialog = __vue_normalize__$6({
+  render: __vue_render__$6,
+  staticRenderFns: __vue_staticRenderFns__$6
+}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, __vue_create_injector__$6, undefined);
 
 var InputAreaMixin = {
   data() {
@@ -1876,6 +2137,7 @@ var BtnLink = {
   action: {
     request: {
       title: '插入链接',
+      type: 'form',
       body: [{
         name: 'url',
         title: '链接地址',
@@ -1903,6 +2165,7 @@ var BtnTable = {
   action: {
     request: {
       title: '插入表格',
+      type: 'form',
       body: [{
         name: 'row',
         title: '行数',
@@ -2034,6 +2297,7 @@ var BtnCode = {
     const selection = this.editor.getSelection();
     const request = {
       title: '插入代码',
+      type: 'form',
       body: [{
         name: 'lang',
         title: '语言类型',
@@ -2324,7 +2588,7 @@ function getText(text) {
   return text;
 }
 
-var script$6 = {
+var script$7 = {
   name: 'markdown-palettes',
   props: {
     value: {
@@ -2404,10 +2668,10 @@ var script$6 = {
 };
 
 /* script */
-const __vue_script__$6 = script$6;
+const __vue_script__$7 = script$7;
 /* template */
 
-var __vue_render__$6 = function __vue_render__() {
+var __vue_render__$7 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2487,11 +2751,11 @@ var __vue_render__$6 = function __vue_render__() {
   }) : _vm._e()], 1)]);
 };
 
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
 /* style */
 
-const __vue_inject_styles__$6 = function (inject) {
+const __vue_inject_styles__$7 = function (inject) {
   if (!inject) return;
   inject("data-v-0c58d19c_0", {
     source: "\n.mp-editor-zone[data-v-0c58d19c] {\n  height: 100%;\n}\n.mp-input-zone[data-v-0c58d19c] {\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n}\n.mp-preview-zone[data-v-0c58d19c] {\n  display: none;\n}\n.mp-editor-zone-full[data-v-0c58d19c] {\n  display: block;\n  box-sizing: border-box;\n  width: 100%;\n  border: none !important;\n}\n.mp-editor-zone-hide[data-v-0c58d19c] {\n  display: none !important;\n}\n@media only screen and (min-width: 768px) {\n.mp-editor-zone[data-v-0c58d19c] {\n    display: block;\n    box-sizing: border-box;\n    width: 50%;\n    float: left;\n}\n}\n.mp-editor-container[data-v-0c58d19c] {\n  position: relative;\n  height: 100%;\n  border: 1px solid #ddd;\n}\n.mp-full-screen[data-v-0c58d19c] {\n  position: fixed;\n  z-index: 9997;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n}\n.mp-editor-toolbar[data-v-0c58d19c] {\n  float: left;\n  width: 100%;\n  height: 40px;\n  box-sizing: border-box;\n  background-color: #fff;\n}\n.mp-editor-ground[data-v-0c58d19c] {\n  position: absolute;\n  width: 100%;\n  top: 40px;\n  bottom: 0;\n  overflow: hidden;\n  border-top: 1px solid #ddd;\n}\n.mp-preview-zone[data-v-0c58d19c] {\n  border-left: 1px solid #ddd;\n  padding-bottom: 2px;\n}\n.mp-input-area[data-v-0c58d19c],\n.mp-input-area[data-v-0c58d19c] .CodeMirror {\n  height: 100%;\n}\n.mp-preview-area[data-v-0c58d19c] {\n  overflow: auto;\n  background-color: #fff;\n  height: 100%;\n}\n.mp-preview-content[data-v-0c58d19c] {\n  color: #333;\n  padding: 10px;\n  padding-left: 20px;\n  padding-right: 20px;\n  overflow: auto;\n  height: auto;\n  word-wrap: break-word;\n}\n.mp-preview-content[data-v-0c58d19c] table {\n  border-collapse: collapse;\n  border-spacing: 0;\n  display: block;\n  width: 100%;\n  overflow: auto;\n  word-break: keep-all;\n  margin: 10px;\n}\n.mp-preview-content[data-v-0c58d19c] table th,\n.mp-preview-content[data-v-0c58d19c] table td {\n  border: 1px solid #ddd;\n  padding: 6px 13px;\n}\n.mp-preview-content[data-v-0c58d19c] code {\n  font-family: Monaco, Menlo, Consolas, \"Courier New\", monospace;\n  font-size: 15px;\n}\n.mp-preview-content[data-v-0c58d19c] img {\n  max-width: 100%;\n}\n.mp-preview-content[data-v-0c58d19c] p {\n  margin: 1rem 0;\n}\n.mp-preview-content[data-v-0c58d19c] h1,\n.mp-preview-content[data-v-0c58d19c] h2,\n.mp-preview-content[data-v-0c58d19c] h3,\n.mp-preview-content[data-v-0c58d19c] h4,\n.mp-preview-content[data-v-0c58d19c] h5,\n.mp-preview-content[data-v-0c58d19c] h6 {\n  margin: 0.5rem 0;\n}\n.mp-preview-content[data-v-0c58d19c] h1,\n.mp-preview-content[data-v-0c58d19c] h2 {\n  padding-bottom: 0.2em;\n  border-bottom: solid 1px #eee;\n}\n.mp-preview-content[data-v-0c58d19c] ul,\n.mp-preview-content[data-v-0c58d19c] ol {\n  padding-left: 1.5em;\n}\n.mp-preview-content[data-v-0c58d19c] ul {\n  list-style: outside disc;\n}\n.mp-preview-content[data-v-0c58d19c] ol {\n  list-style: outside decimal;\n}\n.mp-preview-content[data-v-0c58d19c] hr {\n  margin: 1em 0;\n  height: 0;\n  border: none;\n  border-bottom: solid 1px #eee;\n}\n.mp-editor-menu>li>a[data-v-0c58d19c] {\n  outline: 0;\n  color: #666;\n  cursor: pointer;\n  display: inline-block;\n  min-width: 24px;\n  font-size: 16px;\n  text-decoration: none;\n  text-align: center;\n  border: 1px solid #fff;\n  transition: all 300ms ease-out;\n}\n.mp-editor-menu>li>a.active[data-v-0c58d19c],\n.mp-editor-menu>li>a[data-v-0c58d19c]:hover {\n  border: 1px solid #ddd;\n  background-color: #eee;\n}\n.mp-editor-menu[data-v-0c58d19c] {\n  margin: 0;\n  padding-left: 8px;\n  list-style: none;\n}\n.mp-editor-menu>li>a>.fa[data-v-0c58d19c] {\n  text-align: center;\n  display: block;\n  padding: 5px 0;\n}\n.mp-editor-menu>li[data-v-0c58d19c] {\n  margin: 0;\n  padding: 5px 1px;\n  display: inline-block;\n  position: relative;\n}\n.mp-editor-menu>li .divider[data-v-0c58d19c] {\n  display: inline-block;\n  text-indent: -9999px;\n  margin: 0 5px;\n  height: 65%;\n  border-right: 1px solid #ddd;\n}\n",
@@ -2509,16 +2773,16 @@ const __vue_inject_styles__$6 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$6 = "data-v-0c58d19c";
+const __vue_scope_id__$7 = "data-v-0c58d19c";
 /* module identifier */
 
-const __vue_module_identifier__$6 = undefined;
+const __vue_module_identifier__$7 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$6 = false;
+const __vue_is_functional_template__$7 = false;
 /* component normalizer */
 
-function __vue_normalize__$6(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
+function __vue_normalize__$7(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
   const component = (typeof script === 'function' ? script.options : script) || {};
 
   {
@@ -2565,9 +2829,9 @@ function __vue_normalize__$6(template, style, script, scope, functional, moduleI
 /* style inject */
 
 
-function __vue_create_injector__$6() {
+function __vue_create_injector__$7() {
   const head = document.head || document.getElementsByTagName('head')[0];
-  const styles = __vue_create_injector__$6.styles || (__vue_create_injector__$6.styles = {});
+  const styles = __vue_create_injector__$7.styles || (__vue_create_injector__$7.styles = {});
   const isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
   return function addStyle(id, css) {
     if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
@@ -2621,10 +2885,10 @@ function __vue_create_injector__$6() {
 /* style inject SSR */
 
 
-var Editor = __vue_normalize__$6({
-  render: __vue_render__$6,
-  staticRenderFns: __vue_staticRenderFns__$6
-}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, __vue_create_injector__$6, undefined);
+var Editor = __vue_normalize__$7({
+  render: __vue_render__$7,
+  staticRenderFns: __vue_staticRenderFns__$7
+}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, __vue_create_injector__$7, undefined);
 
 const defaultContentParser = contentParserFactory(defaultConfig.parsers);
 

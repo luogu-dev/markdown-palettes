@@ -30,7 +30,7 @@
 </style>
 
 <script>
-import AbstractDialogComponent from './AbstractDialogComponent'
+import AbstractDialogComponent from './AbstractDialogFormComponent'
 
 export default {
     name: 'dialog-input',

@@ -10,7 +10,8 @@
                     </div>
 
                     <form class="mp-dialog-body" @submit.prevent="finish">
-                        <dialog-form :fields="this.request.body" v-model="responseData"></dialog-form>
+                        <dialog-form v-if="this.request.type === 'form'" :fields="this.request.body" v-model="responseData"></dialog-form>
+                        <dialog-tab v-else-if="this.request.type === 'tab'" :fields="this.request.body" v-model="responseData"></dialog-tab>
 
                         <div class="mp-dialog-footer">
                             <div>
@@ -106,6 +107,7 @@
 
 <script>
 import DialogForm from './DialogForm.vue'
+import DialogTab from './DialogTab.vue'
 
 export default {
     name: 'editor-dialog',
@@ -117,8 +119,12 @@ export default {
     },
     data () {
         const initialData = {}
-        this.request.body.forEach(function (field) {
-            initialData[field.name] = field.default ? field.default : ''
+        this.request.body.forEach((field) => {
+            if (this.request.type === 'form') {
+                initialData[field.name] = field.default ? field.default : ''
+            } else if (this.request.type === 'tab') {
+                initialData[field.name] = {}
+            }
         })
         return {
             responseData: initialData
@@ -137,7 +143,7 @@ export default {
             this.$emit('finish', this.response)
         }
     },
-    components: { DialogForm },
+    components: { DialogForm, DialogTab },
     inject: ['t']
 }
 </script>

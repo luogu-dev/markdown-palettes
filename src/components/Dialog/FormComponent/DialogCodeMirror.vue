@@ -18,7 +18,7 @@
 </style>
 
 <script>
-import AbstractDialogComponent from './AbstractDialogComponent'
+import AbstractDialogComponent from './AbstractDialogFormComponent'
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 

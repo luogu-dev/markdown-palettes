@@ -5,6 +5,7 @@ export default {
     action: {
         request: {
             title: '插入链接',
+            type: 'form',
             body: [
                 {
                     name: 'url',
