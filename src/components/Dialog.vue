@@ -9,7 +9,7 @@
                         <a class="fa fa-times mp-dialog-close" @click="close"></a>
                     </div>
 
-                    <form class="mp-dialog-body" @submit.prevent="finish" v-focus tabindex="-1">
+                    <form class="mp-dialog-body" @submit.prevent="finish" v-focus v-keep-focus tabindex="-1">
                         <div class="mp-dialog-form">
                             <div class="mp-dialog-field" v-for="field in request.body" :key="field.name">
                                 <component :is="field.type || field.component" :request-field="field" v-model="responseData[field.name]"></component>
@@ -119,6 +119,13 @@
 <script>
 import DialogComponents from './dialog-input-components/components'
 
+let windowKeepFocusEl = null
+window.addEventListener('focusin', ({ target }) => {
+    if (windowKeepFocusEl != null && !Array.prototype.includes.call(windowKeepFocusEl.querySelectorAll('*'), target)) {
+        windowKeepFocusEl.focus()
+    }
+})
+
 export default {
     name: 'editor-dialog',
     props: {
@@ -164,6 +171,14 @@ export default {
         focus: {
             inserted (el) {
                 el.focus()
+            }
+        },
+        keepFocus: {
+            bind (el) {
+                windowKeepFocusEl = el
+            },
+            unbind (el) {
+                windowKeepFocusEl = null
             }
         }
     },
