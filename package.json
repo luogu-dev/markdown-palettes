@@ -1,7 +1,7 @@
 {
   "name": "markdown-palettes",
   "description": "Markdown*Palettes: Markdown editor for the modern web.",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "author": "Luogu Dev Team",
   "license": "MIT",
   "module": "dist/MarkdownPalettes.esm.js",
