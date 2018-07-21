@@ -40,7 +40,7 @@ export default {
         },
         previewAreaUpdateLinesBounding () {
             const previewArea = this.$refs.previewArea
-            const previewContent = this.$refs.previewContent
+            const previewContent = this.$refs.previewContent.$el
             const outerTop = previewContent.getBoundingClientRect().top
             this.previewAreaLinesBounding = []
             previewArea.querySelectorAll('[data-line]').forEach(lineE => {

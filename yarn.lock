@@ -2761,6 +2761,13 @@ css-selector-tokenizer@^0.7.0:
     fastparse "^1.1.1"
     regexpu-core "^1.0.0"
 
+css-tree@^1.0.0-alpha.29:
+  version "1.0.0-alpha.29"
+  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-1.0.0-alpha.29.tgz#3fa9d4ef3142cbd1c301e7664c1f352bd82f5a39"
+  dependencies:
+    mdn-data "~1.1.0"
+    source-map "^0.5.3"
+
 css-what@2.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.0.tgz#9467d032c38cfaefb9f2d79501253062f87fa1bd"
@@ -4921,9 +4928,39 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+markdown-it-v-codemirror-highlighter@^1.0.0-alpha.1:
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/markdown-it-v-codemirror-highlighter/-/markdown-it-v-codemirror-highlighter-1.0.0-alpha.1.tgz#b20b012191e4f4208b9fda4b260565688f170183"
+  dependencies:
+    codemirror "^5.39.0"
+
+markdown-it-v-katex@^1.0.0-alpha.1:
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/markdown-it-v-katex/-/markdown-it-v-katex-1.0.0-alpha.1.tgz#b85a2848a46ed7f2eecd124352fb812f853381a2"
+  dependencies:
+    katex "^0.9.0"
+
+markdown-it-v@^1.0.0-alpha.2:
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/markdown-it-v/-/markdown-it-v-1.0.0-alpha.2.tgz#874e2d44f3c76902ebc5ddd2bccb085a21821204"
+  dependencies:
+    css-tree "^1.0.0-alpha.29"
+    lodash "^4.17.10"
+    markdown-it "^8.4.2"
+
 markdown-it@^8.4.1:
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.1.tgz#206fe59b0e4e1b78a7c73250af9b34a4ad0aaf44"
+  dependencies:
+    argparse "^1.0.7"
+    entities "~1.1.1"
+    linkify-it "^2.0.0"
+    mdurl "^1.0.1"
+    uc.micro "^1.0.5"
+
+markdown-it@^8.4.2:
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
   dependencies:
     argparse "^1.0.7"
     entities "~1.1.1"
@@ -4949,6 +4986,10 @@ md5.js@^1.3.4:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+mdn-data@~1.1.0:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-1.1.4.tgz#50b5d4ffc4575276573c4eedb8780812a8419f01"
 
 mdurl@^1.0.1:
   version "1.0.1"

@@ -24,7 +24,7 @@
                         'mp-editor-zone-full': previewDisplay === 'full'
                 }">
                 <div class="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
-                    <div class="mp-preview-content" ref="previewContent" v-html="previewContent"></div>
+                    <preview-area class="mp-preview-content" ref="previewContent" :content="previewContent"></preview-area>
                 </div>
             </div>
         </div>
@@ -179,6 +179,7 @@ import '@fortawesome/fontawesome-free/css/solid.css'
 import '@fortawesome/fontawesome-free/css/fontawesome.css'
 
 import Dialog from './components/Dialog/Dialog.vue'
+import PreviewArea from './components/PreviewArea.js'
 
 import InputAreaMixin from './mixins/InputAreaMixin'
 import PreviewAreaMixin from './mixins/PreviewAreaMixin'
@@ -256,6 +257,6 @@ export default {
     },
     provide: () => ({ t: getText }),
     mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin, ActionMixin],
-    components: { 'editor-dialog': Dialog }
+    components: { 'editor-dialog': Dialog, PreviewArea }
 }
 </script>

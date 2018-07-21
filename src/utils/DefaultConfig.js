@@ -1,8 +1,14 @@
-import KatexParser from '@luogu-dev/markdown-it-katex'
+// import parsers
+import MarkdownItV from 'markdown-it-v'
+import MarkdownItVCodemirrorHighlighter from 'markdown-it-v-codemirror-highlighter/dist/browserIndex.common.js'
+import MarkdownItVKatex from 'markdown-it-v-katex'
+
+// import styles
 import 'katex/dist/katex.css'
-import HighlightjsParser from '../parsers/HighlightjsParser'
-import 'highlight.js/styles/tomorrow.css'
+
+// import toolbar buttons
 import { defaultBtns, defaultSimpleBtns, getBtns } from '../components/ToolBarBtns/toolbarBtn'
+
 import _ from 'lodash'
 
 function mixin (dest, src) {
@@ -20,8 +26,9 @@ export const defaultConfig = {
     previewDisplay: 'normal',
     fullScreen: false,
     parsers: [
-        KatexParser,
-        HighlightjsParser
+        MarkdownItV,
+        MarkdownItVCodemirrorHighlighter,
+        MarkdownItVKatex
     ],
     toolbarConfig: defaultBtns,
     bigScreenToolbarConfig: defaultBtns,
