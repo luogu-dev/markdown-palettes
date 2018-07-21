@@ -6,6 +6,15 @@ import MarkdownItVKatex from 'markdown-it-v-katex'
 // import styles
 import 'katex/dist/katex.css'
 
+// import builtin languages
+import 'codemirror/mode/clike/clike'
+import 'codemirror/mode/css/css'
+import 'codemirror/mode/htmlmixed/htmlmixed'
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/mode/pascal/pascal'
+import 'codemirror/mode/php/php'
+import 'codemirror/mode/python/python'
+
 // import toolbar buttons
 import { defaultBtns, defaultSimpleBtns, getBtns } from '../components/ToolBarBtns/toolbarBtn'
 
