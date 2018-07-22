@@ -4930,9 +4930,9 @@ markdown-it-v-katex@^1.0.0-alpha.1:
   dependencies:
     katex "^0.9.0"
 
-markdown-it-v@^1.0.0-alpha.2:
-  version "1.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/markdown-it-v/-/markdown-it-v-1.0.0-alpha.2.tgz#874e2d44f3c76902ebc5ddd2bccb085a21821204"
+markdown-it-v@^1.0.0-alpha.3:
+  version "1.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/markdown-it-v/-/markdown-it-v-1.0.0-alpha.3.tgz#4b97f24a0054411b8e7d391016e85892984796bb"
   dependencies:
     css-tree "^1.0.0-alpha.29"
     lodash "^4.17.10"
