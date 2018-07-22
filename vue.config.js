@@ -1,4 +1,5 @@
 const IgnorePlugin = require('webpack').IgnorePlugin
+const NodeExternals = require('webpack-node-externals')
 
 module.exports = {
     pages: {
@@ -14,7 +15,8 @@ module.exports = {
         },
         plugins: [
             new IgnorePlugin(/^css-tree$/)
-        ]
+        ],
+        externals: [NodeExternals()]
     },
     productionSourceMap: false
 }
