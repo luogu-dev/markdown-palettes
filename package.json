@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "vue-cli-service serve --open",
     "prod-test": "vue-cli-service serve --open --mode production",
-    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js && rollup -c && cp demo.html dist && ./.after-build.sh",
+    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js && cp demo.html dist && ./.after-build.sh",
     "build-dev": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js --mode development",
     "lint": "vue-cli-service lint",
     "lint-fix": "vue-cli-service lint --fix",
@@ -38,9 +38,6 @@
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-vue-jsx": "^4.0.1",
     "babel-preset-modern-browsers": "^12.0.0-beta.1",
-    "rollup": "^0.62.0",
-    "rollup-plugin-babel": "^4.0.0-beta.7",
-    "rollup-plugin-vue": "^4.3.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.11",
