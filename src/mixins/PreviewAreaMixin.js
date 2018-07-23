@@ -1,14 +1,15 @@
 import _ from 'lodash'
+import CodeMirror from 'codemirror'
 
 export default {
     data () {
         return {
             previewAreaLinesBounding: [],
             previewAreaScrollSynced: false,
-            codemirrorLoadedLangs: [],
-            codemirrorFailedLangs: [],
-            codemirrorLoadingLangs: [],
-            codemirrorNeededLangs: [],
+            codemirrorLoadedModes: [],
+            codemirrorFailedModes: [],
+            codemirrorLoadingModes: [],
+            codemirrorNeededModes: [],
             previewContent: ''
         }
     },
@@ -33,20 +34,20 @@ export default {
         },
         contentParser () { this.previewContentReparse() },
         code () { this.previewContentReparse() },
-        codemirrorNeededLangs (langs) {
-            if (langs.length) {
-                for (const lang of langs) {
-                    const loadingLangs = this.codemirrorLoadingLangs
-                    loadingLangs.push(lang)
-                    langs.splice(langs.indexOf(lang), 1)
-                    import(`codemirror/mode/${lang}/${lang}.js`)
-                        .then(() => void this.codemirrorLoadedLangs.push(lang),
-                              () => void this.codemirrorFailedLangs.push(lang))
-                        .finally(() => void loadingLangs.splice(langs.indexOf(lang), 1))
+        codemirrorNeededModes (modes) {
+            if (modes.length) {
+                for (const mode of modes) {
+                    const loadingModes = this.codemirrorLoadingModes
+                    loadingModes.push(mode)
+                    modes.splice(modes.indexOf(mode), 1)
+                    import(`codemirror/mode/${mode}/${mode}.js`)
+                        .then(() => void this.codemirrorLoadedModes.push(mode),
+                              () => void this.codemirrorFailedModes.push(mode))
+                        .finally(() => void loadingModes.splice(modes.indexOf(mode), 1))
                 }
             }
         },
-        codemirrorLoadedLangs () { this.previewContentReparse() }
+        codemirrorLoadedModes () { this.previewContentReparse() }
     },
     methods: {
         previewAreaMaintainLinesBounding () {
@@ -190,13 +191,14 @@ export default {
                     node.children.forEach(dfs)
                 }
             }
-            dfs(this.previewContent.currentNode);
-            ([...usedLangSet]).filter(lang =>
-                !this.codemirrorLoadedLangs.includes(lang) &&
-                !this.codemirrorFailedLangs.includes(lang) &&
-                !this.codemirrorLoadingLangs.includes(lang) &&
-                !this.codemirrorNeededLangs.includes(lang))
-                .forEach(lang => void this.codemirrorNeededLangs.push(lang))
+            dfs(this.previewContent.currentNode)
+            const usedModeSet = new Set([...usedLangSet].map(lang => CodeMirror.findModeByName(lang)).filter(x => x).map(({ mode }) => mode));
+            ([...usedModeSet]).filter(mode =>
+                !this.codemirrorLoadedModes.includes(mode) &&
+                !this.codemirrorFailedModes.includes(mode) &&
+                !this.codemirrorLoadingModes.includes(mode) &&
+                !this.codemirrorNeededModes.includes(mode))
+                .forEach(mode => void this.codemirrorNeededModes.push(mode))
         }
     }
 }

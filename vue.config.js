@@ -9,9 +9,6 @@ module.exports = {
         }
     },
     configureWebpack: {
-        output: {
-            libraryExport: 'default'
-        },
         plugins: [
             new IgnorePlugin(/^css-tree$/)
         ]
