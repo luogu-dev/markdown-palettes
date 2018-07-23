@@ -1,7 +1,9 @@
 <template>
     <div class="mp-dialog-codemirror">
         <label v-if="title">{{ title }}</label>
-        <div class="mp-dialog-codemirror-editor" ref="inputArea"></div>
+        <div
+            ref="inputArea"
+            class="mp-dialog-codemirror-editor"/>
     </div>
 </template>
 
@@ -30,11 +32,6 @@ export default {
             editor: null
         }
     },
-    mounted () {
-        this.editor = CodeMirror(this.$refs.inputArea, this.editorOption)
-        this.editor.setValue(this.value)
-        this.editor.on('change', cm => void (this.value = cm.getValue()))
-    },
     computed: {
         editorOption () {
             const defaultSetting = {
@@ -52,6 +49,11 @@ export default {
                 this.editor.setValue(val)
             }
         }
-    }
+    },
+    mounted () {
+        this.editor = CodeMirror(this.$refs.inputArea, this.editorOption)
+        this.editor.setValue(this.value)
+        this.editor.on('change', cm => void (this.value = cm.getValue()))
+    },
 }
 </script>

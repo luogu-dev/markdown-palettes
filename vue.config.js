@@ -1,3 +1,5 @@
+const IgnorePlugin = require('webpack').IgnorePlugin
+
 module.exports = {
     pages: {
         index: {
@@ -7,7 +9,11 @@ module.exports = {
         }
     },
     configureWebpack: {
+        plugins: [
+            new IgnorePlugin(/^css-tree$/)
+        ],
         output: {
+            globalObject: `(typeof self !== 'undefined' ? self : this)`,
             libraryExport: 'default'
         }
     },

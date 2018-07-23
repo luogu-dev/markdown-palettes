@@ -1,15 +1,16 @@
 import _ from 'lodash'
+import CodeMirror from 'codemirror'
 
 export default {
     data () {
         return {
             previewAreaLinesBounding: [],
-            previewAreaScrollSynced: false
-        }
-    },
-    computed: {
-        previewContent () {
-            return this.contentParser(this.code)
+            previewAreaScrollSynced: false,
+            codemirrorLoadedModes: [],
+            codemirrorFailedModes: [],
+            codemirrorLoadingModes: [],
+            codemirrorNeededModes: [],
+            previewContent: ''
         }
     },
     created () {
@@ -22,12 +23,31 @@ export default {
             } else {
                 this.previewAreaLinesBounding = []
             }
+            if (typeof val !== 'string') {
+                this.codemirrorLoadLeakLangs()
+            }
         },
         scrollSync (val) {
             if (val && this.previewAreaLinesBounding.length === 0) {
                 this.previewAreaMaintainLinesBounding()
             }
-        }
+        },
+        contentParser () { this.previewContentReparse() },
+        code () { this.previewContentReparse() },
+        codemirrorNeededModes (modes) {
+            if (modes.length) {
+                for (const mode of modes) {
+                    const loadingModes = this.codemirrorLoadingModes
+                    loadingModes.push(mode)
+                    modes.splice(modes.indexOf(mode), 1)
+                    import(`codemirror/mode/${mode}/${mode}.js`)
+                        .then(() => void this.codemirrorLoadedModes.push(mode),
+                            () => void this.codemirrorFailedModes.push(mode))
+                        .finally(() => void loadingModes.splice(modes.indexOf(mode), 1))
+                }
+            }
+        },
+        codemirrorLoadedModes () { this.previewContentReparse() }
     },
     methods: {
         previewAreaMaintainLinesBounding () {
@@ -40,7 +60,7 @@ export default {
         },
         previewAreaUpdateLinesBounding () {
             const previewArea = this.$refs.previewArea
-            const previewContent = this.$refs.previewContent
+            const previewContent = this.$refs.previewContent.$el
             const outerTop = previewContent.getBoundingClientRect().top
             this.previewAreaLinesBounding = []
             previewArea.querySelectorAll('[data-line]').forEach(lineE => {
@@ -155,6 +175,30 @@ export default {
                 this.previewAreaScrollSynced = true
                 previewArea.scrollTop += scroll
             }
+        },
+        previewContentReparse () {
+            this.previewContent = this.contentParser(this.code)
+        },
+        codemirrorLoadLeakLangs () {
+            const usedLangSet = new Set()
+            function dfs (node) {
+                if (node.tagName === 'code') {
+                    const match = /(?:^|\s)language-(.+)(?:$|\s)/.exec(node.attrs['class'])
+                    if (match) {
+                        usedLangSet.add(match[1])
+                    }
+                } else if (node.children) {
+                    node.children.forEach(dfs)
+                }
+            }
+            dfs(this.previewContent.currentNode)
+            const usedModeSet = new Set([...usedLangSet].map(lang => CodeMirror.findModeByName(lang)).filter(x => x).map(({ mode }) => mode));
+            ([...usedModeSet]).filter(mode =>
+                !this.codemirrorLoadedModes.includes(mode) &&
+                !this.codemirrorFailedModes.includes(mode) &&
+                !this.codemirrorLoadingModes.includes(mode) &&
+                !this.codemirrorNeededModes.includes(mode))
+                .forEach(mode => void this.codemirrorNeededModes.push(mode))
         }
     }
 }

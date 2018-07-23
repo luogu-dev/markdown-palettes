@@ -4,42 +4,37 @@
   "version": "0.4.6",
   "author": "Luogu Dev Team",
   "license": "MIT",
-  "module": "dist/MarkdownPalettes.esm.js",
   "main": "dist/MarkdownPalettes.common.js",
   "style": "dist/MarkdownPalettes.css",
   "scripts": {
     "dev": "vue-cli-service serve --open",
     "prod-test": "vue-cli-service serve --open --mode production",
-    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js && rollup -c && cp demo.html dist && ./.after-build.sh",
+    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js && cp demo.html dist && ./.after-build.sh",
     "build-dev": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js --mode development",
     "lint": "vue-cli-service lint",
     "lint-fix": "vue-cli-service lint --fix",
-    "analyze": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js --report"
+    "analyze": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js --report",
+    "test-dist": "node ./test_dist_server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.1.0",
-    "@luogu-dev/markdown-it-katex": "^0.0.1",
     "axios": "^0.18.0",
     "codemirror": "^5.39.0",
-    "highlight.js": "^9.12.0",
     "katex": "^0.9.0",
     "lodash": "^4.17.4",
-    "markdown-it": "^8.4.1"
+    "markdown-it": "^8.4.2",
+    "markdown-it-v": "^1.0.0-alpha.3",
+    "markdown-it-v-codemirror-highlighter": "^1.0.0-alpha.1",
+    "markdown-it-v-katex": "^1.0.0-alpha.1"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-jsx": "^7.0.0-beta.53",
-    "@babel/preset-env": "^7.0.0-beta.53",
-    "@babel/preset-stage-3": "^7.0.0-beta.53",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
     "@vue/eslint-config-standard": "^3.0.0-rc.3",
     "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-transform-vue-jsx": "^4.0.1",
-    "babel-preset-modern-browsers": "^12.0.0-beta.1",
-    "rollup": "^0.62.0",
-    "rollup-plugin-babel": "^4.0.0-beta.7",
-    "rollup-plugin-vue": "^4.3.1",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.11",
@@ -47,5 +42,12 @@
   },
   "peerDependencies": {
     "vue": "^2.5.11"
-  }
+  },
+  "browserslist": [
+    "Edge >= 15",
+    "Firefox >= 53",
+    "Chrome >= 55",
+    "Opera >= 42",
+    "Safari >= 10.1"
+  ]
 }

@@ -1,12 +1,8 @@
 {
     "presets": [
-        ["modern-browsers", {
-            "modules": false
-        }],
-        "@babel/preset-stage-3"
+        "@vue/babel-preset-app"
     ],
     "plugins": [
-        "transform-vue-jsx",
         "lodash"
     ]
 }

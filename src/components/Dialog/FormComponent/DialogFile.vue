@@ -1,7 +1,10 @@
 <template>
     <div class="mp-dialog-input">
         <label>{{ title }}</label>
-        <input type="file" name="picture" @change="handleFile">
+        <input
+            type="file"
+            name="picture"
+            @change="handleFile">
     </div>
 </template>
 

@@ -1,0 +1,11 @@
+root: true
+extends:
+  - "plugin:vue/recommended"
+  - "@vue/standard"
+  - "eslint:recommended"
+rules:
+  indent: [error, 4]
+  vue/name-property-casing: "off"
+  vue/html-indent: [error, 4]
+parserOptions:
+  parser: babel-eslint
