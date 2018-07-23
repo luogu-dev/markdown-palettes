@@ -4,7 +4,6 @@
   "version": "0.4.6",
   "author": "Luogu Dev Team",
   "license": "MIT",
-  "module": "dist/MarkdownPalettes.esm.js",
   "main": "dist/MarkdownPalettes.common.js",
   "style": "dist/MarkdownPalettes.css",
   "scripts": {
