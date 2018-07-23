@@ -4,12 +4,12 @@ export default {
     data () {
         return {
             previewAreaLinesBounding: [],
-            previewAreaScrollSynced: false
-        }
-    },
-    computed: {
-        previewContent () {
-            return this.contentParser(this.code)
+            previewAreaScrollSynced: false,
+            codemirrorLoadedLangs: [],
+            codemirrorFailedLangs: [],
+            codemirrorLoadingLangs: [],
+            codemirrorNeededLangs: [],
+            previewContent: ''
         }
     },
     created () {
@@ -22,12 +22,31 @@ export default {
             } else {
                 this.previewAreaLinesBounding = []
             }
+            if (typeof val !== 'string') {
+                this.codemirrorLoadLeakLangs()
+            }
         },
         scrollSync (val) {
             if (val && this.previewAreaLinesBounding.length === 0) {
                 this.previewAreaMaintainLinesBounding()
             }
-        }
+        },
+        contentParser () { this.previewContentReparse() },
+        code () { this.previewContentReparse() },
+        codemirrorNeededLangs (langs) {
+            if (langs.length) {
+                for (const lang of langs) {
+                    const loadingLangs = this.codemirrorLoadingLangs
+                    loadingLangs.push(lang)
+                    langs.splice(langs.indexOf(lang), 1)
+                    import(`codemirror/mode/${lang}/${lang}.js`)
+                        .then(() => void this.codemirrorLoadedLangs.push(lang),
+                              () => void this.codemirrorFailedLangs.push(lang))
+                        .finally(() => void loadingLangs.splice(langs.indexOf(lang), 1))
+                }
+            }
+        },
+        codemirrorLoadedLangs () { this.previewContentReparse() }
     },
     methods: {
         previewAreaMaintainLinesBounding () {
@@ -155,6 +174,29 @@ export default {
                 this.previewAreaScrollSynced = true
                 previewArea.scrollTop += scroll
             }
+        },
+        previewContentReparse () {
+            this.previewContent = this.contentParser(this.code)
+        },
+        codemirrorLoadLeakLangs () {
+            const usedLangSet = new Set()
+            function dfs (node) {
+                if (node.tagName === 'code') {
+                    const match = /(?:^|\s)language-(.+)(?:$|\s)/.exec(node.attrs['class'])
+                    if (match) {
+                        usedLangSet.add(match[1])
+                    }
+                } else if (node.children) {
+                    node.children.forEach(dfs)
+                }
+            }
+            dfs(this.previewContent.currentNode);
+            ([...usedLangSet]).filter(lang =>
+                !this.codemirrorLoadedLangs.includes(lang) &&
+                !this.codemirrorFailedLangs.includes(lang) &&
+                !this.codemirrorLoadingLangs.includes(lang) &&
+                !this.codemirrorNeededLangs.includes(lang))
+                .forEach(lang => void this.codemirrorNeededLangs.push(lang))
         }
     }
 }
