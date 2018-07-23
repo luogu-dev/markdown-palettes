@@ -6,17 +6,33 @@
 
                     <div class="mp-dialog-header">
                         <strong>{{ t(request.title) }}</strong>
-                        <a class="fa fa-times mp-dialog-close" @click="close"></a>
+                        <a
+                            class="fa fa-times mp-dialog-close"
+                            @click="close"/>
                     </div>
 
-                    <form class="mp-dialog-body" @submit.prevent="finish">
-                        <dialog-form v-if="this.request.type === 'form'" :fields="this.request.body" v-model="responseData"></dialog-form>
-                        <dialog-tab v-else-if="this.request.type === 'tab'" :fields="this.request.body" v-model="responseData"></dialog-tab>
+                    <form
+                        class="mp-dialog-body"
+                        @submit.prevent="finish">
+                        <dialog-form
+                            v-if="this.request.type === 'form'"
+                            :fields="this.request.body"
+                            v-model="responseData"/>
+                        <dialog-tab
+                            v-else-if="this.request.type === 'tab'"
+                            :fields="this.request.body"
+                            v-model="responseData"/>
 
                         <div class="mp-dialog-footer">
                             <div>
-                                <button class="mp-dialog-button" type="button" @click="close">{{ t('取消') }}</button>
-                                <button class="mp-dialog-button" type="submit" style="margin-right: 7px">{{ t('确定') }}</button>
+                                <button
+                                    class="mp-dialog-button"
+                                    type="button"
+                                    @click="close">{{ t('取消') }}</button>
+                                <button
+                                    class="mp-dialog-button"
+                                    type="submit"
+                                    style="margin-right: 7px">{{ t('确定') }}</button>
                             </div>
                         </div>
                     </form>
@@ -111,6 +127,7 @@ import DialogTab from './DialogTab.vue'
 
 export default {
     name: 'editor-dialog',
+    components: { DialogForm, DialogTab },
     props: {
         request: {
             type: Object,
@@ -143,7 +160,6 @@ export default {
             this.$emit('finish', this.response)
         }
     },
-    components: { DialogForm, DialogTab },
     inject: ['t']
 }
 </script>

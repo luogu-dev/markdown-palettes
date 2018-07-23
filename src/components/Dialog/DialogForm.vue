@@ -1,7 +1,13 @@
 <template>
     <div class="dialog-form">
-        <div class="mp-dialog-field" v-for="field in fields" :key="field.name">
-            <component :is="field.type || field.component" :request-field="field" v-model="data[field.name]"></component>
+        <div
+            v-for="field in fields"
+            :key="field.name"
+            class="mp-dialog-field">
+            <component
+                :is="field.type || field.component"
+                :request-field="field"
+                v-model="data[field.name]"/>
         </div>
     </div>
 </template>
@@ -11,6 +17,11 @@ import DialogComponents from './FormComponent/DialogFormComponentMap'
 
 export default {
     name: 'dialog-form',
+    components: DialogComponents,
+    model: {
+        prop: 'value',
+        event: 'change'
+    },
     props: {
         fields: {
             type: Array,
@@ -20,10 +31,6 @@ export default {
             type: Object,
             required: true
         }
-    },
-    model: {
-        prop: 'value',
-        event: 'change'
     },
     data () {
         const initialData = {}
@@ -43,7 +50,6 @@ export default {
             }
         }
     },
-    components: DialogComponents,
     inject: ['t']
 }
 </script>

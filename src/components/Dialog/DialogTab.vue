@@ -2,20 +2,30 @@
     <div class="dialog-tab">
         <div class="dialog-switch-container">
             <ul>
-                <li class="dialog-switch" :class="{
+                <li
+                    v-for="(category, index) in this.fields"
+                    :class="{
                         'dialog-switch-focus': selectId === index,
                         'dialog-switch-not-focus': selectId !== index,
                         'dialog-switch-not-last': index !== count - 1
-                    }" :style="{'width': (100 / count) + '%'}"
-                    v-for="(category, index) in this.fields" :key="category.name" @click="focus(index)">
+                    }"
+                    :style="{'width': (100 / count) + '%'}"
+                    :key="category.name"
+                    class="dialog-switch"
+                    @click="focus(index)">
                     <strong>{{ category.title }} </strong>
                 </li>
             </ul>
         </div>
         <div class="dialog-panel-container">
-            <div class="dialog-panel" :class="selectId === index ? 'dialog-panel-focus' : 'dialog-panel-hide'"
-                 v-for="(category, index) in this.fields" :key="category.name">
-                <dialog-form :fields="category.body" v-model="data[category.name]"></dialog-form>
+            <div
+                v-for="(category, index) in this.fields"
+                :class="selectId === index ? 'dialog-panel-focus' : 'dialog-panel-hide'"
+                :key="category.name"
+                class="dialog-panel">
+                <dialog-form
+                    :fields="category.body"
+                    v-model="data[category.name]"/>
             </div>
         </div>
     </div>
@@ -26,6 +36,7 @@ import DialogForm from './DialogForm.vue'
 
 export default {
     name: 'dialog-tab',
+    components: { DialogForm },
     props: {
         fields: {
             type: Array,
@@ -63,7 +74,6 @@ export default {
             this.selectId = index
         }
     },
-    components: { DialogForm },
     inject: ['t']
 }
 </script>

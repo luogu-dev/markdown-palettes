@@ -1,36 +1,64 @@
 <template>
-    <div class="mp-editor-container" :class="{'mp-full-screen': this.fullScreen}">
-        <div class="mp-editor-toolbar" v-if="toolbarBtns.length">
+    <div
+        :class="{'mp-full-screen': this.fullScreen}"
+        class="mp-editor-container">
+        <div
+            v-if="toolbarBtns.length"
+            class="mp-editor-toolbar">
             <ul class="mp-editor-menu">
-                <li v-for="(item, index) in toolbarBtns" :class="{'mp-divider':item.name === '|'}" :key="item.name + index">
+                <li
+                    v-for="(item, index) in toolbarBtns"
+                    :class="{'mp-divider':item.name === '|'}"
+                    :key="item.name + index">
                     <span v-if="item.name === '|'">|</span>
-                    <a v-else :title="t(ensureValue(item.title))" @click="toolbarAction(item)" unselectable="on">
-                        <i :class="['fa', ensureValue(item.icon)]" unselectable="on">{{ ensureValue(item.content) }}</i>
+                    <a
+                        v-else
+                        :title="t(ensureValue(item.title))"
+                        unselectable="on"
+                        @click="toolbarAction(item)">
+                        <i
+                            :class="['fa', ensureValue(item.icon)]"
+                            unselectable="on">{{ ensureValue(item.content) }}</i>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="mp-editor-ground">
-            <div class="mp-editor-zone mp-input-zone" :class="{
-                        'mp-editor-zone': previewDisplay === 'normal',
-                        'mp-editor-zone-full': previewDisplay === 'hide',
-                        'mp-editor-zone-hide': previewDisplay === 'full'
-                 }">
-                <div class="mp-input-area" ref="inputArea"></div>
+            <div
+                :class="{
+                    'mp-editor-zone': previewDisplay === 'normal',
+                    'mp-editor-zone-full': previewDisplay === 'hide',
+                    'mp-editor-zone-hide': previewDisplay === 'full'
+                }"
+                class="mp-editor-zone mp-input-zone">
+                <div
+                    ref="inputArea"
+                    class="mp-input-area"/>
             </div>
-            <div class="mp-editor-zone mp-preview-zone" :class="{
-                        'mp-editor-zone': previewDisplay === 'normal',
-                        'mp-editor-zone-hide': previewDisplay === 'hide',
-                        'mp-editor-zone-full': previewDisplay === 'full'
-                }">
-                <div class="mp-preview-area" ref="previewArea" @scroll="previewAreaScroll">
-                    <preview-area class="mp-preview-content" ref="previewContent" :content="previewContent"></preview-area>
+            <div
+                :class="{
+                    'mp-editor-zone': previewDisplay === 'normal',
+                    'mp-editor-zone-hide': previewDisplay === 'hide',
+                    'mp-editor-zone-full': previewDisplay === 'full'
+                }"
+                class="mp-editor-zone mp-preview-zone">
+                <div
+                    ref="previewArea"
+                    class="mp-preview-area"
+                    @scroll="previewAreaScroll">
+                    <preview-area
+                        ref="previewContent"
+                        :content="previewContent"
+                        class="mp-preview-content"/>
                 </div>
             </div>
         </div>
         <div>
-            <editor-dialog v-if="showDialog" :request="dialogRequest"
-                @finish="dialogFinish" @close="closeDialog"></editor-dialog>
+            <editor-dialog
+                v-if="showDialog"
+                :request="dialogRequest"
+                @finish="dialogFinish"
+                @close="closeDialog"/>
         </div>
     </div>
 </template>
@@ -193,6 +221,8 @@ import { getText } from './utils/i18n'
 
 export default {
     name: 'markdown-palettes',
+    components: { 'editor-dialog': Dialog, PreviewArea },
+    mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin, ActionMixin],
     props: {
         value: {
             type: String,
@@ -224,6 +254,11 @@ export default {
             }
         }
     },
+    watch: {
+        value (newValue) {
+            this.setCode(newValue)
+        }
+    },
     methods: {
         setCode (code) {
             this.code = code
@@ -250,13 +285,6 @@ export default {
 
         t: getText
     },
-    watch: {
-        value (newValue) {
-            this.setCode(newValue)
-        }
-    },
     provide: () => ({ t: getText }),
-    mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin, ActionMixin],
-    components: { 'editor-dialog': Dialog, PreviewArea }
 }
 </script>

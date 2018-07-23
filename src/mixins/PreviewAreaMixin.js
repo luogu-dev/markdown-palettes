@@ -42,7 +42,7 @@ export default {
                     modes.splice(modes.indexOf(mode), 1)
                     import(`codemirror/mode/${mode}/${mode}.js`)
                         .then(() => void this.codemirrorLoadedModes.push(mode),
-                              () => void this.codemirrorFailedModes.push(mode))
+                            () => void this.codemirrorFailedModes.push(mode))
                         .finally(() => void loadingModes.splice(modes.indexOf(mode), 1))
                 }
             }

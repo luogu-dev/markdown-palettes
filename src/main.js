@@ -3,7 +3,7 @@ import Editor from './module.js'
 
 // eslint-disable-next-line
 const app = new Vue({
-    functional: true,
     el: '#editor',
+    functional: true,
     render: h => h(Editor)
 })
