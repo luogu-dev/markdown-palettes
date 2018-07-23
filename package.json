@@ -28,16 +28,11 @@
     "markdown-it-v-katex": "^1.0.0-alpha.1"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-jsx": "^7.0.0-beta.53",
-    "@babel/preset-env": "^7.0.0-beta.53",
-    "@babel/preset-stage-3": "^7.0.0-beta.53",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
     "@vue/eslint-config-standard": "^3.0.0-rc.3",
     "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-transform-vue-jsx": "^4.0.1",
-    "babel-preset-modern-browsers": "^12.0.0-beta.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.11",
@@ -45,5 +40,12 @@
   },
   "peerDependencies": {
     "vue": "^2.5.11"
-  }
+  },
+  "browserslist": [
+    "Edge >= 15",
+    "Firefox >= 53",
+    "Chrome >= 55",
+    "Opera >= 42",
+    "Safari >= 10.1"
+  ]
 }
