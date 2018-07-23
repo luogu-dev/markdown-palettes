@@ -41,8 +41,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.11",
-    "vue-template-compiler": "^2.5.16",
-    "webpack-node-externals": "^1.7.2"
+    "vue-template-compiler": "^2.5.16"
   },
   "peerDependencies": {
     "vue": "^2.5.11"
