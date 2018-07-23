@@ -3,7 +3,7 @@
         <div class="dialog-switch-container">
             <ul>
                 <li
-                    v-for="(category, index) in this.fields"
+                    v-for="(category, index) in fields"
                     :class="{
                         'dialog-switch-focus': selectId === index,
                         'dialog-switch-not-focus': selectId !== index,
@@ -19,7 +19,7 @@
         </div>
         <div class="dialog-panel-container">
             <div
-                v-for="(category, index) in this.fields"
+                v-for="(category, index) in fields"
                 :class="selectId === index ? 'dialog-panel-focus' : 'dialog-panel-hide'"
                 :key="category.name"
                 class="dialog-panel">

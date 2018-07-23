@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="{'mp-full-screen': this.fullScreen}"
+        :class="{'mp-full-screen': fullScreen}"
         class="mp-editor-container">
         <div
             v-if="toolbarBtns.length"
