@@ -261,8 +261,10 @@ export default {
     },
     methods: {
         setCode (code) {
-            this.code = code
-            this.editor.setValue(code)
+            if (this.code !== code) {
+                this.code = code
+                this.editor.setValue(code)
+            }
         },
         getCode () {
             return this.code
