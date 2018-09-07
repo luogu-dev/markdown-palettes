@@ -14,11 +14,16 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5"></script>
     <script src="MarkdownPalettes.umd.js"></script>
     <script>
-        var app = new Vue({
-            functional: true,
-            el: '#editor',
-            render: h => h(MarkdownPalettes)
-        })
+      const app = new Vue({
+        template: '<markdown-palettes v-model="code"/>',
+        el: '#editor',
+        data: {
+          code: '# Demo'
+        },
+        components: {
+          MarkdownPalettes
+        }
+      })
     </script>
   </body>
 </html>
