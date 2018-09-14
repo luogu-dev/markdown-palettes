@@ -16,6 +16,7 @@
     "analyze": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js --report",
     "test-dist": "hs dist"
   },
+  "typings": "./types/index.d.ts",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.1.0",
     "axios": "^0.18.0",
@@ -33,9 +34,15 @@
     "@vue/cli-service": "^3.0.0-beta.15",
     "@vue/eslint-config-standard": "^3.0.0-rc.3",
     "babel-plugin-lodash": "^3.3.4",
+    "eslint": "^4.19.1",
+    "eslint-plugin-typescript": "^0.12.0",
+    "eslint-plugin-vue": "^4.5.0",
     "http-server": "^0.11.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.0.3",
     "vue": "^2.5.11",
     "vue-template-compiler": "^2.5.16"
   },
