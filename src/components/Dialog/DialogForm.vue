@@ -16,7 +16,7 @@
 import DialogComponents from './FormComponent/DialogFormComponentMap'
 
 export default {
-    name: 'dialog-form',
+    name: 'DialogForm',
     components: DialogComponents,
     model: {
         prop: 'value',

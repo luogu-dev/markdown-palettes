@@ -220,7 +220,7 @@ import InjectLnParser from './parsers/InjectLnParser.js'
 import { getText } from './utils/i18n'
 
 export default {
-    name: 'markdown-palettes',
+    name: 'MarkdownPalettes',
     components: { 'editor-dialog': Dialog, PreviewArea },
     mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin, ActionMixin],
     props: {
@@ -287,6 +287,6 @@ export default {
 
         t: getText
     },
-    provide: () => ({ t: getText }),
+    provide: () => ({ t: getText })
 }
 </script>

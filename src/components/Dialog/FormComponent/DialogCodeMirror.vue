@@ -25,7 +25,7 @@ import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 
 export default {
-    name: 'dialog-codemirror',
+    name: 'DialogCodemirror',
     extends: AbstractDialogComponent,
     data () {
         return {
@@ -54,6 +54,6 @@ export default {
         this.editor = CodeMirror(this.$refs.inputArea, this.editorOption)
         this.editor.setValue(this.value)
         this.editor.on('change', cm => void (this.value = cm.getValue()))
-    },
+    }
 }
 </script>
