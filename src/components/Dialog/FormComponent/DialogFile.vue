@@ -35,7 +35,7 @@
 import abstractInputComponent from './AbstractDialogFormComponent'
 
 export default {
-    name: 'file',
+    name: 'File',
     extends: abstractInputComponent,
     methods: {
         async handleFile (event) {

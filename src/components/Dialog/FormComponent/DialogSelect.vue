@@ -39,7 +39,7 @@
 import AbstractDialogComponent from './AbstractDialogFormComponent'
 
 export default {
-    name: 'dialog-select',
+    name: 'DialogSelect',
     extends: AbstractDialogComponent
 }
 </script>

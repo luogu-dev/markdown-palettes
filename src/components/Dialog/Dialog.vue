@@ -126,7 +126,7 @@ import DialogForm from './DialogForm.vue'
 import DialogTab from './DialogTab.vue'
 
 export default {
-    name: 'editor-dialog',
+    name: 'EditorDialog',
     components: { DialogForm, DialogTab },
     props: {
         request: {

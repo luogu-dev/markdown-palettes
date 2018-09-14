@@ -1,5 +1,5 @@
 export default {
-    name: 'info',
+    name: 'Info',
     icon: 'fa-info-circle',
     title: '关于',
     action () {

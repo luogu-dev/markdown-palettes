@@ -35,7 +35,7 @@
 import DialogForm from './DialogForm.vue'
 
 export default {
-    name: 'dialog-tab',
+    name: 'DialogTab',
     components: { DialogForm },
     props: {
         fields: {
