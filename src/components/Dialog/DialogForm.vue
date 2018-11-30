@@ -45,7 +45,7 @@ export default {
     watch: {
         data: {
             deep: true,
-            callback (newData) {
+            handler (newData) {
                 this.$emit('change', newData)
             }
         }

@@ -2,9 +2,8 @@ export default {
     name: 'img',
     icon: 'fa-code',
     title: '插入代码',
-    action () {
-        const selection = this.editor.getSelection()
-        const request = {
+    action: {
+        request: {
             title: '插入代码',
             type: 'form',
             body: [
@@ -56,17 +55,12 @@ export default {
                 },
                 {
                     name: 'code',
-                    type: 'dialog-codemirror',
-                    default: selection
+                    type: 'dialog-codemirror'
                 }
             ],
             callback: (data) => {
-                this.editor.replaceSelection('```' + data.lang + '\n' +
-                    data.code + '\n' +
-                    '```\n')
-                this.editor.focus()
+                return '```' + data.lang + '\n' + data.code + '\n' + '```\n';
             }
         }
-        this.requestData(request)
     }
 }

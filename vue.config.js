@@ -17,8 +17,6 @@ module.exports = {
             libraryExport: 'default'
         }
     },
-    transpileDependencies: [
-        /markdown-it-v/
-    ],
+    transpileDependencies: [],
     productionSourceMap: false
 }
