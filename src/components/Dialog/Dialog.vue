@@ -23,6 +23,12 @@
                             :fields="request.body"
                             v-model="responseData"/>
 
+                        <component
+                            v-for="(component, index) in request.body"
+                            v-else-if="request.type === 'component'"
+                            :key="`dialog-component-${index}`"
+                            :is="component"/>
+
                         <div class="mp-dialog-footer">
                             <div>
                                 <button
@@ -140,6 +146,8 @@ export default {
                 initialData[field.name] = field.default ? field.default : ''
             } else if (this.request.type === 'tab') {
                 initialData[field.name] = {}
+            } else if(this.request.type === 'component') {
+                initialData[field.name] = null
             }
         })
         return {
