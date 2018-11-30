@@ -5,6 +5,7 @@ export default {
     action: {
         request: {
             title: '插入图片',
+            type: 'form',
             body: [
                 {
                     name: 'address',

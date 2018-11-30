@@ -2,7 +2,7 @@ export default {
     methods: {
         toolbarAction (btn) {
             if (typeof btn.action === 'function') {
-                btn.action.callback(this)
+                btn.action.call(this)
             } else {
                 this.toolbarHandleActionLegacy(btn.action)
             }

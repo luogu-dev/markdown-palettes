@@ -17,6 +17,7 @@ module.exports = {
             libraryExport: 'default'
         }
     },
-    transpileDependencies: [],
+    transpileDependencies: [
+    ],
     productionSourceMap: false
 }
