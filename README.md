@@ -73,7 +73,7 @@ This is recommended if you use other Vue components in your HTML page.
 <script>
   var app = new Vue({
     el: '#editor-container',
-    components: [MarkdownPalettes],
+    components: { MarkdownPalettes },
     data: () => { value: 'Hello, **Markdown*Palettes**!' }
   })
 </script>
