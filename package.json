@@ -23,8 +23,8 @@
     "katex": "^0.9.0",
     "lodash": "^4.17.4",
     "markdown-it": "^8.4.2",
-    "markdown-it-v": "^1.0.0-alpha.3",
-    "markdown-it-v-codemirror-highlighter": "^1.0.0-alpha.1",
+    "markdown-it-v": "^1.2.0",
+    "markdown-it-v-codemirror-highlighter": "^1.0.0",
     "markdown-it-v-katex": "^1.0.0-alpha.1"
   },
   "devDependencies": {

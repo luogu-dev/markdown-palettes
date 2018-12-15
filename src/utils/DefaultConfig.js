@@ -1,6 +1,6 @@
 // import parsers
 import MarkdownItV from 'markdown-it-v'
-import MarkdownItVCodemirrorHighlighter from 'markdown-it-v-codemirror-highlighter/dist/browserIndex.common.js'
+import MarkdownItVCodemirrorHighlighter from 'markdown-it-v-codemirror-highlighter/dist/browserIndex.esm.js'
 import MarkdownItVKatex from 'markdown-it-v-katex'
 
 // import styles
