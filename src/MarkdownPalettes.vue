@@ -166,6 +166,10 @@
         height: 0
         border: none
         border-bottom: solid 1px #eee
+    .mp-preview-content >>> blockquote
+        padding: 10px 20px
+        margin: 0 0 20px
+        border-left: 5px solid #eee
 
     .mp-editor-menu>li>a
         outline: 0
