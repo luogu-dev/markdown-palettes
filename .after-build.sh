@@ -19,7 +19,7 @@ cat - >> $dist << EOF
           this.editor = new Vue(mp)
           this.editor.\$mount(el)
       }
-      getContentParaser () {
+      getContentParser () {
           return this.editor.contentParser
       }
   }
