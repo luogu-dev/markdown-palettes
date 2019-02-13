@@ -1,6 +1,8 @@
 <template>
     <div>
-        <markdown-palettes v-model="value" :config="config"></markdown-palettes>
+        <markdown-palettes 
+            v-model="value" 
+            :config="config"/>
     </div>
 </template>
 
