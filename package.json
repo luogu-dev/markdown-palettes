@@ -1,7 +1,7 @@
 {
   "name": "markdown-palettes",
   "description": "Markdown*Palettes: Markdown editor for the modern web.",
-  "version": "0.4.7",
+  "version": "0.4.8-alpha",
   "author": "Luogu Dev Team",
   "license": "MIT",
   "main": "dist/MarkdownPalettes.common.js",
@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "vue-cli-service serve --open",
     "prod-test": "vue-cli-service serve --open --mode production",
-    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js && cp demo.html dist && ./.after-build.sh",
+    "build": "vue-cli-service build --name MarkdownPalettes --target lib src/module.js && vue-cli-service build --name MarkdownPalettesBrowser --target lib src/browserModule.js --no-clean && ./.after-build.sh && cp demo.html dist/demo.html",
+    "build-lib": "vue-cli-service build --name MarkdownPalettes --target lib src/module.js && ./.after-build.sh",
+    "build-browser": "vue-cli-service build --name MarkdownPalettesBrowser --target lib src/browserModule.js && ./.after-build.sh",
     "build-dev": "vue-cli-service build --name MarkdownPalettes --target lib src/browserModule.js --mode development",
     "lint": "vue-cli-service lint",
     "lint-fix": "vue-cli-service lint --fix",
@@ -20,17 +22,19 @@
     "@fortawesome/fontawesome-free": "^5.1.0",
     "axios": "^0.18.0",
     "codemirror": "^5.39.0",
+    "global": "^4.3.2",
     "katex": "^0.9.0",
     "lodash": "4.17.10",
     "markdown-it": "^8.4.2",
     "markdown-it-v": "^1.2.1",
     "markdown-it-v-codemirror-highlighter": "1.0.0",
-    "markdown-it-v-katex": "^1.0.0-alpha.1"
+    "markdown-it-v-katex": "^1.0.0-alpha.1",
+    "vue": "^2.5.11"
   },
   "devDependencies": {
     "@babel/plugin-proposal-object-rest-spread": "7.3.1",
     "@babel/preset-env": "7.3.1",
-    "@vue/cli-plugin-babel": "3.4.0",
+    "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.1.5",
     "@vue/cli-service": "3.4.0",
     "@vue/eslint-config-standard": "^4.0.0",
@@ -38,11 +42,7 @@
     "http-server": "^0.11.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue": "^2.5.11",
     "vue-template-compiler": "^2.5.16"
-  },
-  "peerDependencies": {
-    "vue": "^2.5.11"
   },
   "browserslist": [
     "Edge >= 15",

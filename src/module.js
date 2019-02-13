@@ -7,4 +7,4 @@ export default Editor
 
 const defaultContentParser = contentParserFactory(defaultConfig.parsers)
 
-export { Editor, defaultContentParser }
+export { Editor, defaultContentParser, defaultConfig }

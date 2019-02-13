@@ -1,29 +1,18 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>luogu-markdown-editor</title>
-    <link rel="stylesheet" href="MarkdownPalettes.css">
-  </head>
-  <body>
-    <div id="editor-container" style="height: 700px;">
-      <div id="editor"></div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="markdown-palettes.min.js"></script>
+    <link rel="stylesheet" href="markdown-palettes.css">
+</head>
+<body>
+    <div style="height: 800px">
+        <div id="editor"></div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5"></script>
-    <script src="MarkdownPalettes.umd.js"></script>
+
     <script>
-      const app = new Vue({
-        template: '<markdown-palettes v-model="code"/>',
-        el: '#editor',
-        data: {
-          code: '# Demo'
-        },
-        components: {
-          MarkdownPalettes
-        }
-      })
+        var editor = new MarkdownPalettes('#editor');
     </script>
-  </body>
+</body>
 </html>

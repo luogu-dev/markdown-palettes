@@ -2,27 +2,23 @@
 
 set -e
 
-src=dist/MarkdownPalettes.umd.min.js
-dist=dist/markdown-palettes.js
-vue=https://cdn.jsdelivr.net/npm/vue@2.5
+cd ./dist/
 
-wget $vue -O $dist
-echo >> $dist
-cat $src >> $dist
-cat - >> $dist << EOF
+if test -e ./MarkdownPalettesBrowser.umd.min.js
+then
+    mv ./MarkdownPalettesBrowser.umd.min.js ./markdown-palettes.min.js
+    mv ./MarkdownPalettesBrowser.umd.js ./markdown-palettes.js
+    mv ./MarkdownPalettesBrowser.css ./markdown-palettes.css
 
-(function(mp){
-  'use strict'
-  class MarkdownPalettes {
-      constructor (el, config = {}) {
-          this.config = config
-          this.editor = new Vue(mp)
-          this.editor.\$mount(el)
-      }
-      getContentParser () {
-          return this.editor.contentParser
-      }
-  }
-  window.MarkdownPalettes = MarkdownPalettes
-})(MarkdownPalettes)
-EOF
+    rm -rf ./MarkdownPalettesBrowser.common.*.js
+    rm -rf ./MarkdownPalettesBrowser.common.js
+    rm -rf ./MarkdownPalettesBrowser.umd.*.js
+fi
+
+if test -e ./MarkdownPalettes.umd.js
+ then
+rm -rf ./MarkdownPalettes.common.*.js
+rm -rf ./MarkdownPalettes.umd.js
+rm -rf ./MarkdownPalettes.umd.*.js
+fi
+
