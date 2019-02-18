@@ -84,15 +84,15 @@ This is recommended if you use other Vue components in your HTML page.
 This is suitable if you don't have other Vue components in your HTML page or you 'dislike' Vue. Note that this bundle includes Vue inside so it's larger.
 
 ```html
-<link rel="stylesheet" href="MarkdownPalettes.css">
+<link rel="stylesheet" href="markdown-palettes.css">
 <script src="markdown-palettes.js"></script>
 <div id="editor-container" style="height: 700px;">
   <div id="editor"></div>
 </div>
 <script>
   var markdownEditor = new MarkdownPalettes("#editor");
-  markdownEditor.editor.setCode("Hello, **Markdown*Palettes**!");
-  var code = markdownEditor.editor.getCode();
+  markdownEditor.contenet = "**content**";
+  var code = markdownEditor.content;
 </script>
 ```
 
