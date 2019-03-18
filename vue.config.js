@@ -1,4 +1,5 @@
-const IgnorePlugin = require('webpack').IgnorePlugin
+const webpack = require('webpack')
+const IgnorePlugin = webpack.IgnorePlugin
 
 module.exports = {
     pages: {
@@ -10,12 +11,11 @@ module.exports = {
     },
     configureWebpack: {
         plugins: [
-            new IgnorePlugin(/^css-tree$/)
-        ],
-        output: {
-            globalObject: `(typeof self !== 'undefined' ? self : this)`,
-            libraryExport: 'default'
-        }
+            new IgnorePlugin(/^css-tree$/),
+            new webpack.optimize.LimitChunkCountPlugin({
+                maxChunks: 1,
+            }),
+        ]
     },
     transpileDependencies: [
     ],

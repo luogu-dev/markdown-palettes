@@ -10,14 +10,11 @@ then
     mv ./MarkdownPalettesBrowser.umd.js ./markdown-palettes.js
     mv ./MarkdownPalettesBrowser.css ./markdown-palettes.css
 
-    rm -rf ./MarkdownPalettesBrowser.common.*.js
     rm -rf ./MarkdownPalettesBrowser.common.js
-    rm -rf ./MarkdownPalettesBrowser.umd.*.js
 fi
 
 if test -e ./MarkdownPalettes.umd.js
  then
-rm -rf ./MarkdownPalettes.common.*.js
 rm -rf ./MarkdownPalettes.umd.js
 rm -rf ./MarkdownPalettes.umd.*.js
 fi
