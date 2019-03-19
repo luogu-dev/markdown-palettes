@@ -1,6 +1,8 @@
+import { faLink } from '@fortawesome/free-solid-svg-icons'
+
 export default {
     name: 'link',
-    icon: 'fa-link',
+    icon: faLink,
     title: '插入链接',
     action: {
         request: {
