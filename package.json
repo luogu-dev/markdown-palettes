@@ -19,7 +19,9 @@
     "test-dist": "hs dist"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.1.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "axios": "^0.18.0",
     "codemirror": "^5.39.0",
     "global": "^4.3.2",

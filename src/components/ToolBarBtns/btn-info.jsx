@@ -1,6 +1,8 @@
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+
 export default {
     name: 'info',
-    icon: 'fa-info-circle',
+    icon: faInfoCircle,
     title: '关于',
     action () {
         this.openDialog({

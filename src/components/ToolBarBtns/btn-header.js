@@ -1,7 +1,7 @@
 export default function headerFactory (level) {
     return {
         name: 'h' + level,
-        icon: 'icon-blold',
+        class: ['mp-icon-header'],
         content: 'H' + level,
         title: level + '级标题',
         action () {

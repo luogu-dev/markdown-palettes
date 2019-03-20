@@ -1,6 +1,8 @@
+import { faTable } from '@fortawesome/free-solid-svg-icons'
+
 export default {
     name: 'table',
-    icon: 'fa-table',
+    icon: faTable,
     title: '插入表格',
     action: {
         request: {

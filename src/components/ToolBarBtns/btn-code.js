@@ -1,6 +1,8 @@
+import { faCode } from '@fortawesome/free-solid-svg-icons'
+
 export default {
     name: 'img',
-    icon: 'fa-code',
+    icon: faCode,
     title: '插入代码',
     action () {
         const selection = this.editor.getSelection()
