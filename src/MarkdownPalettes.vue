@@ -17,8 +17,14 @@
                         unselectable="on"
                         @click="toolbarAction(item)">
                         <i
-                            :class="['fa', ensureValue(item.icon)]"
-                            unselectable="on">{{ ensureValue(item.content) }}</i>
+                            v-if="item.hasOwnProperty('class')"
+                            :class="ensureValue(item.class)"
+                            unselectable="on"
+                        >{{ ensureValue(item.content) }}</i>
+                        <font-awesome-icon
+                            v-else-if="item.hasOwnProperty('icon')"
+                            :icon="ensureValue(item.icon)"
+                        />
                     </a>
                 </li>
             </ul>
@@ -204,11 +210,21 @@
         margin: 0 5px
         height: 65%
         border-right: 1px solid #ddd
+    .mp-icon-header
+        text-align center
+        display block
+        padding 5px 0
+        font-weight 900
+        -moz-osx-font-smoothing grayscale
+        -webkit-font-smoothing antialiased
+        font-style normal
+        font-variant normal
+        text-rendering auto
+        line-height 1
 </style>
 
 <script>
-import '@fortawesome/fontawesome-free/css/solid.css'
-import '@fortawesome/fontawesome-free/css/fontawesome.css'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import Dialog from './components/Dialog/Dialog.vue'
 import PreviewArea from './components/PreviewArea.js'
@@ -225,7 +241,7 @@ import { getText } from './utils/i18n'
 
 export default {
     name: 'markdown-palettes',
-    components: { 'editor-dialog': Dialog, PreviewArea },
+    components: { FontAwesomeIcon, 'editor-dialog': Dialog, PreviewArea },
     mixins: [InputAreaMixin, PreviewAreaMixin, ToolbarMixin, ActionMixin],
     props: {
         value: {

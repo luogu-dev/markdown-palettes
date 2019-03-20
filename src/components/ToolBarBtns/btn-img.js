@@ -1,6 +1,8 @@
+import { faImage } from '@fortawesome/free-solid-svg-icons'
+
 export default {
     name: 'img',
-    icon: 'fa-image',
+    icon: faImage,
     title: '插入图片',
     action: {
         request: {
