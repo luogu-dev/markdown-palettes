@@ -2,6 +2,7 @@
 /*
 Like markdown-it-simplemath, this is a stripped down, simplified version of:
 https://github.com/runarberg/markdown-it-math
+
 It differs in that it takes (a subset of) LaTeX as input and relies on KaTeX
 for rendering output.
 */
@@ -133,10 +134,21 @@ function math_block(state, start, end, silent){
     return true;
 }
 
-module.exports = function math_plugin(md, options) {
+export default function math_plugin(md, options) {
     // Default options
 
     options = options || {};
+
+    var escapeHtml = function(html) {
+        var tagsToReplace = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;'
+        };
+        return html.replace(/[&<>]/g, function(tag) {
+            return tagsToReplace[tag] || tag;
+        });
+    };
 
     // set KaTeX as the renderer for markdown-it-simplemath
     var katexInline = function(latex){
@@ -146,12 +158,13 @@ module.exports = function math_plugin(md, options) {
         }
         catch(error){
             if(options.throwOnError){ console.log(error); }
-            return latex;
+            return escapeHtml(latex);
         }
     };
 
     var inlineRenderer = function(tokens, idx, options, env, { sDom }){
-        const html = katexInline(tokens[idx].content);
+        var html = katexInline(tokens[idx].content)
+
         sDom.openTag('span', { __html: html })
         sDom.closeTag()
         return sDom
@@ -164,12 +177,12 @@ module.exports = function math_plugin(md, options) {
         }
         catch(error){
             if(options.throwOnError){ console.log(error); }
-            return latex;
+            return escapeHtml(latex);
         }
     }
 
     var blockRenderer = function(tokens, idx, options, env, { sDom }){
-        const html = katexBlock(tokens[idx].content);
+        var html = katexBlock(tokens[idx].content);
         sDom.openTag('p', { __html: html })
         sDom.closeTag()
         sDom.appendText('\n')

@@ -25,12 +25,11 @@
     "axios": "^0.18.0",
     "codemirror": "^5.39.0",
     "global": "^4.3.2",
-    "katex": "^0.9.0",
+    "katex": "^0.11.1",
     "lodash": "4.17.10",
     "markdown-it": "^8.4.2",
     "markdown-it-v": "^1.2.1",
     "markdown-it-v-codemirror-highlighter": "1.0.0",
-    "markdown-it-v-katex": "^1.0.0-alpha.1",
     "vue": "^2.5.11"
   },
   "devDependencies": {
