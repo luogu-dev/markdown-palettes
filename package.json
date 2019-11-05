@@ -1,7 +1,7 @@
 {
   "name": "markdown-palettes",
   "description": "Markdown*Palettes: Markdown editor for the modern web.",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "author": "Luogu Dev Team",
   "license": "MIT",
   "main": "dist/MarkdownPalettes.common.js",
