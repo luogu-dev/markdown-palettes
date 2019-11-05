@@ -1,7 +1,7 @@
 // import parsers
 import MarkdownItV from 'markdown-it-v'
 import MarkdownItVCodemirrorHighlighter from 'markdown-it-v-codemirror-highlighter/dist/browserIndex.common.js'
-import MarkdownItVKatex from 'markdown-it-v-katex'
+import MarkdownItVKatex from '../FixedMarkdownItVKatex'
 
 // import styles
 import 'katex/dist/katex.css'
