@@ -91,7 +91,7 @@ This is suitable if you don't have other Vue components in your HTML page or you
 </div>
 <script>
   var markdownEditor = new MarkdownPalettes("#editor");
-  markdownEditor.contenet = "**content**";
+  markdownEditor.content = "**content**";
   var code = markdownEditor.content;
 </script>
 ```
