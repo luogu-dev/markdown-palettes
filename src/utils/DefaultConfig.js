@@ -36,7 +36,21 @@ export const defaultConfig = {
     editorOption: {
         mode: 'gfm',
         lineNumbers: true,
-        lineWrapping: true
+        lineWrapping: true,
+        indentUnit: 4,
+        tabSize: 4,
+
+        extraKeys: {
+            // To standardize the indentation
+            Tab: (cm) => {
+                if (cm.somethingSelected()) {
+                    cm.execCommand("indentMore");
+                }
+                else {
+                    cm.execCommand("insertSoftTab");
+                }
+            }
+        }
     },
     scrollSync: true
 }
